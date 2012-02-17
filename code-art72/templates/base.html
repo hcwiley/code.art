@@ -1,0 +1,23 @@
+<!DOCTYPE HTML5>
+<html>
+    <head>
+        <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+        <meta name='description' content='content managed artist websites' />
+        <meta name='keywords' content='cms, artist, website, template, content, management, art72, art, easy, gallery,' />
+        <link id='main-css' type='text/css' rel='stylesheet' href='{{ STATIC_URL }}promo/css/styles.css'/>
+        <!--<link type='text/css' rel='stylesheet' href='{{ STATIC_URL }}css/ie.css'/>!-->
+        <link type='image/x-icon' rel="icon" href='{{ STATIC_URL }}promo/images/art72-favicon.png' />
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+    	<div id='container'>
+            {% include "header.html" %}
+            <div id='wrapper'>
+                <div id='main'>
+                    {% block center %}{% endblock %}
+                </div>
+            </div>
+            {% include 'footer.html' %}
+        </div>
+    </body>
+</html>
