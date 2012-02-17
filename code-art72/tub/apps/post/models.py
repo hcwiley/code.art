@@ -6,6 +6,9 @@ from uuid import uuid4
 from sorl import thumbnail
 import Image
 from apps.developer.models import *
+from django.db import models
+import urllib
+import BeautifulSoup
 
 MAX_IMAGE_SIZE = settings.MAX_IMAGE_SIZE
 
@@ -13,8 +16,15 @@ class Post(models.Model):
     title = models.CharField(max_length=144)
     blurb = models.TextField()
     developer = models.ForeignKey(Developer)
-    image = thumbnail.ImageField(upload_to='images/posts/%Y/%m/%d')
+    image = thumbnail.ImageField(upload_to='images/posts/%Y/%m/%d', null=True, blank=True)
     __original_image = None
+    
+    @models.permalink
+    def get_absolute_url(self):
+        return ('apps.post.views.post', {'post':self.id})
+    
+    def __unicode__(self):
+        return self.title
     
     def rename_image_file(self):
         """
@@ -43,9 +53,23 @@ class Post(models.Model):
             self.do_resizes()
 
 class Link(models.Model):
-    url = models.URLField()
+    url = models.URLField(help_text='add your own link here')
     post = models.ForeignKey(Post)
+    title = models.CharField(max_length=100, null=False, blank=True)
+    
+    def __unicode__(self):
+        return self.title
+    
+    def save(self, *args, **kwargs):
+        if self.title == '':
+            soup = BeautifulSoup.BeautifulSoup(urllib.urlopen(self.url))
+            self.title = soup.title.string
+        super(Link, self).save(*args, **kwargs)
+    
 
 class Tag(models.Model):
-    text = models.CharField(max_length=50)
+    text = models.CharField(max_length=50, help_text='add your own tag here')
     post = models.ForeignKey(Post)
+    
+    def __unicode__(self):
+        return self.text

@@ -10,6 +10,8 @@ from uuid import uuid4
 from sorl import thumbnail
 import Image
 from django.contrib.sites.models import Site
+import simplejson
+import urllib2
 
 MAX_IMAGE_SIZE = ('300','300')
 
@@ -28,24 +30,16 @@ class Developer(models.Model):
     lat = models.CharField(max_length=50, blank=True, null=True)
     long = models.CharField(max_length=50, blank=True, null=True)
     # external id links
-    github_id = models.CharField(max_length=50, blank=True, null=True)
-    bitbucket_id = models.CharField(max_length=50, blank=True, null=True)
-    stack_over_id = models.CharField(max_length=50, blank=True, null=True)
-    source_forge_id = models.CharField(max_length=50, blank=True, null=True)
-    twitter_id = models.CharField(max_length=50, blank=True, null=True) 
-    vimeo_id = models.CharField(max_length=50, blank=True, null=True)
-    youtube_id = models.CharField(max_length=50, blank=True, null=True)
     
     def get_absolute_url(self): 
         current_site = Site.objects.get_current()
-        return "http://%s/%s" % (current_site.domain, self.user.username)
+        return "http://%s/profile/%s" % (current_site.domain, self.user.username)
         
     def __unicode__(self):
         if self.user.get_full_name() != '':
             return self.user.get_full_name()
         else:
             return self.user.username 
-    
     
     def rename_image_file(self):
         """
@@ -64,15 +58,79 @@ class Developer(models.Model):
         img.thumbnail(MAX_IMAGE_SIZE, Image.ANTIALIAS)
         img.save(self.image.path)
         
+    def has_videos(self):
+        if self.externalid_set.filter(type=6).count() > 0 or self.externalid_set.filter(type=7).count() > 0:
+            return True
+        return False
+    
+    def videos(self):
+        videos = {}
+        for handle in self.externalid_set.filter(type=6):#vimeo
+            url = 'http://vimeo.com/api/v2/user/%s/videos.json' % handle.handle
+            file = urllib2.urlopen(url)
+            content = file.read()     
+            json = simplejson.loads(content)
+            for video in json:
+                url = "http://player.vimeo.com/video/%s" % video['url'].strip('http://vimeo.com') 
+                videos.update({url: url})
+#        for handle in self.externalid_set.filter(type=7):#youtube
+#            url = 'https://gdata.youtube.com/feeds/api/users/%s/uploads?alt=json' % handle.handle
+#            file = urllib2.urlopen(url)
+#            content = file.read()     
+#            json = simplejson.loads(content)
+#            for video in json:
+#                videos.update({video['entry']: video['entry']})
+        print videos
+        return videos
+        
     def save(self, *args, **kwargs):
         image_changed = self.image != self.__original_image
         if image_changed:
             self.rename_image_file()
             self.__original_image = self.image
-        super(Developer, self).save(*args, **kwargs)
-        if image_changed:
+        if self.user.is_staff:
+            super(Developer, self).save(*args, **kwargs)
+        if image_changed and self.image:
             self.do_resizes() 
+
+ID_TYPES = (
+            ('1', 'github'),
+            ('2', 'bitbucket'),
+            ('3', 'source_forge'),
+            ('4', 'stack_overflow'),
+            ('5', 'twitter'),
+            ('6', 'vimeo'),
+            ('7', 'youtube')
+    )
+
+class ExternalId(models.Model):
+    type = models.CharField(max_length=20, choices=ID_TYPES)
+    handle = models.CharField(max_length=50)
+    developer = models.ForeignKey(Developer)
+    
+    def __unicode__(self):
+        return '%s @ %s' % (self.handle, self.type)
+    
+    def get_profile_page(self):
+        if self.type == 1: #github
+            return 'https://github.com/%s' % self.handle
+        elif self.type == 2: #bitbucket
+            return "https://bitbucket.org/%s" % self.handle
+        elif self.type == 3: #source_forge
+            return "https://sourceforge.net/users/?user_id=%s" % self.handle
+        elif self.type == 4: #stack_overflow
+            return "http://stackoverflow.com/users/%s" % self.handle
+        elif self.type == 5: #twitter
+            return "https://twitter.com/%s" % self.handle
+        elif self.type == 6: #vimeo
+            return "http://vimeo.com/%s" % self.handle
+        elif self.type == 1: #youtube
+            return "http://youtube.com/%s" % self.handle
         
+    def nice_type(self):
+        return "%s" % ID_TYPES[int(self.type)-1][1].replace('_',' ')
+        
+
 @receiver(post_save, sender=User, weak=False)
 def delete_image_on_file(sender, instance, raw, created, using, **kwargs):
     if created:

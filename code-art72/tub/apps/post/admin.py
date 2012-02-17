@@ -1,14 +1,17 @@
 from django.contrib import admin
-from django.contrib.auth.models import User
-from apps.post.models import Post
-from django.contrib.auth.admin import UserAdmin
+from apps.post.models import *
 
-admin.site.unregister(User)
+class TagInline(admin.StackedInline):
+    model = Tag
 
-class PostInline(admin.StackedInline):
-    model = Post
+class LinkInline(admin.StackedInline):
+    model = Link
 
-class UserAdmin(UserAdmin):
-    inlines = [ PostInline, ]
+class PostAdmin(admin.ModelAdmin):
+    inlines = [ TagInline, LinkInline]
+    class Meta:
+        model = Post
 
-admin.site.register(User, UserAdmin)
+admin.site.register(Post, PostAdmin)
+admin.site.register(Link)
+admin.site.register(Tag)

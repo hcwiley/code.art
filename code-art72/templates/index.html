@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
-{% block center %}
-<h1>Hello World</h1>
+{% block center %}<h1>Hello World</h1>
+<h2>Here's all the posts</h2>
+<ul>
+    {% for post in posts %}
+    <li>
+        <a href='{{ post.get_absolute_url }}'>{{ post }}</a>
+        <h6>posted by: {% include "developer/tag.html" with developer=post.developer %}</h6>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}

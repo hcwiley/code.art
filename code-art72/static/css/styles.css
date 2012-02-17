@@ -1,0 +1,158 @@
+html, body {
+    width: 99%;
+    height: 99%;
+    background-color: #e5e5e5;
+}
+* {
+    color: #232323;
+    font-family: ubuntu, Helvetica, sans-serif;
+	text-decoration: none;
+	font-style: normal;
+}
+
+#container {
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+}
+
+header, footer {
+    width: 99%;
+    text-align: center;
+}
+
+header {
+    border-bottom: dotted 1px #c0c0c0;
+}
+
+footer {
+    border-top: dotted 1px #c0c0c0;
+}
+
+header * {
+    display: inline;
+}
+
+#login {
+    float: right;
+}
+
+#wrapper {
+    width: 800px;
+    min-height: 80%;
+    height: auto;
+    margin: 0 auto;
+    border-left: dotted 1px #c0c0c0;
+    border-right: dotted 1px #c0c0c0;
+    padding: 10px 30px;
+}
+
+#right-nav {
+    position: fixed;
+    top: 200px;
+    right: 50px;
+    width: 150px;
+    min-height: 400px;
+    height: auto;
+    z-index: 5;
+}
+
+label {
+    display: block;
+    color: #232323;
+    font-family: Monaco, monospace, serif;
+}
+
+input, textarea {
+    background-color: #c9c9c9;
+    color: #232323;
+    font-weight: 500;
+    border: none;
+    font-size: 14px;
+    width: 160px;
+    display: block;
+}
+
+button {
+    background-color: #c9c9c9;
+    border: none;
+    font-weight: 900;
+    height: 30px;
+    font-size: 16px;
+}
+
+.shadow {
+    -moz-box-shadow: 0px 0px 5px #ccc;
+    -webkit-box-shadow: 0px 0px 5px #ccc;
+    box-shadow: 0px 0px 7px #222;
+}
+
+.rounded, input, textarea {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#post_form {
+	display: none;
+    height: 0px;
+    overflow: hidden;
+}
+
+a {
+    color: #8888cc;
+    text-decoration: none;
+    font-style: italic;
+    display: inline;
+}
+
+li {
+    list-style: square;
+    height: 20px;
+}
+
+h4.form-part {
+    display: inline;
+}
+
+form.form-part input {
+    display: inline;
+	margin-top: 15px;
+    margin-left: 20px;
+}
+
+.developer-profile{
+	margin-top: 30px;
+	text-align: center;
+}
+
+.developer-profile *{
+	display: inline;
+}
+
+.developer-profile *:not(img){
+	float: right;
+}
+
+#profile_picture{
+	float: left;
+}
+#videos, div.video {
+	float: right;
+	display: block;
+	clear: both;
+}
+
+iframe{
+	width: 400px;
+	height: 300px;
+}
+h2{
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 24px;
+}
+
+h6 {
+    display: inline;
+}
