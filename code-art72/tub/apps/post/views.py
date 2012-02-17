@@ -7,9 +7,10 @@ from django.core.context_processors import csrf
 from tub.views import common_args
 from apps.post.forms import *
 
-def post(request, post):
+def post(request, id):
+    print id
     args = common_args(request)
-    post = Post.objects.get(id=post)
+    post = Post.objects.get(id=id)
     if request.POST:
         print request.POST
         try:

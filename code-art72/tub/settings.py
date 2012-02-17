@@ -16,7 +16,7 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'collected-static/')
 MEDIA_URL = '/site_media/media/'
 STATIC_URL = '/site_media/static/'
 LOGIN_URL = '/accounts/login'
-LOGIN_REDIRECT_URL  = '/profile'
+LOGIN_REDIRECT_URL = '/profile'
 
 ADMIN_MEDIA_PREFIX = os.path.join(STATIC_URL, 'admin/')
 sys.path.append(PROJECT_ROOT)
@@ -82,7 +82,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.admin',
-    'django.contrib.admindocs',
+#    'django.contrib.admindocs',
     # everything above needed for admin
     'django.contrib.localflavor',
     'django.contrib.staticfiles',

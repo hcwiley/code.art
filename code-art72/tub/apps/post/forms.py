@@ -11,7 +11,7 @@ class TagForm(ModelForm):
         model = Tag
         exclude = ('post',)
         widgets = {
-            'text': TextInput({'placeholder': "add your own tag here"}),
+            'text': TextInput({'placeholder': "add your own tag here", 'tabindex':'2'}),
         }
         
 class LinkForm(ModelForm):
@@ -19,5 +19,5 @@ class LinkForm(ModelForm):
         model = Link
         exclude = ('post',)
         widgets = {
-            'url': TextInput({'placeholder': "add your own link here"}),
+            'url': TextInput({'placeholder': "add your own link here", 'tabindex':'2'}),
         }

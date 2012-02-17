@@ -36,7 +36,9 @@ header * {
 #login {
     float: right;
 }
-
+#feedback{
+	float: left;
+}
 #wrapper {
     width: 800px;
     min-height: 80%;
@@ -110,6 +112,10 @@ a {
 li {
     list-style: square;
     height: 20px;
+}
+
+li.post{
+	height: 180px;
 }
 
 h4.form-part {

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block center %}
+<style type='text/css'>
+    form, input {
+        display: inline;
+    }
+	#feedback{
+		position: fixed;
+		top: 20px;
+		right: 30px;
+	}
+</style>
+<script type='text/javascript'>
+</script>
+<h2>{{ post }}</h2>
+{% autoescape off %}
+{{ post.blurb }}
+{% endautoescape %}
+<ul class='links'>
+    <h3>here's all the links with that post</h3>
+    {% for link in post.link_set.all %}
+    <li>
+        <a href='{{ link.url }}' target='_blank'>{{ link }}</a>
+    </li>
+    {% endfor %}
+    {% if user %}<h4 class='form-part'> (+) </h4>
+    <form id='link_form' class='form-part' method='post' action=''>
+        {% csrf_token %}{{ link_form.url }}
+        <button type='submit'>
+            submit
+        </button>
+    </form>
+    {% endif %}
+</ul>
+<ul class='tags'>
+    <h3>here's all the tags with that post</h3>
+    {% for tag in post.tag_set.all %}
+    <li>
+        <a href='{{ tag.url }}' target='_blank'>{{ tag }}</a>
+    </li>
+    {% endfor %}
+    {% if user %}<h4 class='form-part'> (+)</h4>
+    <form id='tag_form' class='form-part' method='post' action=''>
+        {% csrf_token %}{{ tag_form.text }}
+        <button type='submit'>
+            submit
+        </button>
+    </form>
+    {% endif %}
+</ul>
+{% endblock %}

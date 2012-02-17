@@ -21,7 +21,7 @@ class Post(models.Model):
     
     @models.permalink
     def get_absolute_url(self):
-        return ('apps.post.views.post', {'post':self.id})
+        return ('apps.post.views.post', {self.id:self.id})
     
     def __unicode__(self):
         return self.title
@@ -44,6 +44,8 @@ class Post(models.Model):
         img.save(self.image.path)
         
     def save(self, *args, **kwargs):
+        if Post.objects.filter(title=self.title).count() > 0:
+            return 'there is already a post with that name'
         image_changed = self.image != self.__original_image
         if image_changed:
             self.rename_image_file()

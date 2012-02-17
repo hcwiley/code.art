@@ -1,0 +1,4 @@
+Art72 Signup Information:
+Datetime: {{ now }}
+Email: {{ email }}
+Artist Type: {% if artist_type %}{{ artist_type }}{% else %}not provided{% endif %}
