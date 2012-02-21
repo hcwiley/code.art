@@ -193,6 +193,9 @@ form.form-part input.submit{
 	width: 120px;
 	background-color: #C0C0C0;
 	z-index: 1;
+	-moz-border-radius: 0px ;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
 }
 
 .developer-profile{
