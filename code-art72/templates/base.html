@@ -13,6 +13,13 @@
 	<body>
 		<div id='container'>
 			{% include "header.html" %}
+			<div id='left-nav'>
+				{% for tag in tags %} <a href='{{ tag.get_absolute_url }}'>
+				<li>
+					{{ tag }}
+				</li></a>
+				{% endfor %}
+			</div>
 			<div id='wrapper'>
 				<div id='main'>
 					{% block center %}{% endblock %}

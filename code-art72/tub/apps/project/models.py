@@ -12,16 +12,16 @@ import BeautifulSoup
 
 MAX_IMAGE_SIZE = settings.MAX_IMAGE_SIZE
 
-class Post(models.Model):
+class Project(models.Model):
     title = models.CharField(max_length=144)
     blurb = models.TextField()
-    developer = models.ForeignKey(Developer)
-    image = thumbnail.ImageField(upload_to='images/posts/%Y/%m/%d', null=True, blank=True)
+    developer = models.ManyToMany(Developer)
+    image = thumbnail.ImageField(upload_to='images/projects/%Y/%m/%d', null=True, blank=True)
     __original_image = None
     
     @models.permalink
     def get_absolute_url(self):
-        return ('apps.post.views.post', {self.id:self.id})
+        return ('apps.project.views.project', {self.id:self.id})
     
     def __unicode__(self):
         return self.title

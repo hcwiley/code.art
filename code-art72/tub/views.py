@@ -15,13 +15,14 @@ def common_args(request):
     year: the year at the time of request  
     """ 
     developer = None#get_object_or_404(Developer, user__username=request)
-    user = request.user.is_authenticated()
+    user = request.user if request.user.is_authenticated() else None
     args = {
                 'base_template' : 'base-ajax.html' if request.is_ajax() else 'base.html',
                 'developer' : developer,
                 'STATIC_URL' : settings.STATIC_URL,
                 'MEDIA_URL' : settings.MEDIA_URL,
                 'posts' :  Post.objects.all(),
+                'tags' : Tag.objects.all(),
                 'user' : user,
            }
     return args

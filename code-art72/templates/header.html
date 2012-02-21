@@ -4,6 +4,10 @@
 	</div>
 	<a href='/'><h1>Welcome to code.art72.org</h1></a>
 	<div id='login'>
-		<h5><a href='/accounts/login'>login</a> or <a href='/accounts/register'>register</a></h5>
+		{% if user %}
+			<h3>{{ user.developer }}</h3>&nbsp;&nbsp;|&nbsp;&nbsp;<h5><a href='/accounts/logout'>logout</a></h5>
+		{% else %}
+			<h5><a href='/accounts/login'>login</a> or <a href='/accounts/register'>register</a></h5>
+		{% endif %}
 	</div>
 </header>
