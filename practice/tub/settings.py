@@ -4,6 +4,11 @@ import os
 import sys
 DEBUG = True
 
+if len(os.listdir('/Users')) > 0:
+   IS_DEV = True
+else:
+    IS_DEV = False
+
 TEMPLATE_DEBUG = DEBUG
 
 MAX_IMAGE_SIZE = (1400, 1400)
@@ -76,6 +81,8 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, '../static/'),
 )
 
+OAUTH_AUTHORIZE_VIEW = 'tub.views.oauth_authorize'
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -90,6 +97,7 @@ INSTALLED_APPS = (
     'django.contrib.webdesign',
     'apps.contactform',
     'sorl.thumbnail',
+    'django-oauth-plus',
     'south',
     'registration',
     'apps.developer',

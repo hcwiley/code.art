@@ -4,7 +4,7 @@
 <ul>
 	{% for post in posts %}
 	<li class='post'>
-		<a href='/{{ post.get_absolute_url }}'>{{ post }}</a>
+		<a href='{{ post.get_absolute_url }}'>{{ post }}</a>
 		<h6>posted by: {% include "developer/tag.html" with developer=post.developer %}</h6>
 	</li>
 	{% endfor %}

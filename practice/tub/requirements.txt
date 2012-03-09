@@ -8,3 +8,4 @@ python-memcached==1.48
 django-registration==0.7
 lxml=2.3.3
 simplejson=2.3.2
+django-oauth-plus

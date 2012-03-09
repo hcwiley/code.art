@@ -15,7 +15,10 @@ MAX_IMAGE_SIZE = settings.MAX_IMAGE_SIZE
 class Project(models.Model):
     title = models.CharField(max_length=144)
     blurb = models.TextField()
-    developer = models.ManyToMany(Developer)
+    developer = models.ManyToManyRelationship(Developer)
+    repos = models.ManyToManyRelationship(Repo, null=True,blank=False)
+    media = models.ManyToManyRelationship(Media, null=True,blank=False)
+    date = models.ForeignKey(Date, null=True, blank=True)
     image = thumbnail.ImageField(upload_to='images/projects/%Y/%m/%d', null=True, blank=True)
     __original_image = None
     

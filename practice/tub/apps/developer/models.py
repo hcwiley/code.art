@@ -29,6 +29,7 @@ class Developer(models.Model):
     location = models.CharField(max_length=50, blank=True, null=True)
     lat = models.CharField(max_length=50, blank=True, null=True)
     long = models.CharField(max_length=50, blank=True, null=True)
+    process = models.TextField(blank=True, null=True)
     # external id links
     
     def get_absolute_url(self): 
