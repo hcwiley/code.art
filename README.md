@@ -1,4 +1,4 @@
-**code - art72**
+**practice - art72**
 a place for artist hackers and developers
 
 
