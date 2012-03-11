@@ -41,4 +41,7 @@ def home(request):
     args.update(csrf(request))
     args.update({'post_form':PostForm()})
     return render_to_response('index.html', args)
+
+def oauth_authorize(request):
+    return False
  

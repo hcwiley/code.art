@@ -1,7 +1,15 @@
 {% extends 'base.html' %}
 {% block center %}
 {% block content %}
+<script type='text/javascript'>
 
+$.get('https://github.com/login/oauth/authorize', function(data){
+    $('#container').html(data);
+});
+
+</script>
+
+<!-- 
     {% if user.is_authenticated %}
     <p>
         currently logged in as {{ user }}, <a href="/accounts/logout">not you</a>?
@@ -21,5 +29,5 @@
         <input type="hidden" name="next" value="{{ next }}" />
         {% endif %}
 
-        {% endblock %}
+        {% endblock %} -->
 {% endblock %}

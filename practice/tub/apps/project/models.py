@@ -15,6 +15,7 @@ MAX_IMAGE_SIZE = settings.MAX_IMAGE_SIZE
 class Project(models.Model):
     title = models.CharField(max_length=144)
     blurb = models.TextField()
+    useGitBlurd = models.BooleanField(default=False)
     developer = models.ManyToManyRelationship(Developer)
     repos = models.ManyToManyRelationship(Repo, null=True,blank=False)
     media = models.ManyToManyRelationship(Media, null=True,blank=False)

@@ -18,11 +18,11 @@ urlpatterns = patterns('',
     (r'^$', 'views.home'),
 )
 #OAtuh stuff
-urlpatterns = patterns('',
-    url(r'^oauth/', include('oauth_provider.urls')),
-    url(r'^oauth/request_token/', 'apps.developer.views.auth_resquest'),
-    url(r'^/oauth/authorize/', 'apps.developer.views.auth_authorization'), #this is for gets
-    url(r'^/oauth/access_token/', 'apps.developer.views.auth_access'),
+urlpatterns += patterns('',
+#    url(r'^oauth/', include('oauth_provider.urls')),
+#    url(r'^oauth/request_token/', 'apps.developer.views.auth_resquest'),
+#    url(r'^oauth/authorize/', 'apps.developer.views.auth_authorization'), #this is for gets
+#    url(r'^oauth/access_token/', 'apps.developer.views.auth_access'),
 )
 
 #TODO: submit a pull request to sorl thumbnail with updated django admin docs entry
@@ -70,4 +70,5 @@ urlpatterns += patterns('',
     #TODO: this is a hack to allow for no slashes... dashboard urls start with slash, except for the home one
     (r'^profile/', include('apps.developer.urls')),
     (r'^post/', include('apps.post.urls')),
+    (r'^oauth/', include('apps.oauth2_lite_client.urls')),
 )

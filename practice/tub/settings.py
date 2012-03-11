@@ -2,6 +2,7 @@
 
 import os
 import sys
+
 DEBUG = True
 
 if len(os.listdir('/Users')) > 0:
@@ -81,8 +82,6 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, '../static/'),
 )
 
-OAUTH_AUTHORIZE_VIEW = 'tub.views.oauth_authorize'
-
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -97,11 +96,11 @@ INSTALLED_APPS = (
     'django.contrib.webdesign',
     'apps.contactform',
     'sorl.thumbnail',
-    'django-oauth-plus',
     'south',
     'registration',
     'apps.developer',
-    'apps.post'
+    'apps.post',
+    'apps.oauth2_lite_client',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
