@@ -66,9 +66,9 @@ h1 .dot{
 #logo{
     float: left;
     display: inline;
-    height: 60px;
+    height: 80px;
     width: auto;
-    margin: 2px 40px 0px 10px;
+    margin: 10px 50px 0px 10px;
 }
 
 
@@ -111,7 +111,7 @@ div.title *{
 }
 #wrapper {
     float: left;
-	width: 800px;
+	width: 70%;
     min-width: 600px;
     float: none;
     height: auto;
@@ -129,10 +129,11 @@ div.title *{
     min-height: 500px;
     height: auto;
     padding: 30px 10px;
+    width: 100%;
 }
 
 #right-nav {
-	display: inline;
+	display: none;
     float: right;
     width: 200px;
     min-height: 400px;
@@ -151,6 +152,20 @@ div.title *{
     min-height: 400px;
     height: auto;
     z-index: 5;
+}
+
+.half-column{
+	width: 45%;
+	float: left; 
+}
+
+#projects.half-column{
+	border-left: 1px dotted #666;
+	margin-left: 10px;
+	padding-left: 50px;
+	float: right;
+	min-height: 300px;
+	height: auto;
 }
 
 #profile_tabs div{

@@ -2,7 +2,7 @@
 <a href='{{ developer.get_absolute_url }}'>
 {{ developer }}
 {% if developer.image %}
-    {% thumbnail developer.image '80x80' crop='center' as img %}
+    {% thumbnail developer.image '50x50' crop='center' as img %}
 	<img src='{{ STATIC_MEDIA }}{{ img.url }}' width='{{ img.width }}' height='{{ img.height }}' title='{{ developer }}'/>
 	{% endthumbnail %}
 {% endif %} 

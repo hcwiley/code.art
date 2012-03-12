@@ -22,6 +22,13 @@
         <div id='container'>
             <div id='left-nav'>
                 {% block left_nav %}
+                <h3>projects</h3>
+                {% for project in projects %} <a href='{{ project.get_absolute_url }}'>
+                <li>
+                    {{ project }}
+                </li></a>
+                {% endfor %}
+                <h3>tags</h3>
                 {% for tag in tags %} <a href='{{ tag.get_absolute_url }}'>
                 <li>
                     {{ tag }}
