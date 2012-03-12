@@ -1,17 +1,6 @@
 from django.contrib import admin
-from apps.post.models import *
+from apps.project.models import *
 
-class TagInline(admin.StackedInline):
-    model = Tag
-
-class LinkInline(admin.StackedInline):
-    model = Link
-
-class PostAdmin(admin.ModelAdmin):
-    inlines = [ TagInline, LinkInline]
-    class Meta:
-        model = Post
-
-admin.site.register(Post, PostAdmin)
-admin.site.register(Link)
-admin.site.register(Tag)
+admin.site.register(Repo)
+admin.site.register(Media)
+admin.site.register(Project)

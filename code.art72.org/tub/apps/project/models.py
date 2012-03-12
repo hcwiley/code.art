@@ -6,20 +6,50 @@ from uuid import uuid4
 from sorl import thumbnail
 import Image
 from apps.developer.models import *
-from django.db import models
+from django.template.defaultfilters import slugify
 import urllib
 import BeautifulSoup
+from apps.post.models import *
 
 MAX_IMAGE_SIZE = settings.MAX_IMAGE_SIZE
 
+class Repo(models.Model):
+    title = models.CharField(max_length=144)
+    blurb = models.TextField(default="", null=True, blank=True)
+    url = models.URLField()
+    
+    def __unicode__(self):
+        return self.title
+
+class ExtendedImage(models.Model):
+    uploaded = thumbnail.ImageField(upload_to='images/projects/%Y/%m/%d', null=True, blank=True, default=None)
+    external = models.URLField(null=True, blank=True, default="")
+    
+    def __unicode__(self):
+        if self.uploaded:
+            return self.uploaded
+        elif self.external:
+            return self.external
+
+
+class Media(models.Model):
+    title = models.CharField(max_length=144)
+    image = models.ForeignKey(ExtendedImage, null=True, blank=True, default=None)
+    video = models.URLField(null=True, blank=True, default=None)
+    
+    def __unicode__(self):
+        return self.title
+
+
 class Project(models.Model):
     title = models.CharField(max_length=144)
+    slug = models.SlugField(editable=False, default="")
     blurb = models.TextField()
-    useGitBlurd = models.BooleanField(default=False)
-    developer = models.ManyToManyRelationship(Developer)
-    repos = models.ManyToManyRelationship(Repo, null=True,blank=False)
-    media = models.ManyToManyRelationship(Media, null=True,blank=False)
-    date = models.ForeignKey(Date, null=True, blank=True)
+    use_git_blurb = models.BooleanField(default=False)
+    developer = models.ManyToManyField(Developer)
+    repos = models.ManyToManyField(Repo, null=True,blank=False)
+    media = models.ManyToManyField(Media, null=True,blank=False)
+#    date = models.ForeignKey(Date, null=True, blank=True)
     image = thumbnail.ImageField(upload_to='images/projects/%Y/%m/%d', null=True, blank=True)
     __original_image = None
     
@@ -48,38 +78,13 @@ class Project(models.Model):
         img.save(self.image.path)
         
     def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
         if Post.objects.filter(title=self.title).count() > 0:
             return 'there is already a post with that name'
         image_changed = self.image != self.__original_image
         if image_changed:
             self.rename_image_file()
             self.__original_image = self.image
-        super(Post, self).save(*args, **kwargs)
+        super(Project, self).save(*args, **kwargs)
         if image_changed:
             self.do_resizes()
-
-class Link(models.Model):
-    url = models.URLField(help_text='add your own link here')
-    post = models.ForeignKey(Post)
-    title = models.CharField(max_length=100, null=False, blank=True)
-    
-    def __unicode__(self):
-        return self.title
-    
-    def save(self, *args, **kwargs):
-        if self.title == '':
-            soup = BeautifulSoup.BeautifulSoup(urllib.urlopen(self.url))
-            self.title = soup.title.string
-        super(Link, self).save(*args, **kwargs)
-    
-
-class Tag(models.Model):
-    text = models.CharField(max_length=50, help_text='add your own tag here')
-    post = models.ManyToManyField(Post)
-    
-    def __unicode__(self):
-        return self.text
-    
-    @models.permalink
-    def get_absolute_url(self):
-        return ('apps.post.views.tag', {self.id:self.id})
