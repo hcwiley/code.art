@@ -71,5 +71,6 @@ urlpatterns += patterns('',
     #TODO: this is a hack to allow for no slashes... dashboard urls start with slash, except for the home one
     (r'^profile/', include('apps.developer.urls')),
     (r'^post/', include('apps.post.urls')),
+    (r'^project/', include('apps.project.urls')),
     (r'^oauth/', include('apps.oauth2_lite_client.urls')),
 )

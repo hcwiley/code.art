@@ -101,6 +101,7 @@ INSTALLED_APPS = (
     'apps.developer',
     'apps.post',
     'apps.oauth2_lite_client',
+    'apps.project',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window

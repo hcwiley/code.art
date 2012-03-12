@@ -4,6 +4,7 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from apps.developer.models import *
 from apps.post.models import *
 from apps.post.forms import *
+from apps.project.models import *
 from django.core.context_processors import csrf
 
 
@@ -41,6 +42,7 @@ def home(request):
             args.update({'result': 'your post did not validate...'})
     args.update(csrf(request))
     args.update({'post_form':PostForm()})
+    args.update({'projects': Project.objects.all()})
     return render_to_response('index.html', args)
 
 def oauth_authorize(request):
