@@ -1,0 +1,45 @@
+{% extends 'base.html'%}
+{% load thumbnail %}
+{% block left_nav %}
+<div id='profile_tabs'>
+    <div class='cur-page'>
+        <a href='/{{ developer.profile_edit_url }}'>Profile</a>
+    </div>
+    <div>
+        <a href='/{{ developer.profile_repos_url }}'>Repos</a>
+    </div>
+    <div>
+        <a href='/{{ developer.profile_media_url }}'>Media</a>
+    </div>
+    <div>
+        <a href='/{{ developer.profile_social_url }}'>Scoial</a>
+    </div>
+    <div>
+        <a href='/{{ developer.profile_projects_url }}'>Projects</a>
+    </div>
+    <div>
+        <a href='/{{ developer.profile_posts_url }}'>Posts</a>
+    </div>
+    <div>
+        <a href='/{{ developer.profile_gists_url }}'>Gists</a>
+    </div>
+</div>
+{% endblock %}
+{% block center %}
+<div class='developer-profile'>
+    <h3>First Last Name</h3>
+    <h4>{{ developer.user.first_name }} {{ developer.user.last_name }}</h4>
+    <h3>Username</h3>
+    <h5>({{ developer.user.username }})</h5>
+    <h5><a href='mailto:{{ developer.user.email }}'>{{ developer.user.email }}</a></h5>
+    <div id='connected_services'>
+	<h4>Connected Services</h4>
+	{% for id in developer.externalid_set.all %}
+	<h5><a href='{{ id.get_profile_page }}'>{{ id.nice_type }}</a></h5>
+	{% endfor %}
+	</div>
+    {% if developer.image %}
+    {% thumbnail developer.image '250' crop='center' as img %}<img id='profile_picture' src='{{ STATIC_MEDIA }}{{ img.url }}' width='{{ img.width }}' height='{{ img.height }}' title='{{ developer }}'/> {% endthumbnail %} 
+    {% endif %}
+	
+</div>{% endblock %}
