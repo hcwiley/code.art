@@ -9,7 +9,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         
         # Adding field 'ExternalId.developer'
-        db.add_column('developer_externalid', 'developer', self.gf('django.db.models.fields.related.ForeignKey')(default=None, to=orm['developer.Developer']), keep_default=False)
+        db.add_column('developer_externalid', 'developer', self.gf('django.db.models.fields.related.ForeignKey')(default="None", to=orm['developer.Developer']), keep_default=False)
 
 
     def backwards(self, orm):
