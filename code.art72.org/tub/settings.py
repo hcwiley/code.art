@@ -100,7 +100,7 @@ INSTALLED_APPS = (
     'registration',
     'apps.developer',
     'apps.post',
-    'apps.oauth2_lite_client',
+    'oauth2app',
     'apps.project',
 )
 
