@@ -1,2 +1,6 @@
 .DS_STORE
 *.pyc
+*.project
+*.pydevproject
+*.db
+local_settings.py
