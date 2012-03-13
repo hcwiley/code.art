@@ -16,7 +16,7 @@ def common_args(request):
     year: the year at the time of request  
     """ 
     user = request.user if request.user.is_authenticated() else None
-    developer = Developer.objects.filter(user=user)
+    developer = Developer.objects.get(user=user) if user != None else None
     args = {
                 'base_template' : 'base-ajax.html' if request.is_ajax() else 'base.html',
                 'developer' : developer,
