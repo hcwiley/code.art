@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block center %}
+<div id='thinkspace' class='half-column'>
+<h2>Think space</h2>
+<ul>
+	{% for post in posts %}
+	<li class='post'>
+		<a href='{{ post.get_absolute_url }}'>{{ post }}</a>
+		<h6>posted by: {% include "developer/tag.html" with developer=post.developer %}</h6>
+	</li>
+	{% endfor %}
+</ul>
+</div>
+<div id='projects' class='half-column'>
+<h2>projects</h2>
+<ul>
+	{% for project in projects %}
+	<li class='post'>
+		<a href='{{ project.get_absolute_url }}'>{{ project }}</a>
+		<h6>posted by: {% include "developer/tag.html" with developer=project.developer.all.0 %}</h6>
+	</li>
+	{% endfor %}
+</ul>
+</div>
+{% endblock %}

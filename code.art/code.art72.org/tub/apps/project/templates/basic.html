@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block center %}
+<style type='text/css'>
+	form, input {
+		display: inline;
+	}
+	#feedback {
+		position: fixed;
+		top: 20px;
+		right: 30px;
+	}
+</style>
+<script type='text/javascript'></script>
+<h2>{{ project }}</h2>
+<br>
+<p>
+	{% autoescape off %}
+	{{ project.blurb }}
+	{% endautoescape %}
+</p>
+<br>
+{% for media in project.media.all %}
+	{% include 'project/media.html' with media=media %}
+{% endfor %}
+{% for repo in project.repos.all %}
+	{% include 'project/repo.html' with repo=repo %}
+{% endfor %}
+
+{% endblock %} 

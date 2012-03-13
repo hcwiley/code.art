@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block center %}
+{% if my_providers %}
+    <h1>My connected providers</h1>
+    {% for provider in my_providers %}
+        <li><a href="{{ provider.provider.get_authorization_url }}">{{ provider.provider }}</a></li>
+    {% endfor %}
+{% endif %}
+
+<h1>Providers</h1>
+{% for provider in providers %}
+        <li><a href="{{ provider.get_authorization_url }}">{{ provider }}</a></li>
+{% endfor %}
+
+<h1>Repos</h1>
+{% for repo in repos %}
+        <li><a href="{{ repo.get_authorization_url }}">{{ repo }}</a></li>
+{% endfor %}
+{% endblock %}

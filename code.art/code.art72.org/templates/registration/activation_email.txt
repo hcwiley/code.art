@@ -1,0 +1,9 @@
+Thanks for signing up with Code-Art72.
+
+Please follow the below url within {{ expiration_days }} days to activate your account.
+
+http://{{ site.domain }}/accounts/activate/{{ activation_key }}
+
+Cheers,
+
+The guys at Art72
