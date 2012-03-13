@@ -9,7 +9,7 @@ from django.contrib.auth.models import AnonymousUser
 
 def get_all_repos(request):
     user = request.user
-    github = Provider.objects.get(slug='github')
+#    github = Provider.objects.get(slug='github')
 #    cred = user.credential_set.get(provider=github)
     return None
 #    if github:
