@@ -2,7 +2,7 @@
 <h4>a place for artist hackers and developers</h4>
 
 <h2>purpose</h2>
-<p>Share your sketches, links, code, videos, all in centralized location that ties into github, sourceforge, stackoverflow, etc... but also has a focus on the final piece being created from the process, the practice.</p>
+<p>Share your sketches, links, code, videos, all in centralized location that ties into github, sourceforge, stackoverflow, etc... but also has a focus on the final piece being created from the process.</p>
 
 <h2>explanation</h2>
 <p>My thesis deals with the process of creating a work that is beyond general knowledge; by creating code.art I hope to organize my repos, images, and videos in a logical way so that others may easily mimic the pattern and be able to use code.art72.org more naturally.
