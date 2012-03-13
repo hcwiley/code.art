@@ -1,0 +1,27 @@
+{% extends 'base.html'%}
+{% load thumbnail %}
+{% block left_nav %}
+<div id='profile_tabs'>
+    <div>
+        <a href='{{ developer.get_absolute_url }}'>Profile</a>
+    </div>
+    <div>
+        <a href='{{ developer.get_absolute_url }}/repos'>Repos</a>
+    </div>
+    <div>
+        <a href='{{ developer.get_absolute_url }}/media'>Media</a>
+    </div>
+    <div>
+        <a href='{{ developer.get_absolute_url }}/social'>Scoial</a>
+    </div>
+    <div>
+        <a href='{{ developer.get_absolute_url }}/project'>Projects</a>
+    </div>
+    <div>
+        <a href='{{ developer.get_absolute_url }}/posts'>Posts</a>
+    </div>
+    <div>
+        <a href='/{{ developer.profile_gists_url }}'>Gists</a>
+    </div>
+</div>
+{% endblock %}
