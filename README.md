@@ -1,4 +1,4 @@
-<h1>code.art</h1>
+<a href='http://code.art72.org' target='_blank'><h1>code.art</h1></a>
 <h4>a place for artist hackers and developers</h4>
 
 <h2>purpose</h2>
