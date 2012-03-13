@@ -1,4 +1,4 @@
-<h1>code.art powered by art72</h1>
+<h1>code.art</h1>
 <h4>a place for artist hackers and developers</h4>
 
 <h2>purpose</h2>
