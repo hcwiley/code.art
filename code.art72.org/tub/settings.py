@@ -100,7 +100,6 @@ INSTALLED_APPS = (
     'registration',
     'apps.developer',
     'apps.post',
-    'oauth2app',
     'apps.project',
 )
 

@@ -72,8 +72,4 @@ urlpatterns += patterns('',
     (r'^profile/', include('apps.developer.urls')),
     (r'^post/', include('apps.post.urls')),
     (r'^project/', include('apps.project.urls')),
-    (r'^oauth2/missing_redirect_uri/?$', 'django.contrib.site.oauth2.views.missing_redirect_uri'),
-    (r'^oauth2/authorize/?$', 'tub.oauth2.views.authorize'),
-    (r'^oauth2/token/?', 'oauth2app.token.handler'),
-)
 )
