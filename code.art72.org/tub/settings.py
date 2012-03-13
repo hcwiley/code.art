@@ -64,14 +64,17 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'tub.urls'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-   "django.core.context_processors.static",
-   "django.contrib.auth.context_processors.auth",
-   "django.core.context_processors.debug",
-   "django.core.context_processors.i18n",
-   "django.core.context_processors.media",
-   "django.core.context_processors.static",
-   "django.contrib.messages.context_processors.messages",
-   "django.core.context_processors.csrf",
+    "django.core.context_processors.static",
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.contrib.messages.context_processors.messages",
+    "django.core.context_processors.csrf",
+    'social_auth.context_processors.social_auth_by_name_backends',
+    'social_auth.context_processors.social_auth_backends',
+    'social_auth.context_processors.social_auth_by_type_backends',
 )
 
 TEMPLATE_DIRS = (
@@ -81,7 +84,43 @@ TEMPLATE_DIRS = (
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, '../static/'),
 )
+# django-social-auth stuff
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'social_auth.backends.contrib.github.GithubBackend',
+    'social_auth.backends.contrib.dropbox.DropboxBackend',
+    'social_auth.backends.contrib.flickr.FlickrBackend',
+    'social_auth.backends.OpenIDBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
+TWITTER_CONSUMER_KEY         = ''
+TWITTER_CONSUMER_SECRET      = ''
+FACEBOOK_APP_ID              = ''
+FACEBOOK_API_SECRET          = ''
+GOOGLE_OAUTH2_CLIENT_ID      = '889172199565.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_SECRET  = '7moPqSoZWZ6CQCsnJDQD-1bu'
+GOOGLE_OAUTH_EXTRA_SCOPE     = 'http://gdata.youtube.com'
+GITHUB_APP_ID                = 'b0b11d70b4f9254c6510'
+GITHUB_API_SECRET            = '7fbe126a6ff892a49a9ff642b5b21371a1ef937f'
+DROPBOX_APP_ID               = ''
+DROPBOX_API_SECRET           = ''
+FLICKR_APP_ID                = ''
+FLICKR_API_SECRET            = ''
+
+LOGIN_URL          = '/login-form/'
+LOGIN_REDIRECT_URL = '/logged-in/'
+LOGIN_ERROR_URL    = '/login-error/'
+
+SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
+SOCIAL_AUTH_UUID_LENGTH = 16
+SOCIAL_AUTH_EXTRA_DATA = False
+SOCIAL_AUTH_EXPIRATION = 'expires'
+SOCIAL_AUTH_SESSION_EXPIRATION = False
+SOCIAL_AUTH_ASSOCIATE_BY_MAIL = True
+#SOCIAL_AUTH_USER_MODEL = 'apps.developer.Developer' # Do this later
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -97,10 +136,11 @@ INSTALLED_APPS = (
     'apps.contactform',
     'sorl.thumbnail',
     'south',
-    'registration',
+#    'registration',
     'apps.developer',
     'apps.post',
     'apps.project',
+    'social_auth',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window

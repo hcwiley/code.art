@@ -6,7 +6,8 @@ from apps.post.models import *
 from apps.post.forms import *
 from apps.project.models import *
 from django.core.context_processors import csrf
-
+from django.contrib.auth import logout
+#from social_auth.models import Providers
 
 def common_args(request):
     """
@@ -49,4 +50,14 @@ def oauth_authorize(request):
     return False
  
 def login(request):
-     return False
+#    for p in Provider.objects.all():
+#        print p
+    return redirect("/auth/login/github")
+ 
+def log_out(request):
+    logout(request)
+    args = common_args(request)
+    return render_to_response('index.html', args)
+ 
+def logged_in(request):
+     return redirect("/profile")

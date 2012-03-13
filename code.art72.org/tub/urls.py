@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     (r'^/$', 'views.home'),
     (r'^$', 'views.home'),
     (r'^login$', 'views.login'),
+    (r'^logout$', 'views.log_out'),
 )
 #OAtuh stuff
 urlpatterns += patterns('',
@@ -25,39 +26,6 @@ urlpatterns += patterns('',
 #    url(r'^oauth/authorize/', 'apps.developer.views.auth_authorization'), #this is for gets
 #    url(r'^oauth/access_token/', 'apps.developer.views.auth_access'),
 )
-
-#TODO: submit a pull request to sorl thumbnail with updated django admin docs entry
-#TODO: allow login via username or email
-#TODO: make username and email unique check case insensitive
-#TODO: figure out what characters will be allowed for usernames
-#TODO: add in site domain info to email templates so activation links can go out correctly for testing
-urlpatterns += patterns('',
-                       # Activation keys get matched by \w+ instead of the more specific
-                       # [a-fA-F0-9]{40} because a bad activation key should still get to the view;
-                       # that way it can return a sensible "invalid key" message instead of a
-                       # confusing 404.
-                       url(r'^accounts/activate/(?P<activation_key>\w+)$',
-                           activate,
-                           name = 'registration_activate'),
-                       url(r'^accounts/login$',
-                           auth_views.login,
-                           {'template_name': 'registration/login.html'},
-                           name = 'auth_login'),
-                       url(r'^accounts/logout$',
-                           auth_views.logout,
-                           {'template_name': 'registration/logged_out.html'},
-                           name = 'auth_logout'),
-                       url(r'^accounts/register$',
-                           register,
-                           {'form_class':RegistrationFormUniqueEmail},
-                           name = 'registration_register'),
-                       url(r'^accounts/register/complete$',
-                           direct_to_template,
-                           {'template': 'registration/registration_complete.html'},
-                           name = 'registration_complete'),
-                       )
-#these forms needs to enforce the case insensitive email and username
-
 
 if settings.DEBUG:
     # let django serve user generated media while in development
@@ -72,4 +40,6 @@ urlpatterns += patterns('',
     (r'^profile/', include('apps.developer.urls')),
     (r'^post/', include('apps.post.urls')),
     (r'^project/', include('apps.project.urls')),
+    (r'^auth/', include('social_auth.urls')),
+    (r'^logged-in', 'views.logged_in'),
 )
