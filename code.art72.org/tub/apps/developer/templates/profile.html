@@ -28,14 +28,14 @@
 {% block center %}
 <div class='developer-profile'>
     <h3>First Last Name</h3>
-    <h4>{{ developer.user.first_name }} {{ developer.user.last_name }}</h4>
+    <h5>{{ developer.user.first_name }} {{ developer.user.last_name }}</h5>
     <h3>Username</h3>
     <h5>{{ developer.user.username }}</h5>
     <h5><a href='mailto:{{ developer.user.email }}'>{{ developer.user.email }}</a></h5>
     <div id='connected_services'>
 	<h4>Connected Services</h4>
-	{% for id in developer.externalid_set.all %}
-	<h5><a href='{{ id.get_profile_page }}'>{{ id.nice_type }}</a></h5>
+	{% for id in user.social_auth.all %}
+	<h5>{{ id.provider }}</h5>
 	{% endfor %}
 	</div>
     {% if developer.image %}

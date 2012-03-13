@@ -27,7 +27,11 @@
 {% endblock %}
 {% block center %}
 <div class='developer-profile'>
-    {% for repo in project.repos.all %}
-	{{ repo.title }}
+	<div id='repos'>
+    {% for repo in repos %}
+	<a href='{{ repo.url }}'target="_blank"><h5>{{ repo }}</h5></a>
+	<p>{{ repo.blurb }}</p>
+	<br>
 	{% endfor %}
+    </div>
 </div>{% endblock %}

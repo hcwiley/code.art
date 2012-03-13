@@ -1,6 +1,6 @@
 html, body {
-    width: 99%;
-    height: 99%;
+    width: 100%;
+    height: 100%;
     background-color: #FFF;
 }
 * {
@@ -26,9 +26,10 @@ header, footer {
 
 header {
     float: left;
-    height: 80px;
+    height: 115px;
     width: 100%;
     clear: both;
+    background-color: #dedede;
 }
 
 header > div{
@@ -38,6 +39,8 @@ header > div{
 }
 
 #header-title{
+	background-color: #fff;
+	height: 90px;
     position: relative;
     top: -80px;
     left: 0px;
@@ -50,6 +53,7 @@ header > div{
 
 header h1{
     position: relative;
+    top: -10px;
     font-size: 50px;
     display: inline;
 /*    left: -73px;*/
@@ -215,6 +219,14 @@ div.title *{
     border-bottom: none;
 }
 
+.developer-profile h3{
+	font-weight: bold;
+}
+.developer-profile h5{
+	padding-left: 15px;
+	color: #7da109;
+}
+
 label {
     display: block;
     color: #232323;
@@ -371,6 +383,9 @@ h3{
 
 p, li{
 	font-family: Helvetica, Arial, sans-serif;
+}
+li{
+	display: block;
 }
 
 h6 {

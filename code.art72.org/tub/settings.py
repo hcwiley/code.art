@@ -88,6 +88,9 @@ STATICFILES_DIRS = (
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.twitter.TwitterBackend',
     'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.google.GoogleOAuthBackend',
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'social_auth.backends.google.GoogleBackend',
     'social_auth.backends.google.GoogleOAuth2Backend',
     'social_auth.backends.contrib.github.GithubBackend',
     'social_auth.backends.contrib.dropbox.DropboxBackend',
@@ -96,19 +99,21 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-TWITTER_CONSUMER_KEY         = ''
-TWITTER_CONSUMER_SECRET      = ''
-FACEBOOK_APP_ID              = ''
-FACEBOOK_API_SECRET          = ''
+TWITTER_CONSUMER_KEY         = 'nZnYw5fmQ7uFdiRlmQ'
+TWITTER_CONSUMER_SECRET      = 'gOxgQI0YmFF6boKRQ9L0qhEeCd0c6mgV4AI7nyrLrk'
+FACEBOOK_APP_ID              = '172127646238759'
+FACEBOOK_API_SECRET          = '32455151543ca5c16d02eb93f2a23add'
+GOOGLE_CONSUMER_KEY          = '889172199565.apps.googleusercontent.com'
+GOOGLE_CONSUMER_SECRET       = '7moPqSoZWZ6CQCsnJDQD-1bu'
 GOOGLE_OAUTH2_CLIENT_ID      = '889172199565.apps.googleusercontent.com'
 GOOGLE_OAUTH2_CLIENT_SECRET  = '7moPqSoZWZ6CQCsnJDQD-1bu'
 GOOGLE_OAUTH_EXTRA_SCOPE     = 'http://gdata.youtube.com'
 GITHUB_APP_ID                = 'b0b11d70b4f9254c6510'
 GITHUB_API_SECRET            = '7fbe126a6ff892a49a9ff642b5b21371a1ef937f'
-DROPBOX_APP_ID               = ''
-DROPBOX_API_SECRET           = ''
-FLICKR_APP_ID                = ''
-FLICKR_API_SECRET            = ''
+DROPBOX_APP_ID               = 'rhcjlezizolqu3j'
+DROPBOX_API_SECRET           = '9czz8shr45nt9pm'
+FLICKR_APP_ID                = '15ef3ce0f0c8d4e8f7d50968e4c56b8d'
+FLICKR_API_SECRET            = '40f29a19dff20148'
 
 LOGIN_URL          = '/login-form/'
 LOGIN_REDIRECT_URL = '/logged-in/'

@@ -11,7 +11,9 @@ from sorl import thumbnail
 import Image
 from django.contrib.sites.models import Site
 import simplejson
-import urllib2
+import urllib2 as urllib
+from social_auth.models import UserSocialAuth
+from apps.project.models import *
 
 MAX_IMAGE_SIZE = ('300','300')
 
@@ -30,6 +32,8 @@ class Developer(models.Model):
     lat = models.CharField(max_length=50, blank=True, null=True)
     long = models.CharField(max_length=50, blank=True, null=True)
     process = models.TextField(blank=True, null=True)
+    repos = models.ManyToManyField(Repo, default=None, null=True, blank=False)
+    projects = models.ManyToManyField(Project, default=None, null=True, blank=False)
     # external id links
     
     def get_absolute_url(self): 
@@ -83,6 +87,24 @@ class Developer(models.Model):
 #                videos.update({video['entry']: video['entry']})
         print videos
         return videos
+    
+    def update_repos(self):
+        github = self.user.social_auth.filter(provider='github')[0]
+        repos = urllib.urlopen('https://api.github.com/users/%s/repos' % github.user)
+        repos = simplejson.loads(repos.read())
+        names = {}
+        c = 0
+        for repo in repos:
+            rep = Repo.objects.get_or_create(title=repo['name'])[0]
+            rep.blurb = repo['description']
+            rep.url = repo['html_url']
+            dev = repo['owner']
+            dev = dev['login']
+            rep.developer = dev
+            rep.save() 
+            print repo['name']
+        return Repo.objects.all()
+        
         
     def save(self, *args, **kwargs):
         image_changed = self.image != self.__original_image

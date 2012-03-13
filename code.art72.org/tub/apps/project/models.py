@@ -5,11 +5,10 @@ from django.db import models
 from uuid import uuid4
 from sorl import thumbnail
 import Image
-from apps.developer.models import *
 from django.template.defaultfilters import slugify
 import urllib
 import BeautifulSoup
-from apps.post.models import *
+#from apps.post.models import Post, Tag, Link
 
 MAX_IMAGE_SIZE = settings.MAX_IMAGE_SIZE
 
@@ -46,7 +45,6 @@ class Project(models.Model):
     slug = models.SlugField(editable=False, default="")
     blurb = models.TextField()
     use_git_blurb = models.BooleanField(default=False)
-    developer = models.ManyToManyField(Developer)
     repos = models.ManyToManyField(Repo, null=True,blank=False)
     media = models.ManyToManyField(Media, null=True,blank=False)
 #    date = models.ForeignKey(Date, null=True, blank=True)
