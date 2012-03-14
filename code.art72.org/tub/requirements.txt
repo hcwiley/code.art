@@ -7,3 +7,6 @@ sorl-thumbnail==11.09.1
 python-memcached==1.48
 django-registration==0.7
 simplejson=2.3.2
+oauth2
+python_openid
+django-social-auth
