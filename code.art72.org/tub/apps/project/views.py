@@ -50,6 +50,8 @@ def project(request, id=None):
     else:
         args.update({'tag_form':TagForm(instance=project)})
         args.update({'link_form':LinkForm(instance=project)})
+    repo = project.repos.all()[0]
+    args['commits']  = repo.get_commits()
     args.update(csrf(request))
     return render_to_response('project/basic.html', args)
 

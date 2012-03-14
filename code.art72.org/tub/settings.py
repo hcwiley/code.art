@@ -115,6 +115,8 @@ DROPBOX_API_SECRET           = '9czz8shr45nt9pm'
 FLICKR_APP_ID                = '15ef3ce0f0c8d4e8f7d50968e4c56b8d'
 FLICKR_API_SECRET            = '40f29a19dff20148'
 
+AVAILABLE_PROVIDERS = [ 'github', 'google','twitter', 'flickr','facebook','dropbox', ]
+
 LOGIN_URL          = '/login-form/'
 LOGIN_REDIRECT_URL = '/logged-in/'
 LOGIN_ERROR_URL    = '/login-error/'

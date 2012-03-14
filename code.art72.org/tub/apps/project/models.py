@@ -6,7 +6,7 @@ from uuid import uuid4
 from sorl import thumbnail
 import Image
 from django.template.defaultfilters import slugify
-import urllib
+import urllib, simplejson
 import BeautifulSoup
 #from apps.post.models import Post, Tag, Link
 
@@ -19,6 +19,18 @@ class Repo(models.Model):
     
     def __unicode__(self):
         return self.title
+    
+    def get_commits(self):
+        github = self.developer_set.all()[0]
+        github = github.user.social_auth.filter(provider='github')[0]
+        print 'giter:::: %s' % github.user
+        commits = urllib.urlopen('https://api.github.com/repos/%s/%s/commits' % (github.user, self.title))
+        commits = simplejson.load(commits)
+        print commits
+        return commits
+    
+    def get_dates_rivisions(self):
+        return "foo"
 
 class ExtendedImage(models.Model):
     uploaded = thumbnail.ImageField(upload_to='images/projects/%Y/%m/%d', null=True, blank=True, default=None)
@@ -35,7 +47,7 @@ class Media(models.Model):
     title = models.CharField(max_length=144)
     image = models.ForeignKey(ExtendedImage, null=True, blank=True, default=None)
     video = models.URLField(null=True, blank=True, default=None)
-    
+    date = models.DateTimeField(null=True, blank=True)
     def __unicode__(self):
         return self.title
 
@@ -45,10 +57,10 @@ class Project(models.Model):
     slug = models.SlugField(editable=False, default="")
     blurb = models.TextField()
     use_git_blurb = models.BooleanField(default=False)
-    repos = models.ManyToManyField(Repo, null=True,blank=False)
-    media = models.ManyToManyField(Media, null=True,blank=False)
+    repos = models.ManyToManyField(Repo, null=True,blank=True)
+    media = models.ManyToManyField(Media, null=True,blank=True)
 #    date = models.ForeignKey(Date, null=True, blank=True)
-    image = thumbnail.ImageField(upload_to='images/projects/%Y/%m/%d', null=True, blank=True)
+    image = models.ForeignKey(ExtendedImage, null=True, blank=True)
     __original_image = None
     
     @models.permalink
@@ -77,7 +89,7 @@ class Project(models.Model):
         
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-        if Post.objects.filter(title=self.title).count() > 0:
+        if Project.objects.filter(title=self.title).count() > 0:
             return 'there is already a post with that name'
         image_changed = self.image != self.__original_image
         if image_changed:

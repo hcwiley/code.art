@@ -1,0 +1,11 @@
+<a href="{{ repo.url }}" target='_blank'><img src='{{ STATIC_URL }}images/blacktocat.svg' width=30 height=30/><h3>{{ repo }}</h3></a>
+{% for commit in commits %} <a href="{{ commit.commit.url }}" target='_blank'>
+<div class='commit'>
+    <div class='commit-header'>
+        <h5>{{ commit.commit.committer.name }}</h5><h6>{{ commit.commit.committer.date }}</h6>
+    </div>
+    <p>
+        {{ commit.commit.message }}
+    </p>
+</div></a>
+{% endfor %} 

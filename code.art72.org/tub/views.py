@@ -25,6 +25,7 @@ def common_args(request):
                 'MEDIA_URL' : settings.MEDIA_URL,
                 'posts' :  Post.objects.all(),
                 'tags' : Tag.objects.all(),
+                'projects': Project.objects.all(),
                 'user' : user,
            }
     print user
@@ -60,4 +61,4 @@ def log_out(request):
     return render_to_response('index.html', args)
  
 def logged_in(request):
-     return redirect("/profile")
+     return redirect("/profile/%s" % request.user.username)
