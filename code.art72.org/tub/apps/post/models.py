@@ -15,7 +15,7 @@ MAX_IMAGE_SIZE = settings.MAX_IMAGE_SIZE
 class Post(models.Model):
     title = models.CharField(max_length=144)
     blurb = models.TextField()
-#    developer = models.ForeignKey(Developer)
+    developer = models.ForeignKey(Developer)
     image = thumbnail.ImageField(upload_to='images/posts/%Y/%m/%d', null=True, blank=True)
     __original_image = None
     
