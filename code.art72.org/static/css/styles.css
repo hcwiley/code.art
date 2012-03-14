@@ -13,6 +13,15 @@ html, body {
 	border: none;
 }
 
+a {
+    color: #222;
+    text-decoration: none;
+/*    font-variant: small-caps;*/
+    display: inline;
+    font-family: botanika-mono-web, monospace, sans-serif;
+    font-size: 15px;
+}
+
 #container {
     width: 100%;
     min-height: 100%;
@@ -26,7 +35,7 @@ header, footer {
 
 header {
     float: left;
-    height: 115px;
+    height: 135px;
     width: 100%;
     clear: both;
     background-color: #dedede;
@@ -40,33 +49,36 @@ header > div{
 
 #header-title{
 	background-color: #fff;
-	height: 90px;
+	height: 100px;
     position: relative;
-    top: -80px;
+    top: -90px;
     left: 0px;
     text-align: center;
+    padding-bottom: 10px;
     width: 100%;
     z-index: 0;
     display: block;
     float: left;
+    border-top: 5px solid #ce2c2f;
 }
 
 header h1{
     position: relative;
-    top: -10px;
-    font-size: 50px;
+    top: 0px;
+    font-size: 70px;
     display: inline;
 /*    left: -73px;*/
 }
 
 h1.code{
-    font-family: botanika-mono-web, monospace, sans-serif;
+    font-family: TheMixMono, botanika-mono-web, monospace, sans-serif;
     font-weight: 100;
 }
 
 header h4{
 	font-variant: small-caps;
 	position: relative;
+	top: -10px;
 	
 }
 
@@ -83,6 +95,75 @@ h1.dot{
     height: 80px;
     width: auto;
     margin: 10px 40px 0px 35px;
+}
+
+
+header * {
+    display: inline;
+}
+
+#soc-links{
+    float: right;
+    margin-top: 10px;
+    margin-right: 80px;
+    margin-bottom: 20px;
+    height: 100px;
+    width: 30px;
+    text-align: right;
+}
+.soc-icon{
+    display: inline;
+    height: 50px;
+    width: 100px
+    margin: 10px;
+}
+.soc-icon h4{
+    font-size: 30px;
+    font-weight: 900;
+    font-family: TheMixMono, botanika-mono-web, monospace, sans-serif;
+}
+
+.soc-icon #facebook{
+    float: right;
+    position: relative;
+}
+
+#login {
+    width: 200px;
+    float: right;
+    text-align: right;
+    margin-top: 38px;
+    margin-right: 20px;
+}
+#login h3{
+    margin-bottom: 8px;
+    display: block;
+}
+#feedback{
+    display: inline;
+}
+div.title{
+    background-color: #FFF;
+    -moz-border-radius: 0px 10px 10px 0px;
+    -webkit-border-radius: 0px 10px 10px 0px;
+    -khtml-border-radius: 0px 10px 10px 0px;
+    margin: 0px;
+    padding: 1px 20px;
+    width: 390px;
+    height: 50px;
+}
+div.title a{
+}
+div.title *{
+    color: #104e93;
+    display: block;
+    font-variant: small-caps;
+    font-weight: 900;
+    font-size: 25px;
+}
+.page-title{
+    text-align: center;
+    font-size: 20px;
 }
 
 
@@ -107,47 +188,6 @@ footer .art72 img:hover{
 	opacity: 0;
 }
 
-header * {
-    display: inline;
-}
-
-#login {
-	width: 200px;
-    float: right;
-    text-align: right;
-    margin-top: 38px;
-    margin-right: 20px;
-}
-#login h3{
-	margin-bottom: 8px;
-	display: block;
-}
-#feedback{
-	display: inline;
-}
-div.title{
-	background-color: #FFF;
-	-moz-border-radius: 0px 10px 10px 0px;
-    -webkit-border-radius: 0px 10px 10px 0px;
-    -khtml-border-radius: 0px 10px 10px 0px;
-    margin: 0px;
-    padding: 1px 20px;
-    width: 390px;
-    height: 50px;
-}
-div.title a{
-}
-div.title *{
-	color: #104e93;
-	display: block;
-	font-variant: small-caps;
-	font-weight: 900;
-	font-size: 25px;
-}
-.page-title{
-	text-align: center;
-	font-size: 20px;
-}
 #wrapper {
     float: left;
 	width: 70%;
@@ -183,18 +223,27 @@ div.title *{
 
 #left-nav {
     float: left;
-    margin-top: 90px;
     margin-left: 30px;
+    padding-right: 40px;
     width: 150px;
     min-height: 400px;
     height: auto;
     z-index: 5;
-    
+    border-right: 8px solid #DEDEDE;
+    padding-top: 50px;
 }
 
 .half-column{
 	width: 45%;
 	float: left; 
+}
+
+.half-column h2{
+    margin-left: -10px;
+}
+.half-column h3{
+    color: #ce2c2f;
+    font-size: 18px;
 }
 
 #projects.half-column{
@@ -225,6 +274,40 @@ div.title *{
 .developer-profile h5{
 	padding-left: 15px;
 	color: #7da109;
+}
+
+#connected_services{
+    width: 200px;
+}
+#connected_services h6{
+    margin-left: 20px;
+    width: 60px;
+    color: #2c2c2c;
+    font-family: TheMixMono, botanika-mono-web, monospace, sans-serif;
+}
+
+#commits{
+    width: 400px;
+}
+
+.commit-header{
+    border-bottom: 1px solid #232323;
+    margin-bottom: 2px;
+    margin-top: 7px;
+}
+
+#commits p, #commits a{
+    margin-left: 30px;
+    font-variant: none;
+}
+
+#commits h5{
+    margin: 7px 0 0 0;
+    display: inline;
+}
+
+#commits h6{
+    display: inline;
 }
 
 label {
@@ -279,13 +362,6 @@ button {
 
 #profile_tabs > div.cur-page > a{
     color: #fff;
-}
-
-a {
-    color: #A8433C;
-    text-decoration: none;
-    font-style: italic;
-    display: inline;
 }
 
 li {
@@ -364,6 +440,15 @@ form.form-part input.submit{
 	clear: both;
 }
 
+.repo h5{
+    margin-left: -30px;
+    font-size: 18px;
+}
+
+.repo p{
+    margin-left: 60px;
+}
+
 iframe{
 	width: 400px;
 	height: 300px;
@@ -377,7 +462,6 @@ h2{
 h3{
 	font-size: 15px;
 	font-weight: 600;
-	font-family: Monaco, Ubuntu, sans-serif;
 	margin: 2px;
 }
 

@@ -5,7 +5,7 @@
         <meta name='description' content='content managed artist websites' />
         <meta name='keywords' content='artist, website, tagging, hacking, art sharing, code, art72, art, open source,' />
         <link id='main-css' type='text/css' rel='stylesheet' href='{{ STATIC_URL }}css/styles.css'/>
-        <link type='image/x-icon' rel="icon" href='{{ STATIC_URL }}promo/images/art72-favicon.png' />
+        <link type='image/x-icon' rel="icon" href='{{ STATIC_URL }}images/fav.png' />
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
         <script type="text/javascript" src="https://use.typekit.com/cew3pji.js"></script>
@@ -16,19 +16,30 @@
             }
         </script>
         <title>{% block title %}{% endblock %}</title>
+        <script>
+            ( function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if(d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=172127646238759";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+        </script>
     </head>
     <body>
+        <div id="fb-root"></div>
         {% include "header.html" %}
         <div id='container'>
             <div id='left-nav'>
-                {% block left_nav %}
-                <h3>projects</h3>
+                {% block left_nav %} <h3>projects</h3>
                 {% for project in projects %} <a href='{{ project.get_absolute_url }}'>
                 <li>
                     {{ project }}
                 </li></a>
-                {% endfor %}
-                <h3>tags</h3>
+                {% endfor %} <h3>tags</h3>
                 {% for tag in tags %} <a href='{{ tag.get_absolute_url }}'>
                 <li>
                     {{ tag }}

@@ -1,4 +1,13 @@
 <footer>
-<a href="http://art72.me" target='_blank'><div class='art72'><img width='115' height='70' src="{{ STATIC_URL }}images/art72-gray.png" /></div></a>	
-<a href="/"><img class='logo' width='auto' height='120' src="{{ STATIC_URL }}images/logo.png" /></a>
+    <a href="http://art72.me" target='_blank'>
+    <div class='art72'><img width='115' height='70' src="{{ STATIC_URL }}images/art72-gray.png" />
+    </div></a>
+    <a href="/"><img class='logo' width='auto' height='120' src="{{ STATIC_URL }}images/logo.png" /></a>
+    <div id='soc-links'>
+        {% for provider, val in current_providers.items %}
+        <div class='soc-icon'>
+            {% include val %}
+        </div>
+        {% endfor %}
+    </div>
 </footer>

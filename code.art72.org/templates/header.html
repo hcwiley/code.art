@@ -1,7 +1,6 @@
 <header>
 	<div>
 		<a href="/"><img id='logo' src="{{ STATIC_URL }}images/mark.png" /></a>
-		<a href="/">
 		<div id='login'>
 			{% if user %}
 			<a href='{{ user.developer.get_absolute_url }}'><h3>{{ user.developer }}</h3></a>
@@ -10,6 +9,7 @@
 			{% endif %}
 		</div>
 	</div>
+  <a href="/">
 	<div id='header-title'>
 			<h1 class='code'>code</h1><h1 class='dot'>.</h1><h1 class='art'>art</h1>
 			<br/>
