@@ -14,6 +14,7 @@ import simplejson
 import urllib2 as urllib
 from social_auth.models import UserSocialAuth
 from apps.project.models import *
+from test.test_imageop import MAX_LEN
 
 MAX_IMAGE_SIZE = ('300','300')
 
@@ -23,6 +24,8 @@ class Developer(models.Model):
     """
     #TODO: when checking for unique email, check for things like 'zackdever@gmail.com' vs 'zackdever+foo@gmail.com' and periods. not sure if this is specific to gmail or not
     # user data
+    ALL_PROVIDERS = (('github','github'), ('google','google'),('twitter','twitter'), ('flickr','flickr'),('facebook','facebook'),('dropbox','dropbox',))
+    
     user = models.OneToOneField(User)
     statement = models.TextField(null=True, blank=True)
     image = thumbnail.ImageField(upload_to='images/developers/%Y/%m/%d', null=True, blank=True)
@@ -32,8 +35,10 @@ class Developer(models.Model):
     lat = models.CharField(max_length=50, blank=True, null=True)
     long = models.CharField(max_length=50, blank=True, null=True)
     process = models.TextField(blank=True, null=True)
-    repos = models.ManyToManyField(Repo, default=None, null=True, blank=False)
-    projects = models.ManyToManyField(Project, default=None, null=True, blank=False)
+    repos = models.ManyToManyField(Repo, default=None, null=True, blank=True)
+    medias = models.ManyToManyField(Media, default=None, null=True, blank=True)
+    projects = models.ManyToManyField(Project, default=None, null=True, blank=True)
+    providers = models.CharField(choices=ALL_PROVIDERS, max_length=20, null=True, blank=True)
     # external id links
     
     def get_absolute_url(self): 
@@ -63,11 +68,6 @@ class Developer(models.Model):
         img.thumbnail(MAX_IMAGE_SIZE, Image.ANTIALIAS)
         img.save(self.image.path)
         
-    def has_videos(self):
-        if self.externalid_set.filter(type=6).count() > 0 or self.externalid_set.filter(type=7).count() > 0:
-            return True
-        return False
-    
     def videos(self):
         videos = {}
         for handle in self.externalid_set.filter(type=6):#vimeo
@@ -100,10 +100,37 @@ class Developer(models.Model):
             rep.url = repo['html_url']
             dev = repo['owner']
             dev = dev['login']
-            rep.developer = dev
             rep.save() 
+            self.repos.add(rep)
             print repo['name']
         return Repo.objects.all()
+     
+    def update_media(self):
+        print 'updating the medias'
+        youtube = self.user.social_auth.filter(provider='google')[0]
+        medias = urllib.urlopen('https://gdata.youtube.com/feeds/api/videos?author=%s&alt=json&prettyprint=true' % youtube.user)
+        medias = simplejson.loads(medias.read())
+        names = {}
+        c = 0
+        medias = medias['feed']
+        medias = medias['entry']
+        for media in medias:
+            tmp = media['title']
+            tmp = tmp['$t']
+            med = Media.objects.get_or_create(title=tmp)[0]
+#            tmp = media['media$thumbnail'] # for image at some point
+#            tmp = tmp['$t']
+#            med.image
+            tmp = media['media$group']
+            tmp = tmp['media$content']
+            tmp = tmp[0]
+            tmp = tmp['url'] 
+            print tmp
+            med.video = tmp
+            med.developer = tmp
+            med.save() 
+            self.medias.add(med)
+        return Media.objects.all()
         
         
     def save(self, *args, **kwargs):
@@ -125,35 +152,6 @@ ID_TYPES = (
             ('6', 'vimeo'),
             ('7', 'youtube')
     )
-
-class ExternalId(models.Model):
-    type = models.CharField(max_length=20, choices=ID_TYPES)
-    handle = models.CharField(max_length=50)
-    developer = models.ForeignKey(Developer)
-    
-    def __unicode__(self):
-        return '%s @ %s' % (self.handle, self.type)
-    
-    def get_profile_page(self):
-        if self.type == 1: #github
-            return 'https://github.com/%s' % self.handle
-        elif self.type == 2: #bitbucket
-            return "https://bitbucket.org/%s" % self.handle
-        elif self.type == 3: #source_forge
-            return "https://sourceforge.net/users/?user_id=%s" % self.handle
-        elif self.type == 4: #stack_overflow
-            return "http://stackoverflow.com/users/%s" % self.handle
-        elif self.type == 5: #twitter
-            return "https://twitter.com/%s" % self.handle
-        elif self.type == 6: #vimeo
-            return "http://vimeo.com/%s" % self.handle
-        elif self.type == 1: #youtube
-            return "http://youtube.com/%s" % self.handle
-        
-    def nice_type(self):
-        return "%s" % ID_TYPES[int(self.type)-1][1].replace('_',' ')
-        
-
 @receiver(post_save, sender=User, weak=False)
 def delete_image_on_file(sender, instance, raw, created, using, **kwargs):
     if created:

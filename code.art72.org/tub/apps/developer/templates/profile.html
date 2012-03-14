@@ -1,7 +1,7 @@
 {% extends base_template %}
 {% load thumbnail %}
 {% block left_nav %}
-    <div id='profile_tabs'>
+<div id='profile_tabs'>
     <div class='cur-page'>
         <a href='{{ developer.get_absolute_url }}'>Profile</a>
     </div>
@@ -15,7 +15,7 @@
         <a href='{{ developer.get_absolute_url }}/social'>Scoial</a>
     </div>
     <div>
-        <a href='{{ developer.get_absolute_url }}/project'>Projects</a>
+        <a href='{{ developer.get_absolute_url }}/projects'>Projects</a>
     </div>
     <div>
         <a href='{{ developer.get_absolute_url }}/posts'>Posts</a>
@@ -27,19 +27,27 @@
 {% endblock %}
 {% block center %}
 <div class='developer-profile'>
-    <h3>First Last Name</h3>
+    <h3>first last name</h3>
     <h5>{{ developer.user.first_name }} {{ developer.user.last_name }}</h5>
-    <h3>Username</h3>
+    <h3>username</h3>
     <h5>{{ developer.user.username }}</h5>
+    <h3>email</h3>
     <h5><a href='mailto:{{ developer.user.email }}'>{{ developer.user.email }}</a></h5>
     <div id='connected_services'>
-	<h4>Connected Services</h4>
-	{% for id in user.social_auth.all %}
-	<h5>{{ id.provider }}</h5>
-	{% endfor %}
-	</div>
+        <h3>connected services: </h3><br>
+        {% for provider in current_providers %} <h6>{{ provider }}</h6>
+        {% endfor %}
+    </div>
+    <br>
+    <div id='other-providers'>
+        <h3>other available services</h3>
+        <br>
+        {% for new in new_providers %} <a href="/auth/associate/{{ new }}"><h5>{{ new }}</h5></a>
+        <br/>
+        {% endfor %}
+    </div>
     {% if developer.image %}
-    {% thumbnail developer.image '250' crop='center' as img %}<img id='profile_picture' src='{{ STATIC_MEDIA }}{{ img.url }}' width='{{ img.width }}' height='{{ img.height }}' title='{{ developer }}'/> {% endthumbnail %} 
+    {% thumbnail developer.image '250' crop='center' as img %}<img id='profile_picture' src='{{ STATIC_MEDIA }}{{ img.url }}' width='{{ img.width }}' height='{{ img.height }}' title='{{ developer }}'/> {% endthumbnail %}
     {% endif %}
-	
-</div>{% endblock %}
+</div>
+{% endblock %} 

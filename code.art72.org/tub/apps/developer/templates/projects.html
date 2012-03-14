@@ -8,13 +8,13 @@
     <div>
         <a href='{{ developer.get_absolute_url }}/repos'>Repos</a>
     </div>
-    <div class='cur-page'>
+    <div>
         <a href='{{ developer.get_absolute_url }}/media'>Media</a>
     </div>
     <div>
         <a href='{{ developer.get_absolute_url }}/social'>Scoial</a>
     </div>
-    <div>
+    <div class='cur-page'>
         <a href='{{ developer.get_absolute_url }}/projects'>Projects</a>
     </div>
     <div>
@@ -27,12 +27,17 @@
 {% endblock %}
 {% block center %}
 <div class='developer-profile'>
-    {% for media in media_source %}
-    {% if media.video %}
-    <div class="video-box">
-        <iframe width='150px' height='150px'  src="{{ media.video }}"></iframe>
+    <div id='projects'>
+        {% for project in developer.projects.all %}
+        <div class='project'>
+            <a href='{{ project.url }}'target="_blank"><h5>{{ project }}</h5></a>
+            <br>
+            <p>
+                {{ project.blurb }}
+            </p>
+        </div>
+        <br>
+        {% endfor %}
     </div>
-    {% endif %}
-    {% endfor %}
 </div>
 {% endblock %}

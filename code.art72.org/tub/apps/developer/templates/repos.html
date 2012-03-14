@@ -1,11 +1,11 @@
 {% extends base_template %}
 {% load thumbnail %}
 {% block left_nav %}
-    <div id='profile_tabs'>
-    <div class='cur-page'>
+<div id='profile_tabs'>
+    <div>
         <a href='{{ developer.get_absolute_url }}'>Profile</a>
     </div>
-    <div>
+    <div class='cur-page'>
         <a href='{{ developer.get_absolute_url }}/repos'>Repos</a>
     </div>
     <div>
@@ -15,7 +15,7 @@
         <a href='{{ developer.get_absolute_url }}/social'>Scoial</a>
     </div>
     <div>
-        <a href='{{ developer.get_absolute_url }}/project'>Projects</a>
+        <a href='{{ developer.get_absolute_url }}/projects'>Projects</a>
     </div>
     <div>
         <a href='{{ developer.get_absolute_url }}/posts'>Posts</a>
@@ -27,11 +27,23 @@
 {% endblock %}
 {% block center %}
 <div class='developer-profile'>
-	<div id='repos'>
-    {% for repo in repos %}
-	<a href='{{ repo.url }}'target="_blank"><h5>{{ repo }}</h5></a>
-	<p>{{ repo.blurb }}</p>
-	<br>
-	{% endfor %}
+    <div id='repos'>
+        {% for repo in repos %}
+        <div class='repo'>
+            <a href='{{ repo.url }}'target="_blank"><h5>{{ repo }}</h5></a>
+            <br>
+            <p>
+                {{ repo.blurb }}
+            </p>
+            <div class='projects'>
+            <h4>projects in:</h4><br>
+            {% for project in repo.project_set.all %}
+            <a href='{{ project.get_absolute_url }}'><h6>{{ project }}</h6></a>
+            {% endfor %}
+            </div>
+        </div>
+        <br>
+        {% endfor %}
     </div>
-</div>{% endblock %}
+</div>
+{% endblock %}
