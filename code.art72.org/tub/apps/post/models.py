@@ -8,7 +8,7 @@ import Image
 from apps.developer.models import *
 from django.db import models
 import urllib
-import BeautifulSoup
+#import BeautifulSoup
 
 MAX_IMAGE_SIZE = settings.MAX_IMAGE_SIZE
 
@@ -63,9 +63,9 @@ class Link(models.Model):
         return self.title
     
     def save(self, *args, **kwargs):
-        if self.title == '':
-            soup = BeautifulSoup.BeautifulSoup(urllib.urlopen(self.url))
-            self.title = soup.title.string
+#        if self.title == '':
+#            soup = BeautifulSoup.BeautifulSoup(urllib.urlopen(self.url))
+#            self.title = soup.title.string
         super(Link, self).save(*args, **kwargs)
     
 

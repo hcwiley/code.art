@@ -8,7 +8,6 @@ import Image
 from django.template.defaultfilters import slugify
 import urllib
 import json as simplejson
-import BeautifulSoup
 #from apps.post.models import Post, Tag, Link
 
 MAX_IMAGE_SIZE = settings.MAX_IMAGE_SIZE
@@ -24,10 +23,8 @@ class Repo(models.Model):
     def get_commits(self):
         github = self.developer_set.all()[0]
         github = github.user.social_auth.filter(provider='github')[0]
-        print 'giter:::: %s' % github.user
         commits = urllib.urlopen('https://api.github.com/repos/%s/%s/commits' % (github.user, self.title))
         commits = simplejson.load(commits)
-        print commits
         return commits
     
     def get_dates_rivisions(self):
