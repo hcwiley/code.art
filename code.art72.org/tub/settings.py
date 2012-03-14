@@ -4,10 +4,10 @@ import os
 import sys
 
 DEBUG = True
-
-if len(os.listdir('/Users')) > 0:
-   IS_DEV = True
-else:
+try:
+    if len(os.listdir('/Users')) > 0:
+        IS_DEV = True
+except:
     IS_DEV = False
 
 TEMPLATE_DEBUG = DEBUG
