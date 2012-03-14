@@ -6,12 +6,10 @@ from apps.post.models import *
 from django.contrib.admin.models import User
 from tub.views import common_args
 
-def developer_args(request):
+def developer_args(request, developer):
     args = common_args(request)
-    if request.user.is_authenticated() == False:
-        return redirect("/login")
     args.update({
-         'developer': Developer.objects.get(user = request.user),
+         'developer': Developer.objects.get(user=User.objects.get(username=developer)),
          'base_template': 'developer/profile_base.html',
          })
     new_providers = settings.AVAILABLE_PROVIDERS
@@ -27,37 +25,37 @@ def developer_args(request):
     return args
 
 def profile(request, developer):
-    args = developer_args(request)
+    args = developer_args(request, developer)
     return render_to_response('developer/profile.html', args)
 
 def profile_redirect(request):
     return redirect("/profile/%s" % (request.user.username))
 
 def edit_repos(request, developer):
-    args = developer_args(request)
+    args = developer_args(request, developer)
     repos = request.user.developer.update_repos()
     args['repos'] = repos
     return render_to_response('developer/repos.html', args)
 
 def edit_media(request, developer):
-    args = developer_args(request)
+    args = developer_args(request, developer)
 #    media = request.user.developer.medias.all()
     media = request.user.developer.update_media()
     args['media_source'] = media
     return render_to_response('developer/media.html', args)
 
 def edit_social(request, developer):
-    args = developer_args(request)
+    args = developer_args(request, developer)
     return render_to_response('developer/social.html', args)
 
 def edit_projects(request, developer):
-    args = developer_args(request)
+    args = developer_args(request, developer)
     return render_to_response('developer/projects.html', args)
 
 def edit_posts(request, developer):
-    args = developer_args(request)
+    args = developer_args(request, developer)
     return render_to_response('developer/posts.html', args)
 
 def edit_gists(request, developer):
-    args = developer_args(request)
+    args = developer_args(request, developer)
     return render_to_response('developer/gists.html', args)
