@@ -8,8 +8,9 @@ from tub.views import common_args
 
 def developer_args(request, developer):
     args = common_args(request)
+    developer = Developer.objects.get(user=User.objects.get(username=developer))
     args.update({
-         'developer': Developer.objects.get(user=User.objects.get(username=developer)),
+         'developer': developer,
          'base_template': 'developer/profile_base.html',
          })
     new_providers = settings.AVAILABLE_PROVIDERS
