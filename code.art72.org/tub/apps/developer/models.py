@@ -10,7 +10,7 @@ from uuid import uuid4
 from sorl import thumbnail
 import Image
 from django.contrib.sites.models import Site
-import simplejson
+import json as simplejson
 import urllib2 as urllib
 from social_auth.models import UserSocialAuth
 from apps.project.models import *
