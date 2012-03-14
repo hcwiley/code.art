@@ -6,7 +6,8 @@ from uuid import uuid4
 from sorl import thumbnail
 import Image
 from django.template.defaultfilters import slugify
-import urllib, simplejson
+import urllib
+import json as simplejson
 import BeautifulSoup
 #from apps.post.models import Post, Tag, Link
 
