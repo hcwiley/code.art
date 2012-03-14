@@ -161,7 +161,7 @@ CACHES = {
 
 #AUTH_PROFILE_MODULE = "user.user" #going to be something like this
 
-SEND_BROKEN_LINK_EMAILS = True
+SEND_BROKEN_LINK_EMAILS = False
     
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
