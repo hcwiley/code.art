@@ -14,7 +14,6 @@ import json as simplejson
 import urllib2 as urllib
 from social_auth.models import UserSocialAuth
 from apps.project.models import *
-from test.test_imageop import MAX_LEN
 
 MAX_IMAGE_SIZE = ('300','300')
 
