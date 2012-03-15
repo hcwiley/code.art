@@ -97,16 +97,21 @@ class Project(models.Model):
         
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-        if self.use_git_blurb:
-            self.blurb = self.getGithubBlurb(self.repos.all()[0])
-            self.repos.all()[0].blurd = self.blurb
+        try:
+            if self.use_git_blurb:
+                if self.repos.count() > 0:
+                    self.blurb = self.getGithubBlurb(self.repos.all()[0])
+                    self.repos.all()[0].blurd = self.blurb
+        except:
+            print 'oh well'
         if Project.objects.filter(title=self.title).count() > 1:
             return 'there is already a post with that name'
-        image_changed = self.image != self.__original_image
-        if image_changed:
-            self.rename_image_file()
-            self.__original_image = self.image
-        super(Project, self).save(*args, **kwargs)
+        if self.image:
+            image_changed = self.image != self.__original_image
+            if image_changed:
+                self.rename_image_file()
+                self.__original_image = self.image
+        super(Project, self).save(*args, **kwargs) 
         print self.blurb
-        if image_changed:
+        if self.image and image_changed:
             self.do_resizes()

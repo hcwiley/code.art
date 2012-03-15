@@ -138,13 +138,14 @@ class Developer(models.Model):
         
         
     def save(self, *args, **kwargs):
-        image_changed = self.image != self.__original_image
-        if image_changed:
-            self.rename_image_file()
-            self.__original_image = self.image
+        if self.image:
+            image_changed = self.image != self.__original_image
+            if image_changed:
+                self.rename_image_file()
+                self.__original_image = self.image
         if self.user.is_staff:
             super(Developer, self).save(*args, **kwargs)
-        if image_changed and self.image:
+        if self.image and image_changed:
             self.do_resizes() 
 
 ID_TYPES = (

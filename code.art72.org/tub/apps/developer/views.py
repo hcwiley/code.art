@@ -65,6 +65,7 @@ def edit_projects(request, developer):
     for project in args['developer'].projects.all():
         project_forms.append(get_form(request, ProjectForm, project))
     args.update({'project_forms':project_forms})
+    args.update({'project_form': ProjectForm()})
     return render_to_response('developer/projects.html', args)
 
 def edit_posts(request, developer):

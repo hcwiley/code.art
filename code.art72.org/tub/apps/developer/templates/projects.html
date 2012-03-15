@@ -20,8 +20,15 @@
             <br>
             {% if project.use_git_blurb %}<h6 onclick='useGit(0)'>stop using github description</h6>{% else %}<h6 onclick='useGit(1)'>use github description?</h6>{% endif %}
         </div>
-        <br>
         {% endfor %}
+        <br>
+        <h3 id='add_project'>add new project</h3>
+        <div id='new-project'>
+            <form action='/project/new-project' method="post">
+                {% csrf_token %}{{ project_form.as_p }}
+                <input type='submit' value='submit'/>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}

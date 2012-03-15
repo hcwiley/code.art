@@ -23,3 +23,11 @@ def project(request, id=None):
     args.update(csrf(request))
     return render_to_response('project/basic.html', args)
 
+def new_project(request):
+    if request.POST:
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            project = form.save()
+            request.user.developer.projects.add(project)
+            project = form.save()
+            return redirect('/profile/%s/projects' % request.user)

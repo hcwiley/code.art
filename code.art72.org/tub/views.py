@@ -29,7 +29,6 @@ def common_args(request):
                 'user' : user,
                 'cur_page' : request.path.split('/')[len(request.path.split('/'))-1]
            }
-    print args['cur_page']
     return args
 
 

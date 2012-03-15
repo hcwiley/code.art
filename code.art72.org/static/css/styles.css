@@ -505,7 +505,7 @@ form.form-part input.submit{
  	cursor: pointer;
  	opacity: .7;
 }
-.project{
+.a-project{
 	height: 20px;
 }
 
@@ -531,11 +531,21 @@ form.form-part input.submit{
 	float: left;
 }
 
+#add_project:hover{
+	cursor: pointer;
+	font-variant: small-caps;
+}
+
+#new-project{
+	display: none;
+	width: 400px;
+}
+
 .repo h5{
     margin-left: -30px;
     font-size: 18px;
 }
-
+∆
 .repo p{
     margin-left: 60px;
 }

@@ -34,7 +34,7 @@ function initProfile() {
 				$(this).next('.project-selector').removeClass('hidden');
 				$('#editting_note').addClass('editting');
 				$('#editting_note > h5').text('click the project you want to add this to');
-				$(this).next('.project-selector').children('.project').click(function() {
+				$(this).next('.project-selector').children('.a-project').click(function() {
 					var title = $(this).attr('media');
 					var selected = true;
 					if($(this).attr('class').match('current'))
@@ -83,4 +83,7 @@ function initProfile() {
 				$(projects[i]).addClass('current');
 		};
 	});
+	$('#add_project').click(function(){
+		$('#new-project').show();
+	})
 }
