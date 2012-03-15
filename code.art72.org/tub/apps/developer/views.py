@@ -33,14 +33,14 @@ def profile_redirect(request):
 
 def edit_repos(request, developer):
     args = developer_args(request, developer)
-    repos = request.user.developer.update_repos()
+    repos = args['developer'].update_repos()
     args['repos'] = repos
     return render_to_response('developer/repos.html', args)
 
 def edit_media(request, developer):
     args = developer_args(request, developer)
 #    media = request.user.developer.medias.all()
-    media = request.user.developer.update_media()
+    media = args['developer'].update_media()
     args['media_source'] = media
     return render_to_response('developer/media.html', args)
 
