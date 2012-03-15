@@ -268,6 +268,33 @@ footer .art72 img:hover{
     border-bottom: none;
 }
 
+#editting_note{
+	position: absolute;
+	top: 118px;
+	right: 40px;
+}
+
+#editting_note h6{
+	color: #A8433C;
+}
+
+#editting_note h5{
+	color: #A8433C;
+	display: none;
+}
+#editting_note.editting h6{
+	color: #A8433C;
+	display: none;
+}
+#editting_note.editting h5{
+	color: #A8433C;
+	display: block;
+}
+
+.developer-profile{
+	margin-left: 30px;
+}
+
 .developer-profile h3{
 	font-weight: bold;
 }
@@ -474,4 +501,8 @@ li{
 
 h6 {
     display: inline;
+}
+.hidden{
+	display: none;
+	visibility: hidden;
 }

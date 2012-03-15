@@ -1,40 +1,24 @@
 {% extends base_template %}
 {% load thumbnail %}
-{% block left_nav %}
-<div id='profile_tabs'>
-    <div>
-        <a href='{{ developer.get_absolute_url }}'>Profile</a>
-    </div>
-    <div>
-        <a href='{{ developer.get_absolute_url }}/repos'>Repos</a>
-    </div>
-    <div>
-        <a href='{{ developer.get_absolute_url }}/media'>Media</a>
-    </div>
-    <div>
-        <a href='{{ developer.get_absolute_url }}/social'>Scoial</a>
-    </div>
-    <div class='cur-page'>
-        <a href='{{ developer.get_absolute_url }}/projects'>Projects</a>
-    </div>
-    <div>
-        <a href='{{ developer.get_absolute_url }}/posts'>Posts</a>
-    </div>
-    <div>
-        <a href='/{{ developer.profile_gists_url }}'>Gists</a>
-    </div>
-</div>
-{% endblock %}
 {% block center %}
+{% for form in project_forms %}
+<div class='hidden form'>
+    <form action='' method="post">
+        {% csrf_token %}{{ form }}
+    </form>
+</div>
+{% endfor %}
 <div class='developer-profile'>
     <div id='projects'>
         {% for project in developer.projects.all %}
         <div class='project'>
             <a href='{{ project.url }}'target="_blank"><h5>{{ project }}</h5></a>
             <br>
-            <p>
+            <p id='blurb' class='editable'>
                 {{ project.blurb }}
             </p>
+            <br>
+            {% if project.use_git_blurb %}<h6 onclick='useGit(0)'>stop using github description</h6>{% else %}<h6 onclick='useGit(1)'>use github description?</h6>{% endif %}
         </div>
         <br>
         {% endfor %}

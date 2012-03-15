@@ -27,9 +27,26 @@ def common_args(request):
                 'tags' : Tag.objects.all(),
                 'projects': Project.objects.all(),
                 'user' : user,
+                'cur_page' : request.path.split('/')[len(request.path.split('/'))-1]
            }
-    print user
+    print args['cur_page']
     return args
+
+
+def get_form(request, form_class, instance):
+    if request.method == 'POST':
+        print 'got here'
+        form = form_class(request.POST, request.FILES, instance=instance)
+        if form.is_valid():
+            print 'valid'
+            form.save(commit=False)
+            #DO SOMETHING HERE
+            form.save()
+            form = form_class(instance=instance)
+    else:
+        form = form_class(instance=instance)
+        
+    return form
 
 def home(request):
     args = common_args(request)
