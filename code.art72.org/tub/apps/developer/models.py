@@ -102,7 +102,7 @@ class Developer(models.Model):
             rep.save() 
             self.repos.add(rep)
             print repo['name']
-        return Repo.objects.all()
+        return self.repos.all()
      
     def update_media(self):
         print 'updating the medias'
@@ -129,7 +129,7 @@ class Developer(models.Model):
             med.developer = tmp
             med.save() 
             self.medias.add(med)
-        return Media.objects.all()
+        return self.medias.all()
         
         
     def save(self, *args, **kwargs):
