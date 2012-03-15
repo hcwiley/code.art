@@ -127,9 +127,14 @@ class Developer(models.Model):
             print tmp
             med.video = tmp
             med.developer = tmp
+            tmp = media['media$group']
+            tmp = tmp['media$thumbnail']
+            tmp = tmp[0]
+            tmp = tmp['url']
+            med.image = ExtendedImage.objects.get_or_create(external=tmp)[0]
             med.save() 
             self.medias.add(med)
-        return Media.objects.all()
+        return self.medias.all()
         
         
     def save(self, *args, **kwargs):

@@ -20,8 +20,8 @@ class Repo(models.Model):
     def __unicode__(self):
         return self.title
     
-    def get_commits(self, developer):
-        github = developer_set.all()[0]
+    def get_commits(self):
+        github = self.developer_set.all()[0]
         github = github.user.social_auth.filter(provider='github')[0]
         commits = urllib.urlopen('https://api.github.com/repos/%s/%s/commits' % (github.user, self.title))
         commits = simplejson.load(commits)
