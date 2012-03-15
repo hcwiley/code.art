@@ -1,26 +1,33 @@
 {% extends 'base.html'%}
 {% load thumbnail %}
 {% block left_nav %}
+<script src='{{ STATIC_URL }}js/profile.js' type='text/javascript'></script>
+<div id='editting_note'>
+    <h6>right click the thing you want to edit</h6>
+    <h5>
+        right click again to save
+    </h5>
+</div>
 <div id='profile_tabs'>
-    <div>
+    <div {% if cur_page == developer.user.username %}class='cur-page'{% endif %}>
         <a href='{{ developer.get_absolute_url }}'>Profile</a>
     </div>
-    <div>
+    <div {% if cur_page == 'repos' %}class='cur-page'{% endif %}>
         <a href='{{ developer.get_absolute_url }}/repos'>Repos</a>
     </div>
-    <div>
+    <div {% if cur_page == 'media' %}class='cur-page'{% endif %}>
         <a href='{{ developer.get_absolute_url }}/media'>Media</a>
     </div>
-    <div>
-        <a href='{{ developer.get_absolute_url }}/social'>Scoial</a>
+    <div {% if cur_page == 'social' %}class='cur-page'{% endif %}>
+        <a href='{{ developer.get_absolute_url }}/social'>Social</a>
     </div>
-    <div>
+    <div {% if cur_page == 'projects' %}class='cur-page'{% endif %}>
         <a href='{{ developer.get_absolute_url }}/projects'>Projects</a>
     </div>
-    <div>
+    <div {% if cur_page == 'posts' %}class='cur-page'{% endif %}>
         <a href='{{ developer.get_absolute_url }}/posts'>Posts</a>
     </div>
-    <div>
+    <div {% if cur_page == 'gists' %}class='cur-page'{% endif %}>
         <a href='/{{ developer.profile_gists_url }}'>Gists</a>
     </div>
 </div>
