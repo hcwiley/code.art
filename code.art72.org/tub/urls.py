@@ -19,13 +19,7 @@ urlpatterns = patterns('',
     (r'^login$', 'views.login'),
     (r'^logout$', 'views.log_out'),
 )
-#OAtuh stuff
-urlpatterns += patterns('',
-#    url(r'^oauth/', include('oauth_provider.urls')),
-#    url(r'^oauth/request_token/', 'apps.developer.views.auth_resquest'),
-#    url(r'^oauth/authorize/', 'apps.developer.views.auth_authorization'), #this is for gets
-#    url(r'^oauth/access_token/', 'apps.developer.views.auth_access'),
-)
+
 
 if settings.DEBUG:
     # let django serve user generated media while in development
