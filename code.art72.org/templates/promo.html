@@ -21,7 +21,7 @@
                 $('.read-more').click(function() {
                     $(this).hide();
                     $('.hidden').stop(true, true).animate({
-                        height : 265,
+                        height : 285,
                     }, 500);
                     $(this).unbind();
                 });
@@ -36,9 +36,28 @@
                         height : 0,
                     }, 500);
                 });
-                $('form').unbind('submit');
-                $('#submit').unbind('submit');
-                $('#submit').submit().click(function() {
+                $('form').unbind('');
+                $('#submit').unbind('');
+                $('#submit').submit(function() {
+                    if($('#name').val() == '' || $('#name').val().search(/[ ]+/g) == 0) {
+                        $('#name').focus();
+                        $('#name').css('background-color', '#eee');
+                    } else if($('#email').val() == '') {
+                        $('#email').focus();
+                        $('#email').css('background-color', '#eee');
+                    } else if($('#email').val().split('@').length < 2) {
+                        $('#email').focus();
+                        $('#email').css('background-color', '#eee');
+                    } else if($('#email').val().split('@')[1].split('.').length < 2) {
+                        $('#email').focus();
+                        $('#email').css('background-color', '#eee');
+                    } else {
+                        $.post('', $('form').serialize(), function(data, status, xhr) {
+                            $('form').replaceWith('<p>' + data + '</p>');
+                        });
+                    }
+                });
+                $('#submit').click(function() {
                     if($('#name').val() == '' || $('#name').val().search(/[ ]+/g) == 0) {
                         $('#name').focus();
                         $('#name').css('background-color', '#eee');

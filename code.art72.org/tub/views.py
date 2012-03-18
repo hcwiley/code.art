@@ -9,6 +9,7 @@ from apps.contactform.forms import *
 from apps.contactform.utils import *
 from django.core.context_processors import csrf
 from django.contrib.auth import logout#from social_auth.models import Providers
+from django.core.mail import send_mail
 
 def common_args(request):
     """
@@ -68,7 +69,7 @@ email: %s
             #send_mail(subject, message, from_email, recipient_list, fail_silently=False, auth_user=None, auth_password=None, connection=None)
             send_mail("code.art contact Form from %s" % name, '"%s" <%s>' % (name, email), ['cole+code.art@decode72.com'], fail_silently=False)
             send_mail("code.art contact Confirmation", auto_response(name, message), '"Decode72" <code.art@decode72.com>', [email], fail_silently=False)
-        return HttpResponse("""Hi %s and thanks for showing interest. I'll get back with you as soon as I about getting involved.""" % name)
+        return render_to_response("success.html", {"name": name ,'STATIC_URL': settings.STATIC_URL})
     if request.user.is_authenticated():
         return redirect('/foo')
     args = common_args(request)

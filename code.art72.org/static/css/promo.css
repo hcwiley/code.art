@@ -114,7 +114,7 @@ h3 {
     width: 100%;
     clear: both;
 }
-#github-link img {
+#github-link img, #github {
     position: relative;
     top: -55px;
     z-index: -1;
