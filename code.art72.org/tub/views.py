@@ -7,6 +7,7 @@ from apps.post.forms import *
 from apps.project.models import *
 from django.core.context_processors import csrf
 from django.contrib.auth import logout
+from idlelib.WidgetRedirector import redir
 #from social_auth.models import Providers
 
 def common_args(request):
@@ -30,6 +31,9 @@ def common_args(request):
            }
     print user
     return args
+
+def promo(request):
+    return render_to_response("promo.html")
 
 def home(request):
     args = common_args(request)
