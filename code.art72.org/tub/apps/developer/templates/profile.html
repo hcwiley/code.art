@@ -1,34 +1,14 @@
 {% extends base_template %}
 {% load thumbnail %}
-{% block left_nav %}
-<div id='profile_tabs'>
-    <div class='cur-page'>
-        <a href='{{ developer.get_absolute_url }}'>Profile</a>
-    </div>
-    <div>
-        <a href='{{ developer.get_absolute_url }}/repos'>Repos</a>
-    </div>
-    <div>
-        <a href='{{ developer.get_absolute_url }}/media'>Media</a>
-    </div>
-    <div>
-        <a href='{{ developer.get_absolute_url }}/social'>Scoial</a>
-    </div>
-    <div>
-        <a href='{{ developer.get_absolute_url }}/projects'>Projects</a>
-    </div>
-    <div>
-        <a href='{{ developer.get_absolute_url }}/posts'>Posts</a>
-    </div>
-    <div>
-        <a href='/{{ developer.profile_gists_url }}'>Gists</a>
-    </div>
-</div>
-{% endblock %}
 {% block center %}
+<div class='hidden form'>
+    <form action='' method="post">
+        {% csrf_token %}{{ profile_form }}{{ user_form }}
+    </form>
+</div>
 <div class='developer-profile'>
     <h3>first last name</h3>
-    <h5>{{ developer.user.first_name }} {{ developer.user.last_name }}</h5>
+    <h5 id='first_name' class='editable'>{{ developer.user.first_name }} {{ developer.user.last_name }}</h5>
     <h3>username</h3>
     <h5>{{ developer.user.username }}</h5>
     <h3>email</h3>

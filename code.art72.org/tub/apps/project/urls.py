@@ -7,5 +7,6 @@ admin.autodiscover()
 
 
 urlpatterns = patterns('apps.project.views',
+    (r'^new-project$', 'new_project'),
     (r'^(?P<id>[^/]*)$', 'project'),
 )

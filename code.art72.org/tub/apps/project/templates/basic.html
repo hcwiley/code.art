@@ -19,9 +19,11 @@
 	{% endautoescape %}
 </p>
 <br>
+<div id='videos'>
 {% for media in project.media.all %}
 	{% include 'project/media.html' with media=media %}
 {% endfor %}
+</div>
 <div id='commits'>
 {% for repo in project.repos.all %}
 	{% include 'project/repo.html' with repo=repo %}

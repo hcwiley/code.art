@@ -21,4 +21,11 @@ function init(){
             $('#new-post').show(400);
         }
     });
+    $('.media-thumbs > img').click(function(){
+		var src = $(this).attr('video');
+		$(this).siblings('iframe').attr('src', $(this).attr('video')).show();
+		$(this).parent().addClass('video');
+		$(this).hide();
+		$(this).siblings('h6').hide();
+	});
 }

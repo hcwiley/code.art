@@ -1,23 +1,18 @@
 from django.forms import ModelForm, TextInput
-from apps.post.models import *
+from apps.project.models import *
 
-class PostForm(ModelForm):
+class ProjectForm(ModelForm):
     class Meta:
-        model = Post
-        exclude = ('developer',)
-
-class TagForm(ModelForm):
-    class Meta:
-        model = Tag
-        exclude = ('post',)
-        widgets = {
-            'text': TextInput({'placeholder': "add your own tag here", 'tabindex':'2'}),
-        }
+        model = Project
         
-class LinkForm(ModelForm):
+class RepoForm(ModelForm):
     class Meta:
-        model = Link
-        exclude = ('post',)
-        widgets = {
-            'url': TextInput({'placeholder': "add your own link here", 'tabindex':'2'}),
-        }
+        model = Repo
+        
+class ExtendedImageForm(ModelForm):
+    class Meta:
+        model = ExtendedImage
+        
+class MediaForm(ModelForm):
+    class Meta:
+        model = Media

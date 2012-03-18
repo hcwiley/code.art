@@ -27,6 +27,13 @@ class Repo(models.Model):
         commits = simplejson.load(commits)
         return commits
     
+    def getBlurb(self, developer):
+        github = developer.user.social_auth.filter(provider='github')[0]
+        repos = urllib.urlopen('https://api.github.com/repos/%s/%s' % (github.user, self.title))
+        repos = simplejson.loads(repos.read())
+        print 'des: %s' % repos['description']
+        return repos['description']
+    
     def get_dates_rivisions(self):
         return "foo"
 
@@ -85,14 +92,26 @@ class Project(models.Model):
         img.thumbnail(MAX_IMAGE_SIZE, Image.ANTIALIAS)
         img.save(self.image.path)
         
+    def getGithubBlurb(self, repo):
+        return repo.getBlurb(self.developer_set.all()[0])
+        
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-        if Project.objects.filter(title=self.title).count() > 0:
+        try:
+            if self.use_git_blurb:
+                if self.repos.count() > 0:
+                    self.blurb = self.getGithubBlurb(self.repos.all()[0])
+                    self.repos.all()[0].blurd = self.blurb
+        except:
+            print 'oh well'
+        if Project.objects.filter(title=self.title).count() > 1:
             return 'there is already a post with that name'
-        image_changed = self.image != self.__original_image
-        if image_changed:
-            self.rename_image_file()
-            self.__original_image = self.image
-        super(Project, self).save(*args, **kwargs)
-        if image_changed:
+        if self.image:
+            image_changed = self.image != self.__original_image
+            if image_changed:
+                self.rename_image_file()
+                self.__original_image = self.image
+        super(Project, self).save(*args, **kwargs) 
+        print self.blurb
+        if self.image and image_changed:
             self.do_resizes()

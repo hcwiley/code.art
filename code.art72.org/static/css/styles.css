@@ -268,6 +268,33 @@ footer .art72 img:hover{
     border-bottom: none;
 }
 
+#editting_note{
+	position: absolute;
+	top: 118px;
+	right: 40px;
+}
+
+#editting_note h6{
+	color: #A8433C;
+}
+
+#editting_note h5{
+	color: #A8433C;
+	display: none;
+}
+#editting_note.editting h6{
+	color: #A8433C;
+	display: none;
+}
+#editting_note.editting h5{
+	color: #A8433C;
+	display: block;
+}
+
+.developer-profile{
+	margin-left: 30px;
+}
+
 .developer-profile h3{
 	font-weight: bold;
 }
@@ -286,8 +313,14 @@ footer .art72 img:hover{
     font-family: TheMixMono, botanika-mono-web, monospace, sans-serif;
 }
 
+.video-box{
+	display: none;
+}
+
 #commits{
-    width: 400px;
+    width: 250px;
+    float: right;
+    clear: none;	
 }
 
 .commit-header{
@@ -423,9 +456,66 @@ form.form-part input.submit{
     clear: both;
     display: block;
 }
-.developer-profile h4, .developer-profile h5, .developer-profile div{
+.developer-profile h4, .developer-profile h5, .developer-profile div:not(.video-box){
     display: block;
     clear: both;
+}
+.media-thumbs{
+	height: 200px;
+	width: 200px;
+	margin-bottom: 20px;
+}
+
+.media-thumbs:hover{
+	cursor: pointer;
+	opacity: .8;
+}
+
+.media-thumbs iframe{
+	display:none;
+}
+
+.media-thumbs.video{
+	height: 300px;
+}
+
+.media-thumbs h6, .media-thumbs img{
+	display: block;
+	clear: both;
+	float: left;
+}
+
+.media-thumbs h6{
+	z-index: 2;
+	background-color: #fff;
+	position:relative;
+	font-size: 20px;
+	top: 90px;
+	left: -5px;
+	text-align: center;
+	width: 100%;
+}
+.media-thumbs img{
+	position:relative;
+	top: -30px;
+	z-index: 0;
+}
+
+ .project-selector h4:hover{
+ 	cursor: pointer;
+ 	opacity: .7;
+}
+.a-project{
+	height: 20px;
+}
+
+.project.current{
+	color: #A8433C;
+	font-weight: bold;
+	background-image: url(../images/x-icon.png);
+	background-repeat: no-repeat;
+	background-position: 0 3px;
+	padding-left: 15px;
 }
 
 #profile_picture{
@@ -435,16 +525,27 @@ form.form-part input.submit{
 	display: inline;
 }
 #videos, div.video {
-	float: right;
 	display: block;
 	clear: both;
+	width: 350px;
+	float: left;
+}
+
+#add_project:hover{
+	cursor: pointer;
+	font-variant: small-caps;
+}
+
+#new-project{
+	display: none;
+	width: 400px;
 }
 
 .repo h5{
     margin-left: -30px;
     font-size: 18px;
 }
-
+∆
 .repo p{
     margin-left: 60px;
 }
@@ -474,4 +575,8 @@ li{
 
 h6 {
     display: inline;
+}
+.hidden{
+	display: none;
+	visibility: hidden;
 }
