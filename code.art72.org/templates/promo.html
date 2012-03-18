@@ -2,140 +2,124 @@
 <html>
     <head>
         <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-        <meta name='description' content='code + artist process sharing' />
+        <meta name='description' content='content managed artist websites' />
         <meta name='keywords' content='artist, website, tagging, hacking, art sharing, code, art72, art, open source,' />
-        <link type='image/x-icon' rel="icon" href='fav.png' />
+        <link id='main-css' type='text/css' rel='stylesheet' href='{{ STATIC_URL }}css/promo.css'/>
+        <link type='image/x-icon' rel="icon" href='{{ STATIC_URL }}images/fav.png' />
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <!--         <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script> -->
         <script type="text/javascript" src="https://use.typekit.com/cew3pji.js"></script>
+        <title>{% block header_title %}code.art{% endblock %}</title>
         <script type="text/javascript">
             try {
                 Typekit.load();
             } catch(e) {
             }
         </script>
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-24196336-2']);
-            _gaq.push(['_trackPageview']); (function() {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
+        <script type='text/javascript'>
+            $(document).ready(function() {
+                $('.read-more').click(function() {
+                    $(this).hide();
+                    $('.hidden').stop(true,true).animate({
+                        height : 265,
+                    }, 500);
+                    $(this).unbind();
+                });
+                $('.read-more').hover(function() {
+                    $('.hidden').stop(false,true).animate({
+                        height : 45,
+                    }, 500);
+                    $(this).text('click to view rest');
+                }, function() {
+                    $(this).text('read more');
+                    $('.hidden').stop(false,false).animate({
+                        height : 0,
+                    }, 500);
+                });
+            });
 
         </script>
-        <title>code.art</title>
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-                border: 0;
-                text-decoration: none;
-                font-family: Helvetica, Arial, sans-serif;
-            }
-            body, html {
-                width: 100%;
-                height: 100%;
-            }
-            #logo {
-                margin: 0 auto;
-                width: 610px;
-                height: 450px;
-            }
-            #tag {
-                margin: -20 auto;
-                margin-bottom: 0px;
-                width: 370px;
-                text-align: left;
-            }
-            h1 {
-                font-family: Helvetica, Arial, sans-serif;
-                font-variant: small-caps;
-                font-size: 28px;
-            }
-            #bottom {
-                margin: 0 auto;
-                margin-top: 60px;
-                width: 1100px;
-            }
-            .column {
-                float: left;
-                width: 350px;
-                text-align: justify;
-                margin: 0 100px;
-            }
-            .column .header {
-                width: 370px;
-                padding-bottom: 10px;
-                margin-bottom: 10px;
-                border-bottom: 2px dotted #879a2c;
-                text-align: left;
-            }
-            h3 {
-                color: #343434;
-            }
-            .header.red {
-                border-bottom: 2px dotted #ce2d2f;
-            }
-            #github-link {
-                text-align: center;
-                margin-top: 450px;
-                width: 100%;
-                clear: both;
-            }
-            #github-link img {
-                position: relative;
-                top: -55px;
-                z-index: -1;
-            }
-            a, a > * {
-                color: #ce2d2f;
-                font-family: botanika-mono-web, monospace, sans-serif;
-            }
-            footer {
-                width: 700px;
-                margin: 50 auto;
-            }
-        </style>
+        <title>{% block title %}{% endblock %}</title>
     </head>
     <body>
-        <div id='logo'>
-            <img src='brand-02.png' height="450" width="auto" alt="code.art" />
-        </div>
-        <div id='top>
-            <h3>a manifesto of sorts</h3>
-            <p>We all a particular process, but we all have similiar ways of documenting. I say we get them all together.
-                 
-        </div>
-        <div id='bottom'>
-            <div class='column'>
+        <header>
+            <div id='logo'>
+                <img src='{{ STATIC_URL }}images/brand-02.png' height="450" width="auto" alt="code.art" />
+            </div>
+        </header>
+        <div id='container'>
+            <div id='top'>
                 <div class='header'>
-                    <h3>artist hackers and developers</h3>
+                    <h3>a manifesto of sorts</h3>
                 </div>
                 <p>
-                    Share your sketches, links, code, videos, all in a centralized location that ties into your github, youtube, vimeo, etc... More importantly, it puts focus on the process of creation rather than the end product.
-                    Get feedback on your work through built in comments (don't forget to fork and push).
+                    We all possess a particular process, but we all have similiar documentation. By studying my process over my past three installations I have noticed an incredibley predicticable and documentable pattern.
+                    <br>
+                    <br>
+                    <span class='read-more'>read more</span>
+                </p>
+                <p class='hidden'>
+                    code.art is a protocol, of sorts, for this process. Don't think protocol like git, ssh, or TCP. It is a protocol in the way that Youtube and Twitter are protocols. Non-technies are shown just enough of the under system to get excited about it, like #hashtags. All the sudden the # symbol went from being an ugly part of a url that had to exist before html5 to a celebritey endorsed pop icon.
+                    <br>
+                    <br>
+                    First link your media files and code repos to a code.art project. Then using #hashtags and other built in directives in the descrtion, comments, and commits of the media and repos and code.art will link them visually together when the project gets viewed. The visual linkage will be a roadmap and guideline, if you check out this revision you should see what is in this video or image.
                 </p>
             </div>
-            <div class='column'>
-                <div class='header'>
-                    <h3>sketch book, meet command z</h3>
+            <div id='bottom'>
+                <div class='column'>
+                    <div class='header'>
+                        <h3>artist hackers and developers</h3>
+                    </div>
+                    <p>
+                        Share your sketches, links, code, videos, all in a centralized location that ties into your github, youtube, vimeo, etc... More importantly, it puts focus on the process of creation rather than the end product.
+                        Get feedback on your work through built in comments (don't forget to fork and push).
+                    </p>
                 </div>
-                <p>
-                    By documenting the process of creating in both revision control through github and video or image documentation you can always access any version of the project you were working on.
-                    Fear not the command line, github has an app for <a href="http://mac.github.com/" target="_blank">Mac</a>, making it easier than ever to get started in using revision control.
-                </p>
+                <div class='column'>
+                    <div class='header'>
+                        <h3>sketch book, meet command z</h3>
+                    </div>
+                    <p>
+                        By documenting the process of creating in both revision control through github and video or image documentation you can always access any version of the project you were working on.
+                        Fear not the command line, github has an app for <a href="http://mac.github.com/" target="_blank">Mac</a>, making it easier than ever to get started in using revision control.
+                    </p>
+                </div>
+                <div class='column'>
+                    <div class='header'>
+                        <h3>it has to be free and open</h3>
+                    </div>
+                    <p>
+                        This concept doesn't hold water if it isn't always free and open to all, so I would love any help.
+                        You develop? Fork it, refine it, and send it back.
+                        You hack? Fork it, hack it, and send it back.
+                        You art (if you do you know its a verb)? Share your videos and ideas that you aren't really sure if they can be done.
+                        We all love getting feedback and help
+                    </p>
+                </div>
             </div>
-        </div>
-        <div id='github-link'>
-            <a href="https://github.com/hcwiley/code.art/"><h4>view code.art on github</h4>
-            <br/>
-            <img height='50px' width='50px' src="blacktocat.svg" alt="github"/></a>
+            <div id='contact'>
+                <div class='header'>
+                    <h3>get in touch or involved</h3>
+                </div>
+                <form action='' method="post">
+                    {% csrf_token %} <h4>name
+                    <input name='name' type='text' placeholder="R. Mutt" />
+                    </h4>
+                    <h4>email
+                    <input type='text' placeholder="foo@bar.com" name='email'/>
+                    </h4>
+                    <h4>who are you? {{ contact.type }}</h4>
+                    <input id='submit' type="submit" value="send"/>
+                </form>
+            </div>
+            <div id='github-link'>
+                <a href="https://github.com/hcwiley/code.art/"><h4>view code.art on github</h4>
+                <br/>
+                <img src='{{ STATIC_URL }}images/blacktocat.svg' height='50px' width='50px' alt="github"/></a>
+            </div>
         </div>
         <footer>
-            <img src='footer.png' height='auto' width="700" />
+            <img src='{{ STATIC_URL }}images/footer.png' height='auto' width="700" />
         </footer>
     </body>
 </html>

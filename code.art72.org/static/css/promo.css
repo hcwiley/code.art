@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    text-decoration: none;
+    font-family: Helvetica, Arial, sans-serif;
+}
+body, html {
+    width: 100%;
+    height: 100%;
+}
+#logo {
+    margin: 0 auto;
+    width: 100%;
+    height: 450px;
+    text-align: center;
+}
+#tag {
+    margin: -20 auto;
+    margin-bottom: 0px;
+    width: 370px;
+    text-align: left;
+}
+h1 {
+    font-family: Helvetica, Arial, sans-serif;
+    font-variant: small-caps;
+    font-size: 28px;
+}
+#container {
+    width: 100%;
+    text-align: center;
+}
+#top, #contact {
+    margin: 0 auto;
+    margin-top: 60px;
+    width: 500px;
+    text-align: justify;
+}
+#top .header, #contact .header {
+    width: 100%;
+}
+#contact {
+    margin-top: 100px;
+}
+#contact > form * {
+    font-size: 30px;
+    margin: 5px 0;
+}
+#contact > form > h4 {
+    font-weight: 500;
+    margin-bottom: 20px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-variant: small-caps;
+}
+input, select {
+    font-size: 20px;
+    background-color: #cdcdcd;
+    font-weight: 500;
+    padding-left: 10px;
+    width: 400px;
+    font-family: botanika-mono-web, monospace, sans-serif;
+}
+select {
+    width: 290px;
+}
+#submit {
+    width: 150px;
+    height: 60px;
+    background-color: #fff;
+    text-align: center;
+    position: relative;
+    color: #879a2c;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    left: 150px;
+    font-weight: 900;
+    font-size: 55px;
+}
+#submit:hover {
+    cursor: pointer;
+    font-variant: small-caps;
+}
+#bottom {
+    margin: 60px auto;
+    width: 1000px;
+    height: 160px;
+    padding-left: 50px;
+}
+.column {
+    float: left;
+    width: 300px;
+    text-align: justify;
+    margin: 0 50px 0px 0px;
+}
+.column:last-child {
+    margin: 0 0 0 0px;
+}
+.header {
+    width: 100%;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 2px dotted #879a2c;
+    text-align: left;
+}
+h3 {
+    color: #343434;
+}
+.header.red {
+    border-bottom: 2px dotted #ce2d2f;
+}
+#github-link {
+    text-align: center;
+    margin-top: 450px;
+    width: 100%;
+    clear: both;
+}
+#github-link img {
+    position: relative;
+    top: -55px;
+    z-index: -1;
+}
+a, a > * {
+    color: #ce2d2f;
+    font-family: botanika-mono-web, monospace, sans-serif;
+}
+footer {
+    width: 100%;
+    text-align: center;
+    margin: 50px auto;
+}
+.read-more{
+    color: #879a2c;
+    font-variant: small-caps;
+}
+.read-more:hover{
+    cursor: pointer;
+}
+.hidden{
+/*    display: none;*/
+    overflow: hidden;
+    height: 0px;
+}

@@ -4,7 +4,8 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from apps.developer.models import *
 from apps.post.models import *
 from apps.post.forms import *
-from apps.project.models import *
+from apps.project.forms import *
+from apps.contactform.forms import *
 from django.core.context_processors import csrf
 from django.contrib.auth import logout#from social_auth.models import Providers
 
@@ -30,7 +31,10 @@ def common_args(request):
     return args
 
 def promo(request):
-    return render_to_response("promo.html")
+    args = common_args(request)
+    args['contact'] = ContactForm()
+    args.update(csrf(request))
+    return render_to_response("promo.html", args)
 
 def get_form(request, form_class, instance):
     if request.method == 'POST':
