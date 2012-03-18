@@ -103,10 +103,10 @@
                 </div>
                 <form action='' method="post">
                     {% csrf_token %} <h4>name
-                    <input name='name' type='text' placeholder="R. Mutt" />
+                    <input name='name' type='text' placeholder="R. Mutt" required="true" />
                     </h4>
                     <h4>email
-                    <input type='text' placeholder="foo@bar.com" name='email'/>
+                    <input type='text' placeholder="foo@bar.com" name='email' required="true"/>
                     </h4>
                     <h4>who are you? {{ contact.type }}</h4>
                     <input id='submit' type="submit" value="send"/>
