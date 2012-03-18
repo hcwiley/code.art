@@ -36,6 +36,27 @@
                         height : 0,
                     }, 500);
                 });
+                $('form').unbind('submit');
+                $('#submit').unbind('submit');
+                $('#submit').submit().click(function() {
+                    if($('#name').val() == '' || $('#name').val().search(/[ ]+/g) == 0) {
+                        $('#name').focus();
+                        $('#name').css('background-color', '#eee');
+                    } else if($('#email').val() == '') {
+                        $('#email').focus();
+                        $('#email').css('background-color', '#eee');
+                    } else if($('#email').val().split('@').length < 2) {
+                        $('#email').focus();
+                        $('#email').css('background-color', '#eee');
+                    } else if($('#email').val().split('@')[1].split('.').length < 2) {
+                        $('#email').focus();
+                        $('#email').css('background-color', '#eee');
+                    } else {
+                        $.post('', $('form').serialize(), function(data, status, xhr) {
+                            $('form').replaceWith('<p>' + data + '</p>');
+                        });
+                    }
+                });
             });
 
         </script>
@@ -101,12 +122,12 @@
                 <div class='header'>
                     <h3>get in touch or involved</h3>
                 </div>
-                <form action='' method="post">
+                <form action='#' method="post">
                     {% csrf_token %} <h4>name
-                    <input name='name' type='text' placeholder="R. Mutt" required="true" />
+                    <input name='name' id='name' type='text' placeholder="R. Mutt" required="true" />
                     </h4>
                     <h4>email
-                    <input type='text' placeholder="foo@bar.com" name='email' required="true"/>
+                    <input type='text' id='email' placeholder="foo@bar.com" name='email' required="true"/>
                     </h4>
                     <h4>who are you? {{ contact.type }}</h4>
                     <input id='submit' type="submit" value="send"/>
