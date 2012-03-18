@@ -4,3 +4,5 @@
 *.pydevproject
 *.db
 local_settings.py
+org.eclipse.core.resources.prefs
+org.ecplipse.*
