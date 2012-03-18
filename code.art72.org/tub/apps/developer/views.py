@@ -3,11 +3,16 @@ from datetime import datetime
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from apps.developer.models import *
 from apps.post.models import *
+from django.core.context_processors import csrf
 from django.contrib.admin.models import User
-from tub.views import common_args
+from django.contrib.auth.forms import UserChangeForm
+from tub.views import common_args, get_form
+from apps.project.forms import *
+from apps.developer.forms import *
 
 def developer_args(request, developer):
     args = common_args(request)
+    args.update(csrf(request))
     developer = Developer.objects.get(user=User.objects.get(username=developer))
     args.update({
          'developer': developer,
@@ -26,6 +31,8 @@ def developer_args(request, developer):
 
 def profile(request, developer):
     args = developer_args(request, developer)
+    args['profile_form'] = get_form(request, DeveloperForm, request.user)
+    args['user_form'] = get_form(request, UserChangeForm, request.user)
     return render_to_response('developer/profile.html', args)
 
 def profile_redirect(request):
@@ -48,6 +55,10 @@ def edit_media(request, developer):
     except:
         media = None
     args['media_source'] = media
+    project_forms = []
+    for project in args['developer'].projects.all():
+        project_forms.append(get_form(request, ProjectForm, project))
+    args.update({'project_forms':project_forms})
     return render_to_response('developer/media.html', args)
 
 def edit_social(request, developer):
@@ -56,6 +67,11 @@ def edit_social(request, developer):
 
 def edit_projects(request, developer):
     args = developer_args(request, developer)
+    project_forms = []
+    for project in args['developer'].projects.all():
+        project_forms.append(get_form(request, ProjectForm, project))
+    args.update({'project_forms':project_forms})
+    args.update({'project_form': ProjectForm()})
     return render_to_response('developer/projects.html', args)
 
 def edit_posts(request, developer):
