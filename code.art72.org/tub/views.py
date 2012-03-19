@@ -67,7 +67,7 @@ email: %s
 """ % (now, name, email) 
 #        if not settings.IS_DEV:
             #send_mail(subject, message, from_email, recipient_list, fail_silently=False, auth_user=None, auth_password=None, connection=None)
-        send_mail("code.art signup from %s" % name,'%s (%s) said hey' %(name, email), '"%s" <%s>' % (name, email), ['cole+code.art@decode72.com'], fail_silently=False)
+        send_mail("code.art signup from %s" % name,'%s (%s) of the, %s variety, said hey' %(name, type, email), '"%s" <%s>' % (name, email), ['cole+code.art@decode72.com'], fail_silently=False)
         send_mail("code.art contact Confirmation",  auto_response(name), '"code.art team" <code.art@decode72.com>', [email], fail_silently=False)
         return render_to_response("success.html", {"name": name ,'STATIC_URL': settings.STATIC_URL})
     if request.user.is_authenticated():

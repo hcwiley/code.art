@@ -16,7 +16,7 @@ body, html {
     text-align: center;
 }
 #tag {
-    margin: -20 auto;
+    margin: -20px auto;
     margin-bottom: 0px;
     width: 370px;
     text-align: left;
@@ -47,7 +47,7 @@ h1 {
     margin: 5px 0;
 }
 #contact > form > h4 {
-    font-weight: 500;
+    font-weight: normal;
     margin-bottom: 20px;
     font-family: Helvetica, Arial, sans-serif;
     font-variant: small-caps;
@@ -73,7 +73,7 @@ select {
     padding-bottom: 10px;
     padding-left: 5px;
     left: 150px;
-    font-weight: 900;
+    font-weight: bolder;
     font-size: 55px;
 }
 #submit:hover {
