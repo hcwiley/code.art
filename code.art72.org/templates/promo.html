@@ -18,23 +18,45 @@
         </script>
         <script type='text/javascript'>
             $(document).ready(function() {
-                $('.read-more').click(function() {
-                    $(this).hide();
-                    $('.hidden').stop(true, true).animate({
-                        height : 285,
-                    }, 500);
-                    $(this).unbind();
+                $('.read-more').each(function(index) {
+                    $(this).click(function() {
+                        $(this).hide();
+                        $(this).parent().siblings('.hidden').stop(true, true).animate({
+                            height : 440,
+                        }, 500);
+                        $(this).unbind();
+                    });
+                    $(this).hover(function() {
+                        $(this).parent().siblings('.hidden').stop(false, true).animate({
+                            height : 45,
+                        }, 500);
+                        $(this).text('click to view rest');
+                    }, function() {
+                        $(this).text('read more');
+                        $('.hidden').stop(false, false).animate({
+                            height : 0,
+                        }, 500);
+                    });
                 });
-                $('.read-more').hover(function() {
-                    $('.hidden').stop(false, true).animate({
-                        height : 45,
-                    }, 500);
-                    $(this).text('click to view rest');
-                }, function() {
-                    $(this).text('read more');
-                    $('.hidden').stop(false, false).animate({
-                        height : 0,
-                    }, 500);
+                $('.revq').each(function(index) {
+                    $(this).click(function() {
+                        $(this).hide();
+                        $(this).parent().siblings('.hidden').stop(true, true).animate({
+                            height : 115,
+                        }, 500);
+                        $(this).unbind();
+                    });
+                    $(this).hover(function() {
+                        $(this).parent().siblings('.hidden').stop(false, true).animate({
+                            height : 115,
+                        }, 500);
+                        $(this).text('click to leave open');
+                    }, function() {
+                        $(this).text('what is revision control');
+                        $('.hidden').stop(false, false).animate({
+                            height : 0,
+                        }, 500);
+                    });
                 });
                 $('form').unbind('');
                 $('#submit').unbind('');
@@ -93,47 +115,56 @@
                     <h3>a manifesto of sorts</h3>
                 </div>
                 <p>
-                    We all possess a particular process, but we all have similar documentation. By studying my process over my past three installations I have noticed an incredibly predictable and documentable pattern.
+                    We all possess a particular process, but we all have similar means of documenting. By studying the evolution of my process of creating digital interactive work I have noticed an incredibly predictable documentation pattern. I was using some form revision control to keep track of file changes, and a combination of youtube, vimeo, google+, dropbox, and flickr to document visual evolution.
+                    <br>
+                    <br>
+                    code.art allows you to share your sketches, links, code, videos, all in a centralized location that ties into your github, youtube, vimeo, facebook, whatever whatever... More importantly, it puts focus on the process of creation rather than the end product. By already knowing the available media files given the places you are likely to put them your projects will be automatically created.
                     <br>
                     <br>
                     <span class='read-more'>read more</span>
                 </p>
+                <div id='text-haze'></div>
                 <p class='hidden'>
-                    code.art is a protocol, of sorts, for this process. Don't think protocol like git, ssh, or TCP. It is a protocol in the way that Youtube and Twitter are protocols. Non-technies are shown just enough of the under system to get excited about it, like #hashtags. All the sudden the # symbol went from being an ugly part of a url that had to exist before html5 to a celebritey endorsed pop icon.
+                    As a person who uses all of these online applications, I thought I would have found some way of linking them all together as a form of documentation of process, but I haven't found one. Since I already have the user experience of using these natural new media documentation tools, I am doing the next logical step and making that site.
                     <br>
                     <br>
-                    First link your media files and code repos to a code.art project. Then using #hashtags and other built in directives in the description, comments, and commits of the media and repos and code.art will link them visually together when the project gets viewed. The visual linkage will be a roadmap and guideline, if you check out this revision you should see what is in this video or image. It will also be inspiration; seeing a video and knowing that the code to make that run is right there next to it is inspiring.
+                    I always try and be a better open source developer, but I'm a hacker more than developer so usually the things I'm pushing aren't 100% tested and bug free. I take a lot from the open source community. I wouldn't be able to do anything of things I do in code without the knowledge gained there.
+                    <br>
+                    <br>
+                    I want to contribute. I am getting involved in all the available spaces, but I feel like I could help in a different way. I want to create a visual archive for what can be accomplished with code. This does not necessarily mean code as in Python or C, but code as in an Adobe Illustrator file or Rhino CAD file. Anything that is getting saved is encoded in some file extension, I just want to link that file extension back to its visual appearance.
                 </p>
             </div>
             <div id='bottom'>
                 <div class='column'>
                     <div class='header'>
-                        <h3>artist hackers and developers</h3>
+                        <h5>artists</h5><h3>sketch book, meet command z</h3>
                     </div>
                     <p>
-                        Share your sketches, links, code, videos, all in a centralized location that ties into your github, youtube, vimeo, etc... More importantly, it puts focus on the process of creation rather than the end product.
-                        Get feedback on your work through built in comments (don't forget to fork and push).
+                        <span class='revq'>What is revision control?</span>
+                    </p>
+                    <p class='hidden'>
+                        Real quick, revision control is an answer to the problem of saving img-1.png, img-2.png, img-FINAL.png, by just saving img.png and keeping track of what changed each time.
+                    </p>
+                    <p>
+                        By documenting the process of creating in both revision control through github and video or image documentation you can always access any version of the project you were working on. Fear not the command line, github has an app for <a href="http://mac.github.com/" target="_blank">Mac</a>, making it easier than ever to get started on using git. I hope this site helps you discover a little bit more about your own process.
                     </p>
                 </div>
                 <div class='column'>
                     <div class='header'>
-                        <h3>sketch book, meet command z</h3>
+                        <h5>hackers</h5><h3>look at all the cool shit</h3>
                     </div>
                     <p>
-                        By documenting the process of creating in both revision control through github and video or image documentation you can always access any version of the project you were working on.
-                        Fear not the command line, github has an app for <a href="http://mac.github.com/" target="_blank">Mac</a>, making it easier than ever to get started in using revision control.
+                        I know why you program, the gratification of having a series of words turn into a functioning systems. Tutorials are great, and watching videos of really amazing installations/machines/hacks, also great. I am not trying to replace any of those, rather just show the path from one to the other in a visual and code revision format. I hope this site inspires you to never stop hacking it together.
                     </p>
                 </div>
                 <div class='column'>
                     <div class='header'>
-                        <h3>it has to be free and open</h3>
+                        <h5>developers</h5
+                        <br>
+                        <h3>wasted cpu cycles</h3>
                     </div>
                     <p>
-                        This concept doesn't hold water if it isn't always free and open to all, so I would love any help.
-                        You develop? Fork it, refine it, and send it back.
-                        You hack? Fork it, hack it, and send it back.
-                        You art (if you do you know its a verb)? Share your videos and ideas that you aren't really sure if they can be done.
-                        We all love getting feedback and help
+                        This concept doesn't hold water if it isn't always free and open to all, so I would love any help. Fork it, refine it, and send it back. I'm sure there has been a time in your life where you realized your monitor was full color, if not come look at how the repos looks here. I hope this site opens your eyes to the possibilities constantly appearing in front of you.
                     </p>
                 </div>
             </div>
@@ -153,7 +184,7 @@
                 </form>
             </div>
             <div id='github-link'>
-                <a href="https://github.com/hcwiley/code.art/"><h4>view code.art on github</h4>
+                <a target='_blank'  href="https://github.com/hcwiley/code.art/"><h4>view code.art on github</h4>
                 <br/>
                 <img src='{{ STATIC_URL }}images/blacktocat.svg' height='50px' width='50px' alt="github"/></a>
             </div>
