@@ -44,6 +44,10 @@ h1 {
 #top .header, #contact .header {
     width: 100%;
 }
+.appeals .header h5{
+    font-weight: lighter;
+    color: #ce2d2f;
+}
 #contact {
     margin-top: 100px;
 }
@@ -136,6 +140,7 @@ footer {
 .read-more, .revq{
     color: #879a2c;
     font-variant: small-caps;
+    padding: 5px 5px 5px 0px;
 }
 .read-more:hover, .revq:hover{
     cursor: pointer;

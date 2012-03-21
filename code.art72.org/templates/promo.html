@@ -110,37 +110,44 @@
             </div>
         </header>
         <div id='container'>
+            {% block center %}
             <div id='top'>
                 <div class='header'>
-                    <h3>a manifesto of sorts</h3>
+                    <h3>define: code.art</h3>
                 </div>
                 <p>
-                    We all possess a particular process, but we all have similar means of documenting. By studying the evolution of my process of creating digital interactive work I have noticed an incredibly predictable documentation pattern. I was using some form revision control to keep track of file changes, and a combination of youtube, vimeo, google+, dropbox, and flickr to document visual evolution.
+                    code.art is a website for sharing and managing your documentation of process. The creative process as a new media artist generates documentation naturally, code and images/videos. This does not necessarily mean code as in Python or C, but also code as in an Adobe Illustrator file or Rhino CAD file. Anything that is getting saved is encoded in some file extension, code.art just links that file back to its visual appearance.
+                </p>
+                <br>
+                <div class='header'>
+                <h3>a manifesto of sorts</h3>
+                </div>
+                <p>
+                    We all possess a particular process, but we all have similar means of documenting. By studying the evolution of my process while creating digitally based interactive work I have noticed an incredibly predictable pattern of documentation. I was using some form revision control (svn, hg, git) to keep track of file changes, and a combination of youtube, vimeo, google+, dropbox, and flickr to document visual evolution.
                     <br>
                     <br>
-                    code.art allows you to share your sketches, links, code, videos, all in a centralized location that ties into your github, youtube, vimeo, facebook, whatever whatever... More importantly, it puts focus on the process of creation rather than the end product. By already knowing the available media files given the places you are likely to put them your projects will be automatically created.
+                    code.art allows you to share your sketches, links, code, videos, all in a centralized location that ties into your github, youtube, facebook, whatever whatever... More importantly, it puts focus on the process of creation rather than the end product. There are no extra steps to use this app if your process gets documented in github and youtube/flickr/dropbox.
+
+                    As a person who uses all of these online applications, I thought I would have found some way of linking them all together as a form of documentation of process, but I haven't found one. Since I already have the user experience of using all these natural new media documentation tools, I am taking the next logical step. Making the webapp to link, navigate, and explore evolution of one’s own and other’s process.
                     <br>
                     <br>
                     <span class='read-more'>read more</span>
                 </p>
                 <div id='text-haze'></div>
                 <p class='hidden'>
-                    As a person who uses all of these online applications, I thought I would have found some way of linking them all together as a form of documentation of process, but I haven't found one. Since I already have the user experience of using these natural new media documentation tools, I am doing the next logical step and making that site.
+                    I always try and be a better open source developer, but I'm a hacker more than developer so usually the things I'm pushing aren't 100% tested and bug free. I take a lot from the open source community. I wouldn't be able to do anything of things I do in code without the knowledge gained there; I want to contribute. I am getting involved in all the available spaces, but I feel like I could help in a different way. I want to create a visual archive for what can be accomplished with code.
                     <br>
                     <br>
-                    I always try and be a better open source developer, but I'm a hacker more than developer so usually the things I'm pushing aren't 100% tested and bug free. I take a lot from the open source community. I wouldn't be able to do anything of things I do in code without the knowledge gained there.
-                    <br>
-                    <br>
-                    I want to contribute. I am getting involved in all the available spaces, but I feel like I could help in a different way. I want to create a visual archive for what can be accomplished with code. This does not necessarily mean code as in Python or C, but code as in an Adobe Illustrator file or Rhino CAD file. Anything that is getting saved is encoded in some file extension, I just want to link that file extension back to its visual appearance.
+                    This app is meant to fill the gap between tutorials and final installation videos. Each project is not meant to teach any one specific thing, but rather demonstrate the capabilities of what is being used. The more we know that can be done, the more we think we can do.
                 </p>
             </div>
             <div id='bottom'>
-                <div class='column'>
+                <div class='column appeals'>
                     <div class='header'>
                         <h5>artists</h5><h3>sketch book, meet command z</h3>
                     </div>
                     <p>
-                        <span class='revq'>What is revision control?</span>
+                        <span class='revq'>What is revision control&#63;</span>
                     </p>
                     <p class='hidden'>
                         Real quick, revision control is an answer to the problem of saving img-1.png, img-2.png, img-FINAL.png, by just saving img.png and keeping track of what changed each time.
@@ -149,7 +156,7 @@
                         By documenting the process of creating in both revision control through github and video or image documentation you can always access any version of the project you were working on. Fear not the command line, github has an app for <a href="http://mac.github.com/" target="_blank">Mac</a>, making it easier than ever to get started on using git. I hope this site helps you discover a little bit more about your own process.
                     </p>
                 </div>
-                <div class='column'>
+                <div class='column appeals'>
                     <div class='header'>
                         <h5>hackers</h5><h3>look at all the cool shit</h3>
                     </div>
@@ -157,7 +164,7 @@
                         I know why you program, the gratification of having a series of words turn into a functioning systems. Tutorials are great, and watching videos of really amazing installations/machines/hacks, also great. I am not trying to replace any of those, rather just show the path from one to the other in a visual and code revision format. I hope this site inspires you to never stop hacking it together.
                     </p>
                 </div>
-                <div class='column'>
+                <div class='column appeals'>
                     <div class='header'>
                         <h5>developers</h5
                         <br>
@@ -168,6 +175,7 @@
                     </p>
                 </div>
             </div>
+            {% endblock %}
             <div id='contact'>
                 <div class='header'>
                     <h3>get in touch or involved</h3>
