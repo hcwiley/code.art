@@ -12,7 +12,7 @@
     {% include 'project/media.html' with media=media editable='True' %}
     <div class='project-selector hidden'>
         {% for form in project_forms %}
-        <h4 class='a-project' media='{{ media.title }}'>{{ form.title.value }}</h4>
+        <h4 class='a-project' media='{{ media.title }}'>(+)&nbsp;{{ form.title.value }}</h4>
         {% endfor %}
     </div>
     {% endfor %}

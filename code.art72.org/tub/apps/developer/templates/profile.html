@@ -6,6 +6,7 @@
         {% csrf_token %}{{ profile_form }}{{ user_form }}
     </form>
 </div>
+<img class='profile_picture' src='{{ developer.image.url }}' width='80px' height='80px' title='{{ developer }}'/>
 <div class='developer-profile'>
     <h3>first last name</h3>
     <h5 id='first_name' class='editable'>{{ developer.user.first_name }} {{ developer.user.last_name }}</h5>
@@ -26,8 +27,5 @@
         <br/>
         {% endfor %}
     </div>
-    {% if developer.image %}
-    {% thumbnail developer.image '250' crop='center' as img %}<img id='profile_picture' src='{{ STATIC_MEDIA }}{{ img.url }}' width='{{ img.width }}' height='{{ img.height }}' title='{{ developer }}'/> {% endthumbnail %}
-    {% endif %}
 </div>
 {% endblock %} 

@@ -27,7 +27,7 @@ class Developer(models.Model):
     
     user = models.OneToOneField(User)
     statement = models.TextField(null=True, blank=True)
-    image = thumbnail.ImageField(upload_to='images/developers/%Y/%m/%d', null=True, blank=True)
+    image = models.ForeignKey(ExtendedImage, null=True, blank=True)
     __original_image = None
     about = models.TextField(null=True, blank=True)
     location = models.CharField(max_length=50, blank=True, null=True)
@@ -143,10 +143,15 @@ class Developer(models.Model):
             if image_changed:
                 self.rename_image_file()
                 self.__original_image = self.image
+        else:
+            github = self.user.social_auth.filter(provider='github')[0]
+            repos = urllib.urlopen('https://api.github.com/users/%s' % github.user)
+            repos = simplejson.loads(repos.read())
+            print repos
+            self.image = ExtendedImage.objects.get_or_create(external=repos['avatar_url'])[0]
+            self.image.save()
         if self.user.is_staff:
             super(Developer, self).save(*args, **kwargs)
-        if self.image and image_changed:
-            self.do_resizes() 
 
 ID_TYPES = (
             ('1', 'github'),
