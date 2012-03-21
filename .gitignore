@@ -7,3 +7,5 @@ local_settings.py
 org.eclipse.core.resources.prefs
 org.ecplipse.*
 code.art72.org/tub/media/cache/*
+code.art72.org/tub/apps/developer/migrations/0002_auto__chg_field_developer_image.py
+code.art72.org/tub/apps/developer/migrations/0003_auto__chg_field_developer_image.py
