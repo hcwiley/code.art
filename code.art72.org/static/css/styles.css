@@ -509,7 +509,7 @@ form.form-part input.submit{
 	height: 20px;
 }
 
-.project.current{
+.a-project.current{
 	color: #A8433C;
 	font-weight: bold;
 	background-image: url(../images/x-icon.png);

@@ -26,7 +26,7 @@ function sendEdits() {
 
 function initProfile() {
 	$('.editable').mousedown(function(event) {
-		console.log(event.which);
+		// console.log(event.which);
 		if(event.which == 3) {
 			$('body').attr('oncontextmenu', "return false");
 			if($(this).attr('class').match('media-thumb')) {
@@ -39,9 +39,8 @@ function initProfile() {
 					var selected = true;
 					if($(this).attr('class').match('current'))
 						selected = false;
-					console.log(selected);
-					$('#id_media option').each(function() {
-						console.log($(this));
+					// console.log(selected);
+					$('#'+$(this).attr('form')+ ' [name=media] option').each(function() {
 						if($(this).text() == title){
 							if(selected)
 								$(this).attr('selected', selected);
@@ -50,7 +49,8 @@ function initProfile() {
 						}
 						
 					});
-					$('form').submit();
+					console.log($('#'+$(this).attr('form')));
+					$('#'+$(this).attr('form')).submit();
 				});
 			} else if($('.editting').length < 1) {
 				$('#editting_note').addClass('editting');
@@ -76,12 +76,14 @@ function initProfile() {
 			}
 		}
 	});
-	$('#id_media option').each(function() {
-		var projects = $('.project');
+	$('[name=media] option').each(function() {
+		var title = $(this).parent().siblings('#id_title').val()
+		var projects = $('.a-project[title="'+title+'"]');
 		for(var i = 0; i < projects.length; i++) {
-			if($(this).text() == $(projects[i]).attr('media') && $(this).attr('selected') == "selected")
+			if($(this).text() == $(projects[i]).attr('media') && $(this).attr('selected') == "selected"){
 				$(projects[i]).addClass('current');
-		};
+			}
+		}
 	});
 	$('#add_project').click(function(){
 		$('#new-project').show();

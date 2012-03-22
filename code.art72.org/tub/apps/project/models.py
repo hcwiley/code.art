@@ -55,6 +55,8 @@ class Media(models.Model):
     date = models.DateTimeField(null=True, blank=True)
     def __unicode__(self):
         return self.title
+    class Meta:
+        ordering = ['-date']
 
 
 class Project(models.Model):

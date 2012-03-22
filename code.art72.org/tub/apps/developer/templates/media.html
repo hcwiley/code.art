@@ -2,7 +2,7 @@
 {% block center %}
 {% for form in project_forms %}
 <div class='hidden form'>
-    <form action='' method="post">
+    <form id="{{ form.instance.pk }}" action='/profile/{{ developer.user.username }}/media/{{ form.instance.pk }}' method="post">
         {% csrf_token %}{{ form }}
     </form>
 </div>
@@ -12,7 +12,7 @@
     {% include 'project/media.html' with media=media editable='True' %}
     <div class='project-selector hidden'>
         {% for form in project_forms %}
-        <h4 class='a-project' media='{{ media.title }}'>{{ form.title.value }}</h4>
+        <h4 class='a-project' form='{{ form.instance.pk }}' title='{{ form.title.value }}' media='{{ media.title }}'>{{ form.title.value }}</h4>
         {% endfor %}
     </div>
     {% endfor %}
