@@ -14,6 +14,7 @@ import json as simplejson
 import urllib2 as urllib
 from social_auth.models import UserSocialAuth
 from apps.project.models import *
+from datetime import datetime
 
 MAX_IMAGE_SIZE = ('300','300')
 
@@ -132,6 +133,10 @@ class Developer(models.Model):
             tmp = tmp[0]
             tmp = tmp['url']
             med.image = ExtendedImage.objects.get_or_create(external=tmp)[0]
+            tmp = media['updated']
+            tmp = tmp['$t']
+            tmp = datetime.strptime(tmp, '%Y-%m-%dT%H:%M:%S.000Z')
+            med.date = tmp
             med.save() 
             self.medias.add(med)
         return self.medias.all()
