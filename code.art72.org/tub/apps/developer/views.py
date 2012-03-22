@@ -40,13 +40,19 @@ def profile_redirect(request):
 
 def edit_repos(request, developer):
     args = developer_args(request, developer)
-    repos = request.user.developer.update_repos()
+    try:
+        repos = args['developer'].update_repos()
+    except:
+        repos = None
     args['repos'] = repos
     return render_to_response('developer/repos.html', args)
 
 def edit_media(request, developer, id=None):
     args = developer_args(request, developer)
-    media = request.user.developer.medias.all()
+    try:
+        media = args['developer'].update_media()
+    except:
+        media = None
 #    media = request.user.developer.update_media()
     if id:
         form = ProjectForm(request.POST, instance=Project.objects.get(id=id))

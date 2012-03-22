@@ -1,16 +1,14 @@
 from django import forms
 
-ARTIST_TYPE = (
-            ('painter', 'painting/drawing'),
-            ('photographer', 'photographer'),
-            ('sculptor', 'sculptor'),
-            ('ceramicists', 'ceramicists'),
-            ('digital', 'digital'),
-            ('video', 'performance/video'),
+DEVELOPER_TYPE = (
+            ('artist', 'artist'),
+            ('hacker', 'hacker'),
+            ('developer', 'developer'),
+            ('yes', 'yes')
 )
 
 class ContactForm(forms.Form):
-    email = forms.EmailField()
-    artist_type = forms.ChoiceField(choices=ARTIST_TYPE, required=False)
-    location = forms.CharField(max_length=100, required=False)
+    name = forms.CharField(help_text='R. Mutt')
+    email = forms.EmailField(help_text='foo@bar.com')
+    type = forms.ChoiceField(choices=DEVELOPER_TYPE, required=False)
     

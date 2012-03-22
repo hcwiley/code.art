@@ -1,0 +1,41 @@
+<!DOCTYPE HTML5>
+<html>
+    <head>
+        <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+        <meta name='description' content='content managed artist websites' />
+        <meta name='keywords' content='artist, website, tagging, hacking, art sharing, code, art72, art, open source,' />
+        <link id='main-css' type='text/css' rel='stylesheet' href='{{ STATIC_URL }}css/promo.css'/>
+        <link type='image/x-icon' rel="icon" href='{{ STATIC_URL }}images/fav.png' />
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <!--         <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script> -->
+        <script type="text/javascript" src="https://use.typekit.com/cew3pji.js"></script>
+        <title>{% block header_title %}code.art{% endblock %}</title>
+        <script type="text/javascript">
+            try {
+                Typekit.load();
+            } catch(e) {
+            }
+        </script>
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <header>
+            <div id='logo'>
+                <img src='{{ STATIC_URL }}images/brand-02.png' height="450" width="auto" alt="code.art" />
+            </div>
+        </header>
+        <div id='container'>
+            <br>
+            <br>
+            <br>
+            <h2>thanks for signing up, we'll get back to you soon</h2>
+            <br><br><br>
+            <a href="https://github.com/hcwiley/code.art/"><h4>in the mean time view code.art on github</h4>
+            <br/>
+            <img id='github' src='{{ STATIC_URL }}images/blacktocat.svg' height='50px' width='50px' alt="github"/></a>
+        </div>
+        <footer>
+            <img src='{{ STATIC_URL }}images/footer.png' height='auto' width="700" />
+        </footer>
+    </body>
+</html>

@@ -3,4 +3,5 @@ from apps.project.models import *
 
 admin.site.register(Repo)
 admin.site.register(Media)
+admin.site.register(ExtendedImage)
 admin.site.register(Project)

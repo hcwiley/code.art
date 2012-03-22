@@ -1,13 +1,15 @@
 from django.conf import settings
-from datetime import datetime
+#from datetime import datetime
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from apps.developer.models import *
 from apps.post.models import *
 from apps.post.forms import *
-from apps.project.models import *
+from apps.project.forms import *
+from apps.contactform.forms import *
+from apps.contactform.utils import *
 from django.core.context_processors import csrf
-from django.contrib.auth import logout
-#from social_auth.models import Providers
+from django.contrib.auth import logout#from social_auth.models import Providers
+from django.core.mail import send_mail
 
 def common_args(request):
     """
@@ -27,15 +29,17 @@ def common_args(request):
                 'tags' : Tag.objects.all(),
                 'projects': Project.objects.all(),
                 'user' : user,
-                'cur_page' : request.path.split('/')[len(request.path.split('/'))-1]
            }
     return args
-
 
 def get_form(request, form_class, instance):
     if request.method == 'POST':
         print 'got here'
-        form = form_class(request.POST, request.FILES, instance=instance)
+        if instance:
+            form = form_class(request.POST, request.FILES, instance=instance)
+        else:
+            form = form_class(request.POST, request.FILES)
+            
         if form.is_valid():
             print 'valid'
             form.save(commit=False)
@@ -43,9 +47,49 @@ def get_form(request, form_class, instance):
             form.save()
             form = form_class(instance=instance)
     else:
-        form = form_class(instance=instance)
+        if instance:
+            form = form_class(instance=instance)
+        else:
+            form = form_class()
         
     return form
+
+def promo(request):
+    if request.method == 'POST':
+        name = request.POST["name"]
+        email = request.POST["email"]
+        type = request.POST['type']
+        now = datetime.now()
+        message = """
+On %s, %s sent said hey.
+Contact Information:
+email: %s
+""" % (now, name, email) 
+#        if not settings.IS_DEV:
+            #send_mail(subject, message, from_email, recipient_list, fail_silently=False, auth_user=None, auth_password=None, connection=None)
+        send_mail("code.art signup from %s" % name,'%s (%s) of the, %s variety, said hey' %(name, email, type), '"%s" <%s>' % (name, email), ['cole+code.art@decode72.com'], fail_silently=False)
+        send_mail("code.art contact Confirmation",  auto_response(name), '"code.art team" <code.art@decode72.com>', [email], fail_silently=False)
+        return render_to_response("success.html", {"name": name ,'STATIC_URL': settings.STATIC_URL})
+    if request.user.is_authenticated():
+        return redirect('/foo')
+    args = common_args(request)
+    args['contact'] = ContactForm()
+    args.update(csrf(request))
+    return render_to_response("promo.html", args)
+
+def auto_response(name):
+    return """
+Hi %s!,
+
+We received your request to stay up-to-date with code.art. 
+If you have no idea what we're talking about then someone probably used your email address in our contact form. 
+If this is the case we most sincerely apologize.   
+
+Cheers,
+
+code.art + Decode72
+http://code.art72.org
+""" % (name)
 
 def home(request):
     args = common_args(request)

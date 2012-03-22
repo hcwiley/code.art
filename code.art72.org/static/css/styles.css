@@ -40,16 +40,14 @@ header {
     clear: both;
     background-color: #dedede;
 }
-
-header > div{
-	position: relative;
-	z-index: 1;
-	display:block;
+header > div {
+    position: relative;
+    z-index: 1;
+    display: block;
 }
-
-#header-title{
-	background-color: #fff;
-	height: 100px;
+#header-title {
+    background-color: #fff;
+    height: 90px;
     position: relative;
     top: -90px;
     left: 0px;
@@ -64,7 +62,7 @@ header > div{
 
 header h1{
     position: relative;
-    top: 0px;
+    top: -5px;
     font-size: 70px;
     display: inline;
 /*    left: -73px;*/
