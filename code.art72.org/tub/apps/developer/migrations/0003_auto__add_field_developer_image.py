@@ -8,24 +8,14 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Renaming column for 'Developer.image' to match new field type.
-        db.rename_column('developer_developer', 'image', 'image_id')
-        # Changing field 'Developer.image'
-        db.alter_column('developer_developer', 'image_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['project.ExtendedImage'], null=True))
-
-        # Adding index on 'Developer', fields ['image']
-        db.create_index('developer_developer', ['image_id'])
+        # Adding field 'Developer.image'
+        db.add_column('developer_developer', 'image', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['project.ExtendedImage'], null=True, blank=True), keep_default=False)
 
 
     def backwards(self, orm):
         
-        # Removing index on 'Developer', fields ['image']
-        db.delete_index('developer_developer', ['image_id'])
-
-        # Renaming column for 'Developer.image' to match new field type.
-        db.rename_column('developer_developer', 'image_id', 'image')
-        # Changing field 'Developer.image'
-        db.alter_column('developer_developer', 'image', self.gf('sorl.thumbnail.fields.ImageField')(max_length=100, null=True))
+        # Deleting field 'Developer.image'
+        db.delete_column('developer_developer', 'image_id')
 
 
     models = {
@@ -97,7 +87,7 @@ class Migration(SchemaMigration):
         },
         'project.project': {
             'Meta': {'object_name': 'Project'},
-            'blurb': ('django.db.models.fields.TextField', [], {}),
+            'blurb': ('django.db.models.fields.TextField', [], {'default': "''", 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['project.ExtendedImage']", 'null': 'True', 'blank': 'True'}),
             'media': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['project.Media']", 'null': 'True', 'blank': 'True'}),
