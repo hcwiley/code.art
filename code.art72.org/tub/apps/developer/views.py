@@ -51,8 +51,8 @@ def edit_repos(request, developer):
 def edit_media(request, developer, id=None):
     args = developer_args(request, developer)
     try:
-#        media = args['developer'].update_media()
-        media = args['developer'].medias.all()
+        media = args['developer'].update_media()
+#        media = args['developer'].medias.all()
     except:
         print sys.exc_info()[0]
         media = None
