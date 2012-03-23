@@ -9,6 +9,7 @@ from django.contrib.auth.forms import UserChangeForm
 from tub.views import common_args, get_form
 from apps.project.forms import *
 from apps.developer.forms import *
+import sys
 
 def developer_args(request, developer):
     args = common_args(request)
@@ -52,8 +53,9 @@ def edit_media(request, developer, id=None):
     try:
         media = args['developer'].update_media()
     except:
+        print sys.exc_info()[0]
         media = None
-#    media = request.user.developer.update_media()
+    print "media is... : %s " % media
     if id:
         form = ProjectForm(request.POST, instance=Project.objects.get(id=id))
         if form.is_valid():

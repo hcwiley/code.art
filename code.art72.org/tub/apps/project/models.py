@@ -54,7 +54,7 @@ class ExtendedImage(models.Model):
 class Media(models.Model):
     title = models.CharField(max_length=144)
     image = models.ForeignKey(ExtendedImage, null=True, blank=True, default=None)
-    video = models.URLField(null=True, blank=True, default=None)
+    video = models.URLField(max_length=400, null=True, blank=True, default=None)
     date = models.DateTimeField(null=True, blank=True)
     def __unicode__(self):
         return self.title
