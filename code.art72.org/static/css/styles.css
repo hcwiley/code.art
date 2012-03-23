@@ -517,8 +517,8 @@ form.form-part input.submit{
 }
 
 #profile_picture{
-	float: right;
-	width: 200px;
+	float: left;
+	width: 50px;
 	height: auto;
 	display: inline;
 }

@@ -11,7 +11,7 @@ class Migration(SchemaMigration):
         # Renaming column for 'Developer.image' to match new field type.
         db.rename_column('developer_developer', 'image', 'image_id')
         # Changing field 'Developer.image'
-        db.alter_column('developer_developer', 'image_id', self.gf('django.db.models.fields.related.ForeignKey')(null=True, to=orm['project.Media']))
+        db.alter_column('developer_developer', 'image_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['project.ExtendedImage'], null=True))
 
         # Adding index on 'Developer', fields ['image']
         db.create_index('developer_developer', ['image_id'])
@@ -69,11 +69,11 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Developer'},
             'about': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'developer_image'", 'null': 'True', 'to': "orm['project.Media']"}),
+            'image': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['project.ExtendedImage']", 'null': 'True', 'blank': 'True'}),
             'lat': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
             'location': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
             'long': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
-            'medias': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'developer_medias'", 'default': 'None', 'to': "orm['project.Media']", 'blank': 'True', 'symmetrical': 'False', 'null': 'True'}),
+            'medias': ('django.db.models.fields.related.ManyToManyField', [], {'default': 'None', 'to': "orm['project.Media']", 'null': 'True', 'symmetrical': 'False', 'blank': 'True'}),
             'process': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'projects': ('django.db.models.fields.related.ManyToManyField', [], {'default': 'None', 'to': "orm['project.Project']", 'null': 'True', 'symmetrical': 'False', 'blank': 'True'}),
             'providers': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'}),
@@ -88,7 +88,7 @@ class Migration(SchemaMigration):
             'uploaded': ('sorl.thumbnail.fields.ImageField', [], {'default': 'None', 'max_length': '100', 'null': 'True', 'blank': 'True'})
         },
         'project.media': {
-            'Meta': {'object_name': 'Media'},
+            'Meta': {'ordering': "['-date']", 'object_name': 'Media'},
             'date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('django.db.models.fields.related.ForeignKey', [], {'default': 'None', 'to': "orm['project.ExtendedImage']", 'null': 'True', 'blank': 'True'}),
