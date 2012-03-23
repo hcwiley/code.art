@@ -18,7 +18,7 @@ def project(request, id=None):
     print id == ''
     args.update({'project':project})
     args.update({'project_forms':project_form})
-    if project.repos.count() > 0:
+    if id != "" and project.repos:
         repo = project.repos.all()[0]
         args['commits']  = repo.get_commits()
     args.update(csrf(request))

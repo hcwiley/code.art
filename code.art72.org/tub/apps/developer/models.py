@@ -143,16 +143,11 @@ class Developer(models.Model):
         
         
     def save(self, *args, **kwargs):
-        if self.image:
-            image_changed = self.image != self.__original_image
-            if image_changed:
-                self.rename_image_file()
-                self.__original_image = self.image
-        else:
+        if len(self.user.social_auth.filter(provider='github')) > 0:
             github = self.user.social_auth.filter(provider='github')[0]
             repos = urllib.urlopen('https://api.github.com/users/%s' % github.user)
             repos = simplejson.loads(repos.read())
-            print repos
+#            print repos
             self.image = ExtendedImage.objects.get_or_create(external=repos['avatar_url'])[0]
             self.image.save()
         if self.user.is_staff:

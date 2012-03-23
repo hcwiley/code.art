@@ -65,7 +65,7 @@ class Media(models.Model):
 class Project(models.Model):
     title = models.CharField(max_length=144)
     slug = models.SlugField(editable=False, default="")
-    blurb = models.TextField()
+    blurb = models.TextField(default="", null=True,blank=True)
     use_git_blurb = models.BooleanField(default=False)
     repos = models.ManyToManyField(Repo, null=True,blank=True)
     media = models.ManyToManyField(Media, null=True,blank=True)
