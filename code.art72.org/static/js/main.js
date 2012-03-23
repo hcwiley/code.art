@@ -41,6 +41,8 @@ function changePage(url) {
 				history.pushState({module:"leave"},"code.art ajax", url);
 			}
 			init();
+			if(location.pathname.match('profile'))
+				initProfile();
 		});
 	}, animateDelay / 1.5);
 }
@@ -52,7 +54,7 @@ function init() {
 	loc = loc.split('/');
 	loc = loc[loc.length - 1];
 	watchURLChange();
-	$('*:not(a)').unbind();
+	// $('*:not(a)').unbind();
 	$('#new-post').click(function() {
 		showPostForm();
 		$(this).hide(400);

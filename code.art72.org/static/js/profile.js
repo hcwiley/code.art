@@ -25,7 +25,8 @@ function sendEdits() {
 }
 
 function initProfile() {
-	$('.editable iframe').mousedown(function(event) {
+	$('.editable').unbind();
+	$('.editable').mousedown(function(event) {
 		// console.log(event.which);
 		if(event.which == 3) {
 			$('body').attr('oncontextmenu', "return false");
