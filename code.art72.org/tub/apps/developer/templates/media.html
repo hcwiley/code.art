@@ -9,11 +9,12 @@
 {% endfor %}
 <div class='developer-profile'>
     {% for media in media_source %}
-    {% include 'project/media.html' with media=media editable='True' %}
-    <div class='project-selector hidden'>
-        {% for form in project_forms %}
-        <h4 class='a-project' form='{{ form.instance.pk }}' title='{{ form.title.value }}' media='{{ media.title }}'>{{ form.title.value }}</h4>
-        {% endfor %}
+    <div class='media-element'>
+        {% include 'project/media.html' with media=media editable='True' %}
+        <div class='project-selector hidden'>
+            {% for form in project_forms %} <h4 class='a-project' form='{{ form.instance.pk }}' title='{{ form.title.value }}' media='{{ media.title }}'>{{ form.title.value }}</h4>
+            {% endfor %}
+        </div>
     </div>
     {% endfor %}
 </div>

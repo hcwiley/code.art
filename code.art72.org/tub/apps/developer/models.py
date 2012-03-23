@@ -136,7 +136,7 @@ class Developer(models.Model):
             self.medias.add(med)
 #        print 'updated from youtube'
             
-    def updateGoogle(self):
+    def updatePicasa(self):
         picasa = self.user.social_auth.filter(provider='google')[0]
         albums = urllib.urlopen('https://picasaweb.google.com/data/feed/api/user/%s?alt=json' % picasa.user)
         albums = simplejson.loads(albums.read())
@@ -145,8 +145,10 @@ class Developer(models.Model):
         albums = albums['feed']
         albums = albums['entry']
         print 'bout to get all the albums'
-        try:
-            for album in albums:
+        print len(albums)
+        for album in albums:
+            print album['title']
+            try:
                 tmp = album['link'][0]
                 tmp = tmp['href']
                 medias = urllib.urlopen('%s' % tmp)
@@ -157,32 +159,36 @@ class Developer(models.Model):
                     tmp = media['title']
                     tmp = tmp['$t']
                     med = Media.objects.get_or_create(title=tmp)[0]
-                    tmp = media['media$group']
-                    tmp = tmp['media$content']
-                    tmp = tmp[2]
-                    tmp = tmp['url'] 
-    #                print tmp
-                    med.video = tmp
-                    med.developer = tmp
+                    #image
                     tmp = media['media$group']
                     tmp = tmp['media$content']
                     tmp = tmp[0]
                     tmp = tmp['url']
                     med.image = ExtendedImage.objects.get_or_create(external=tmp)[0]
+                    #date
                     tmp = media['published']
                     tmp = tmp['$t']
                     tmp = datetime.strptime(tmp, '%Y-%m-%dT%H:%M:%S.000Z')
                     med.date = tmp
+                    #video?
+                    tmp = media['media$group']
+                    tmp = tmp['media$content']
+                    if len(tmp) > 1:
+                        tmp = tmp[2]
+                        tmp = tmp['url'] 
+    #                print tmp
+                        med.video = tmp
+                    med.developer = tmp
                     med.save()
                     self.medias.add(med)
-        except:
-            print 'err.. there was an api error'
+            except:
+                print 'err.. there was an api error'
 #        print "updated from picasa"
      
     def update_media(self):
 #        print 'updating the medias'
         self.updateYoutube()
-        self.updateGoogle()
+        self.updatePicasa()
         return self.medias.all()
         
         

@@ -230,7 +230,17 @@ footer .art72 img:hover{
     border-right: 8px solid #DEDEDE;
     padding-top: 50px;
 }
-
+#save-menu{
+	display: none;
+	height: 100px;
+	width: 150px;
+	position: fixed;
+	right: 20px;
+	top: 160px;
+}
+.added{
+	color: #7da109;
+}
 .half-column{
 	width: 45%;
 	float: left; 
@@ -435,10 +445,6 @@ form.form-part input.submit{
 	-khtml-border-radius: 5px;
 }
 
-.developer-profile{
-    
-}
-
 .developer-profile *{
 	text-align: left;
 	float: left;
@@ -457,6 +463,13 @@ form.form-part input.submit{
 .developer-profile h4, .developer-profile h5, .developer-profile div:not(.video-box){
     display: block;
     clear: both;
+}
+
+.developer-profile > div.media-element{
+	float: left;
+	display: inline-block;
+	clear: none;
+	
 }
 .media-thumbs{
 	height: 200px;

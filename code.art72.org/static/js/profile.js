@@ -37,8 +37,12 @@ function initProfile() {
 				$(this).next('.project-selector').children('.a-project').click(function() {
 					var title = $(this).attr('media');
 					var selected = true;
-					if($(this).attr('class').match('current'))
+					if($(this).attr('class').match('current')){
 						selected = false;
+					}
+					else{
+						$(this).addClass('added');
+					}
 					// console.log(selected);
 					$('#'+$(this).attr('form')+ ' [name=media] option').each(function() {
 						if($(this).text() == title){
@@ -49,8 +53,9 @@ function initProfile() {
 						}
 						
 					});
-					console.log($('#'+$(this).attr('form')));
-					$('#'+$(this).attr('form')).submit();
+					// console.log($('#'+$(this).attr('form')));
+					$('#save-menu').show();
+					$('#'+$(this).attr('form')).addClass('modified');
 				});
 			} else if($('.editting').length < 1) {
 				$('#editting_note').addClass('editting');
@@ -87,5 +92,11 @@ function initProfile() {
 	});
 	$('#add_project').click(function(){
 		$('#new-project').show();
+	});
+	$('#save').click(function(){
+		$('.modified').submit();
+	});
+	$('#cancel').click(function(){
+		window.locaiton = window.location;
 	})
 }
