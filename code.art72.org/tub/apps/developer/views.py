@@ -17,7 +17,7 @@ def developer_args(request, developer):
     developer = Developer.objects.get(user=User.objects.get(username=developer))
     args.update({
          'developer': developer,
-         'base_template': 'developer/profile_base.html',
+#         'base_template': 'developer/profile_base.html',
          })
     new_providers = settings.AVAILABLE_PROVIDERS
     current_providers = {}

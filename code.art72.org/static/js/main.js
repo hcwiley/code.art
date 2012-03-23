@@ -7,6 +7,7 @@ function showPostForm(){
 }
 
 function init(){
+	$('*:not(a)').unbind();
     $('#new-post').click(function(){
         showPostForm();
         $(this).hide(400);

@@ -25,7 +25,7 @@ function sendEdits() {
 }
 
 function initProfile() {
-	$('.editable').mousedown(function(event) {
+	$('.editable iframe').mousedown(function(event) {
 		// console.log(event.which);
 		if(event.which == 3) {
 			$('body').attr('oncontextmenu', "return false");
@@ -37,25 +37,24 @@ function initProfile() {
 				$(this).next('.project-selector').children('.a-project').click(function() {
 					var title = $(this).attr('media');
 					var selected = true;
-					if($(this).attr('class').match('current')){
+					if($(this).attr('class').match('current')) {
 						selected = false;
-					}
-					else{
+					} else {
 						$(this).addClass('added');
 					}
 					// console.log(selected);
-					$('#'+$(this).attr('form')+ ' [name=media] option').each(function() {
-						if($(this).text() == title){
+					$('#' + $(this).attr('form') + ' [name=media] option').each(function() {
+						if($(this).text() == title) {
 							if(selected)
 								$(this).attr('selected', selected);
 							else
-								$(this).removeAttr('selected');							
+								$(this).removeAttr('selected');
 						}
-						
+
 					});
 					// console.log($('#'+$(this).attr('form')));
 					$('#save-menu').show();
-					$('#'+$(this).attr('form')).addClass('modified');
+					$('#' + $(this).attr('form')).addClass('modified');
 				});
 			} else if($('.editting').length < 1) {
 				$('#editting_note').addClass('editting');
@@ -83,20 +82,26 @@ function initProfile() {
 	});
 	$('[name=media] option').each(function() {
 		var title = $(this).parent().siblings('#id_title').val()
-		var projects = $('.a-project[title="'+title+'"]');
+		var projects = $('.a-project[title="' + title + '"]');
 		for(var i = 0; i < projects.length; i++) {
-			if($(this).text() == $(projects[i]).attr('media') && $(this).attr('selected') == "selected"){
+			if($(this).text() == $(projects[i]).attr('media') && $(this).attr('selected') == "selected") {
 				$(projects[i]).addClass('current');
 			}
 		}
 	});
-	$('#add_project').click(function(){
+	$('#add_project').click(function() {
 		$('#new-project').show();
 	});
-	$('#save').click(function(){
-		$('.modified').submit();
+	$('#save').click(function() {
+		$('.modified').each(function() {
+			$.post($(this).attr('action'), $(this).serialize(), function(data) {
+				$('#main').html(data);
+				initProfile();
+				init();
+			});
+		});
 	});
-	$('#cancel').click(function(){
+	$('#cancel').click(function() {
 		window.locaiton = window.location;
 	})
 }

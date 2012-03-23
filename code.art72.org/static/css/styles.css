@@ -241,6 +241,22 @@ footer .art72 img:hover{
 .added{
 	color: #7da109;
 }
+
+#save, #cancel{
+	width: 150px;
+	height: 30px;
+	margin: 3px 0;
+}
+#save{
+	background-color: #7da109;
+}
+#cancel{
+	background-color: #ce2c2f;
+}
+#save:hover, #cancel:hover{
+	cursor: pointer;
+	font-variant: small-caps;
+}
 .half-column{
 	width: 45%;
 	float: left; 
