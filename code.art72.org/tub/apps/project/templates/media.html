@@ -1,8 +1,10 @@
 {% load thumbnail %}
 <div class='media-thumbs {% if editable %}editable {% endif %}'>
-    <h6>click to view video</h6>
+    {% if media.video %} <h6>click to view video</h6>
     {% thumbnail media.image.external "200x200" crop="center" as im %} <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}" video='{{ media.video }}'>
+    {% endthumbnail %} <iframe width='200px' height='200px' src=''></iframe>
+    {% else %} <h6>click to view image</h6>
+    {% thumbnail media.image.external "200x200" crop="center" as im %} <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}" video='{{ media.image.url }}'>
     {% endthumbnail %}
-    {% if media.video %} <iframe width='200px' height='200px' src=''></iframe>
     {% endif %}
 </div>

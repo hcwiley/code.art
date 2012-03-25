@@ -31,8 +31,8 @@ def developer_args(request, developer):
 
 def profile(request, developer):
     args = developer_args(request, developer)
-    args['profile_form'] = get_form(request, DeveloperForm, request.user)
-    args['user_form'] = get_form(request, UserChangeForm, request.user)
+    args['profile_form'] = get_form(request, DeveloperForm, args['user'])
+    args['user_form'] = get_form(request, UserChangeForm, args['user'])
     return render_to_response('developer/profile.html', args)
 
 def profile_redirect(request):

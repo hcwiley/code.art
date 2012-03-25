@@ -30,6 +30,11 @@ def common_args(request):
                 'projects': Project.objects.all(),
                 'user' : user,
            }
+    if user:
+        current_providers = {}
+        for soc in developer.user.social_auth.all():
+            current_providers.update({ soc.provider  : 'providers/%s.html' % soc.provider});
+        args['current_providers'] = current_providers
     return args
 
 def get_form(request, form_class, instance):

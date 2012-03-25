@@ -49,6 +49,8 @@ class ExtendedImage(models.Model):
     def url(self):
         if self.external:
             return self.external
+        elif self.uploaded:
+            return self.uploaded
 
 
 class Media(models.Model):
