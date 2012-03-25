@@ -14,6 +14,7 @@ import json as simplejson
 import urllib2 as urllib
 from social_auth.models import UserSocialAuth
 from apps.project.models import *
+from datetime import datetime
 
 MAX_IMAGE_SIZE = ('300','300')
 
@@ -103,9 +104,8 @@ class Developer(models.Model):
             self.repos.add(rep)
             print repo['name']
         return self.repos.all()
-     
-    def update_media(self):
-        print 'updating the medias'
+    
+    def updateYoutube(self):
         youtube = self.user.social_auth.filter(provider='google')[0]
         medias = urllib.urlopen('https://gdata.youtube.com/feeds/api/videos?author=%s&alt=json&prettyprint=true' % youtube.user)
         medias = simplejson.loads(medias.read())
@@ -117,14 +117,10 @@ class Developer(models.Model):
             tmp = media['title']
             tmp = tmp['$t']
             med = Media.objects.get_or_create(title=tmp)[0]
-#            tmp = media['media$thumbnail'] # for image at some point
-#            tmp = tmp['$t']
-#            med.image
             tmp = media['media$group']
             tmp = tmp['media$content']
             tmp = tmp[0]
             tmp = tmp['url'] 
-            print tmp
             med.video = tmp
             med.developer = tmp
             tmp = media['media$group']
@@ -132,22 +128,76 @@ class Developer(models.Model):
             tmp = tmp[0]
             tmp = tmp['url']
             med.image = ExtendedImage.objects.get_or_create(external=tmp)[0]
+            tmp = media['updated']
+            tmp = tmp['$t']
+            tmp = datetime.strptime(tmp, '%Y-%m-%dT%H:%M:%S.000Z')
+            med.date = tmp
             med.save() 
             self.medias.add(med)
+#        print 'updated from youtube'
+            
+    def updatePicasa(self):
+        picasa = self.user.social_auth.filter(provider='google')[0]
+        albums = urllib.urlopen('https://picasaweb.google.com/data/feed/api/user/%s?alt=json' % picasa.user)
+        albums = simplejson.loads(albums.read())
+        names = {}
+        c = 0
+        albums = albums['feed']
+        albums = albums['entry']
+        print 'bout to get all the albums'
+        print len(albums)
+        for album in albums:
+            print album['title']
+            try:
+                tmp = album['link'][0]
+                tmp = tmp['href']
+                medias = urllib.urlopen('%s' % tmp)
+                medias = simplejson.loads(medias.read())
+                medias = medias['feed']
+                medias = medias['entry']
+                for media in medias:
+                    tmp = media['title']
+                    tmp = tmp['$t']
+                    med = Media.objects.get_or_create(title=tmp)[0]
+                    #image
+                    tmp = media['media$group']
+                    tmp = tmp['media$content']
+                    tmp = tmp[0]
+                    tmp = tmp['url']
+                    med.image = ExtendedImage.objects.get_or_create(external=tmp)[0]
+                    #date
+                    tmp = media['published']
+                    tmp = tmp['$t']
+                    tmp = datetime.strptime(tmp, '%Y-%m-%dT%H:%M:%S.000Z')
+                    med.date = tmp
+                    #video?
+                    tmp = media['media$group']
+                    tmp = tmp['media$content']
+                    if len(tmp) > 1:
+                        tmp = tmp[2]
+                        tmp = tmp['url'] 
+    #                print tmp
+                        med.video = tmp
+                    med.developer = tmp
+                    med.save()
+                    self.medias.add(med)
+            except:
+                print 'err.. there was an api error'
+#        print "updated from picasa"
+     
+    def update_media(self):
+#        print 'updating the medias'
+        self.updateYoutube()
+        self.updatePicasa()
         return self.medias.all()
         
         
     def save(self, *args, **kwargs):
-        if self.image:
-            image_changed = self.image != self.__original_image
-            if image_changed:
-                self.rename_image_file()
-                self.__original_image = self.image
-        else:
+        if len(self.user.social_auth.filter(provider='github')) > 0:
             github = self.user.social_auth.filter(provider='github')[0]
             repos = urllib.urlopen('https://api.github.com/users/%s' % github.user)
             repos = simplejson.loads(repos.read())
-            print repos
+#            print repos
             self.image = ExtendedImage.objects.get_or_create(external=repos['avatar_url'])[0]
             self.image.save()
         if self.user.is_staff:
