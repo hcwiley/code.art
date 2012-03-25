@@ -423,7 +423,8 @@ button {
 
 li {
     list-style: square;
-    height: 20px;
+    height: auto;
+    margin: 2px 0;
 }
 .links li, .tags li{
 	margin-left: 40px;
@@ -492,13 +493,23 @@ form.form-part input.submit{
 	width: 200px;
 	margin-bottom: 20px;
 }
+.media-thumbs h5, .media-thumbs h4{
+    position: relative;
+    top: -200px;
+    left: 220px;
+}
+.media-thumbs h4, .commit-header h4{
+    color: #ce2c2f;
+    font-size: 14px;
+    opacity: .7;     
+}
 
 .media-thumbs:hover{
 	cursor: pointer;
 	opacity: .8;
 }
 
-.media-thumbs iframe{
+.media-thumbs iframe, .media-thumbs video, .media-thumbs img:last-child{
 	display:none;
 }
 
@@ -520,7 +531,7 @@ form.form-part input.submit{
 	top: 90px;
 	left: -5px;
 	text-align: center;
-	width: 100%;
+	width: 105%;
 }
 .media-thumbs img{
 	position:relative;

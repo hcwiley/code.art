@@ -1,33 +1,64 @@
 {% extends base_template %}
 {% block center %}
 <style type='text/css'>
-	form, input {
-		display: inline;
-	}
-	#feedback {
-		position: fixed;
-		top: 20px;
-		right: 30px;
-	}
+    form, input {
+        display: inline;
+    }
+    #feedback {
+        position: fixed;
+        top: 20px;
+        right: 30px;
+    }
+    *{
+        z-index: 10;
+    }
+    #date-connections {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        z-index: 1;
+    }
 </style>
-<script type='text/javascript'></script>
+<script type='text/javascript'>
+$(document).ready(function() {
+    var canvas = document.getElementById("date-connections");
+    ctx = canvas.getContext('2d');
+    // ctx.stroke(190);
+    ctx.lineWidth = 4;
+    $('.media-thumbs h4').each(function(index) {
+        var media = $(this);
+        $('.commit-header h4').each(function(index) {
+            if($(this).text().split('-')[1] == $(media).text().split('-')[1]) {
+                console.log($(this).text().split('-'));
+                console.log($(media).text().split('-'));
+                ctx.moveTo($(media).position().left, $(media).position().top);
+                ctx.lineTo($(this).position().left, $(this).position().top);
+                ctx.stroke();
+            }
+        });
+    });
+});
+</script>
+<div id='project'>
 <h2>{{ project }}</h2>
 <br>
 <p>
-	{% autoescape off %}
-	{{ project.blurb }}
-	{% endautoescape %}
+    {% autoescape off %}
+    {{ project.blurb }}
+    {% endautoescape %}
 </p>
 <br>
 <div id='videos'>
-{% for media in project.media.all %}
-	{% include 'project/media.html' with media=media %}
-{% endfor %}
+    {% for media in project.media.all %}
+    {% include 'project/media.html' with media=media %}
+    {% endfor %}
 </div>
 <div id='commits'>
-{% for repo in project.repos.all %}
-	{% include 'project/repo.html' with repo=repo %}
+    {% for repo in project.repos.all %}
+    {% include 'project/repo.html' with repo=repo %}
 </div>
 {% endfor %}
-
+</div> <canvas id='date-connections' width=1000 height=1000></canvas>
 {% endblock %} 

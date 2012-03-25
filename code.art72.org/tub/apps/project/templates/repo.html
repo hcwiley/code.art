@@ -2,7 +2,7 @@
 {% for commit in commits %} <a href="{{ commit.commit.url }}" target='_blank'>
 <div class='commit'>
     <div class='commit-header'>
-        <h5>{{ commit.commit.committer.name }}</h5><h6>{{ commit.commit.committer.date }}</h6>
+        <h5>{{ commit.commit.committer.name }}</h5><h4>{{ commit.commit.committer.date }}</h4>
     </div>
     <p>
         {{ commit.commit.message }}
