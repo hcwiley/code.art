@@ -513,8 +513,9 @@ form.form-part input.submit{
 	display:none;
 }
 
-.media-thumbs.video{
-	height: 300px;
+.media-thumbs.open{
+	height: 400px;
+	width: 320px;
 }
 
 .media-thumbs h6, .media-thumbs img{
