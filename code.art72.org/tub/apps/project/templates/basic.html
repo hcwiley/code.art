@@ -23,19 +23,29 @@
 </style>
 <script type='text/javascript'>
 $(document).ready(function() {
-    var canvas = document.getElementById("date-connections");
-    ctx = canvas.getContext('2d');
+    // canvas = document.createElement('canvas');
+    // var $ctx = $( '<canvas />', {width:$(document).width(), height:$(document).height()} )
+    // $widget.append($ctx);                                    
+    // $ctx[0].getContext('2d');
+    // $(canvas).attr('id','date-connections');
+    // $(canvas).height();
+    // $(canvas).width($(document).width());
+    // document.getElementById('container').appendChild(canvas);
+    // // var canvas = document.getElementById("date-connections");
+    // ctx = canvas.getContext('2d');
     // ctx.stroke(190);
-    ctx.lineWidth = 4;
+    // ctx.lineWidth = 1;
     $('.media-thumbs h4').each(function(index) {
         var media = $(this);
         $('.commit-header h4').each(function(index) {
-            if($(this).text().split('-')[1] == $(media).text().split('-')[1]) {
+            if($(this).text().split('-')[1] == $(media).text().split('-')[1] && $(this).text().split('-')[2].substring(0,1) == $(media).text().split('-')[2].substring(0,1)) {
                 console.log($(this).text().split('-'));
                 console.log($(media).text().split('-'));
-                ctx.moveTo($(media).position().left, $(media).position().top);
-                ctx.lineTo($(this).position().left, $(this).position().top);
-                ctx.stroke();
+                $(media).parent().css('margin-left','100');
+                $(this).parent().css('margin-left','-100');
+                // ctx.moveTo($(media).position().left, $(media).position().top);
+                // ctx.lineTo($(this).position().left, $(this).position().top);
+                // ctx.stroke();
             }
         });
     });
@@ -60,5 +70,5 @@ $(document).ready(function() {
     {% include 'project/repo.html' with repo=repo %}
 </div>
 {% endfor %}
-</div> <canvas id='date-connections' width=1000 height=1000></canvas>
+</div>
 {% endblock %} 
