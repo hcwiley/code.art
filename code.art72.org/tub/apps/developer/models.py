@@ -17,7 +17,7 @@ from apps.project.models import Project, Repo, Media, ExtendedImage
 #from apps.post.models import Post
 from datetime import datetime
 
-MAX_IMAGE_SIZE = ('300','300')
+MAX_IMAGE_SIZE = ('300', '300')
 
 class Developer(models.Model):
     """
@@ -25,7 +25,7 @@ class Developer(models.Model):
     """
     #TODO: when checking for unique email, check for things like 'zackdever@gmail.com' vs 'zackdever+foo@gmail.com' and periods. not sure if this is specific to gmail or not
     # user data
-    ALL_PROVIDERS = (('github','github'), ('google','google'),('twitter','twitter'), ('flickr','flickr'),('facebook','facebook'),('dropbox','dropbox',))
+    ALL_PROVIDERS = (('github', 'github'), ('google', 'google'), ('twitter', 'twitter'), ('flickr', 'flickr'), ('facebook', 'facebook'), ('dropbox', 'dropbox',))
     
     user = models.OneToOneField(User)
     statement = models.TextField(null=True, blank=True)
@@ -74,7 +74,7 @@ class Developer(models.Model):
         videos = {}
         for handle in self.externalid_set.filter(type=6):#vimeo
             url = 'http://vimeo.com/api/v2/user/%s/videos.json' % handle.handle
-            file = urllib2.urlopen(url)
+            file = urllib.urlopen(url)
             content = file.read()     
             json = simplejson.loads(content)
             for video in json:
@@ -134,7 +134,24 @@ class Developer(models.Model):
             tmp = tmp['$t']
             tmp = datetime.strptime(tmp, '%Y-%m-%dT%H:%M:%S.000Z')
             med.date = tmp
-            med.save() 
+            med.save()
+            #Auto project tagging 
+            try:
+                tmp = media['media$group']
+                tmp = tmp['media$description']
+                tmp = tmp['$t']
+                at = tmp.find('@')
+                if at >= 0:
+                    tmp = tmp[at+1:]
+                    print tmp
+                    tmp = tmp.split(' ')[0]
+                    print tmp
+                    proj = Project.objects.get(slug=tmp)
+                    if proj:
+                        print 'project: %s' % proj
+                        proj.media.add(med)
+            except:
+                print 'no go on the auto add'
             self.medias.add(med)
 #        print 'updated from youtube'
             
@@ -149,7 +166,6 @@ class Developer(models.Model):
         print 'bout to get all the albums'
         print len(albums)
         for album in albums:
-            print album['title']
             try:
                 tmp = album['link'][0]
                 tmp = tmp['href']
