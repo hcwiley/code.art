@@ -4,7 +4,7 @@ from django.db import models
 import urllib
 
 class Tag(models.Model):
-    text = models.CharField(max_length=50, help_text='add your own tag here')
+    text = models.CharField(max_length=50, help_text='add your own tag here', unique=True)
     
     def __unicode__(self):
         return self.text
@@ -15,7 +15,7 @@ class Tag(models.Model):
 
 
 class Link(models.Model):
-    url = models.URLField(help_text='add your own link here')
+    url = models.URLField(help_text='add your own link here', unique=True)
     title = models.CharField(max_length=100, null=False, blank=True)
     
     def __unicode__(self):
