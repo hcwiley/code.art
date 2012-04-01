@@ -29,7 +29,7 @@ def post(request, id):
                         print 'valid'
                         tag = form.save()
                         print tag
-                        post.tags.append(tag)
+                        post.tags.add(tag)
                         args.update({'result': 'your tag got added'})
                     else:
                         args.update({'result': 'your tag did not validate...'})
@@ -42,7 +42,7 @@ def post(request, id):
                     if form.is_valid():
                         link = form.save()
     #                    link.save()
-                        post.links.append(link)
+                        post.links.add(link)
                         args.update({'result': 'your link got added'})
                     else:
                         args.update({'result': 'your link did not validate...'})
