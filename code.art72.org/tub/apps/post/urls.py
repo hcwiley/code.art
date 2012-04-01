@@ -7,6 +7,5 @@ admin.autodiscover()
 
 
 urlpatterns = patterns('apps.post.views',
-    (r'^tag/(?P<id>[^/]+)$', 'tag'),
     (r'^(?P<id>[^/]*)$', 'post'),
 )

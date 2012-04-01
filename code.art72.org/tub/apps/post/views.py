@@ -55,10 +55,3 @@ def post(request, id):
     args.update(csrf(request))
     return render_to_response('post/basic.html', args)
 
-def tag(request, id):
-    args = common_args(request)
-    tag = Tag.objects.get(id=id)
-    posts = tag.post.all()
-    args.update({'posts': posts})
-    args.update(csrf(request))
-    return render_to_response('tag.html', args)
