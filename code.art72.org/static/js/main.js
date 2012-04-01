@@ -55,7 +55,7 @@ function init() {
     loc = window.location + "";
     loc = loc.split('/');
     loc = loc[loc.length - 1];
-    watchURLChange();
+//    watchURLChange();
     // $('*:not(a)').unbind();
     $('#new-post').click(function() {
         showPostForm();
@@ -103,16 +103,16 @@ function init() {
             });
         });
     });
-    $('a:not(.no-link)').each(function() {
-        $(this).unbind('click');
-        if($(this).attr('href').match(location.host) == null && $(this).attr('href').match("http") != null) {
-            // console.log($(this).attr('href'));
-            return;
-        }
-        $(this).click(function(e) {
-            e.preventDefault();
-            var url = $(this).attr('href');
-            changePage(url);
-        });
-    });
+//    $('a:not(.no-link)').each(function() {
+//        $(this).unbind('click');
+//        if($(this).attr('href').match(location.host) == null && $(this).attr('href').match("http") != null) {
+//            // console.log($(this).attr('href'));
+//            return;
+//        }
+//        $(this).click(function(e) {
+//            e.preventDefault();
+//            var url = $(this).attr('href');
+//            changePage(url);
+//        });
+//    });
 }
