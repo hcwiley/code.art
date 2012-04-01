@@ -6,9 +6,11 @@ from apps.post.models import *
 from django.core.context_processors import csrf
 from tub.views import common_args
 from apps.post.forms import *
+from apps.utility.forms import *
+from apps.utility.models import *
 
 def list_post(request):
-    args.update({'post_form':PostForm(instance=post)})
+    args.update({'post_form':PostForm(instance = post)})
     args.update(csrf(request))
     return render_to_response('post/list.html', args)
 
@@ -16,49 +18,39 @@ def post(request, id):
     args = common_args(request)
     if id == '':
         return redirect('list_posts')
-    post = Post.objects.get(id=id)
+    post = Post.objects.get(id = id)
     if request.POST:
-        if request.POST['text']:
-            try:
-                print 'text'
-                form = TagForm(request.POST, instance=post)
-                if form.is_valid():
-                    print 'valid'
-                    tag.post += post
-                    if form.save(commit=False):
-                          pass
+        print request.POST
+        try:
+            if request.POST['text']:
+                    print request.POST
+                    form = TagForm(request.POST)
+                    if form.is_valid():
+                        print 'valid'
+                        tag = form.save()
+                        print tag
+                        post.tags.append(tag)
+                        args.update({'result': 'your tag got added'})
                     else:
-                        print 'no save'
-                    print tag.post
-                    tag.save()
-                    args.update({'result': 'your tag got added'})
-                else:
-                    args.update({'result': 'your tag did not validate...'})
-            except:
-                args.update({'result': 'that was bad...'})
-        elif request.POST['url']:
+                        args.update({'result': 'your tag did not validate...'})
+        except:
+            args.update({'result': 'not a tag'})
+            isTag = False
             try:
-                print 'url'
-                form = LinkForm(request.POST, instance=post)
-                if form.is_valid():
-                    link = form.save(commit=False)
-                    link.post = post
-                    link.save()
-                    args.update({'result': 'your link got added'})
-                else:
-                    args.update({'result': 'your link did not validate...'})
+                if request.POST['url']:
+                    form = LinkForm(request.POST)
+                    if form.is_valid():
+                        link = form.save()
+    #                    link.save()
+                        post.links.append(link)
+                        args.update({'result': 'your link got added'})
+                    else:
+                        args.update({'result': 'your link did not validate...'})
             except:
-                    args.update({'result': 'ummmm whoops...'})
+                args.update({'result': 'not a link'})
     args.update({'post':post})
-    args.update({'tag_form':TagForm(instance=post)})
-    args.update({'link_form':LinkForm(instance=post)})
+    args.update({'tag_form':TagForm()})
+    args.update({'link_form':LinkForm()})
     args.update(csrf(request))
     return render_to_response('post/basic.html', args)
 
-def tag(request, id):
-    args = common_args(request)
-    tag = Tag.objects.get(id=id)
-    posts = tag.post.all()
-    args.update({'posts': posts})
-    args.update(csrf(request))
-    return render_to_response('tag.html', args)

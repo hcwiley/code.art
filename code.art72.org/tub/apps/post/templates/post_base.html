@@ -1,9 +1,9 @@
-{% if post.link_set.count > 0 %}
+{% if post.links.count > 0 %}
 <ul class='links'>
 	<h3>links</h3>
-	{% for link in post.link_set.all %}
+	{% for link in post.links.all %}
 	<li>
-		<a href='{{ link.url }}' target='_blank'>{{ link }}</a>
+		<a href='{{ link.url }}' target='_blank'>{{ link.url }}</a>
 	</li>
 	{% endfor %}
 </ul>
@@ -14,10 +14,10 @@
 		<input type='submit' class='submit' value='submit' />
 	</form>
 	{% endif %}
-{% if post.tag_set.count > 0 %}
+{% if post.tags.count > 0 %}
 <ul class='tags'>
 	<h3>tags</h3>
-	{% for tag in post.tag_set.all %}
+	{% for tag in post.tags.all %}
 	<li>
 		<a href='{{ tag.url }}' target='_blank'>{{ tag }}</a>
 	</li>

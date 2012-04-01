@@ -6,6 +6,6 @@ from django.contrib.auth import views as auth_views
 admin.autodiscover()
 
 
-urlpatterns = patterns('apps.post.views',
-    (r'^(?P<id>[^/]*)$', 'post'),
+urlpatterns = patterns('apps.utility.views',
+    (r'^tag/(?P<id>[^/]+)$', 'tag'),
 )

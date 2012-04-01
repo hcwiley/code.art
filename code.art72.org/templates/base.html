@@ -59,6 +59,13 @@
                     {{ tag }}
                 </li></a>
                 {% endfor %}
+                <div id='soc-links'>
+                    {% for provider, val in current_providers.items %}
+                    <div class='soc-icon'>
+                        {% include val %}
+                    </div>
+                    {% endfor %}
+                </div>
                 {% endblock %}
             </div>
             <div id='wrapper'>

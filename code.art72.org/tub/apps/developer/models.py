@@ -13,7 +13,8 @@ from django.contrib.sites.models import Site
 import json as simplejson
 import urllib2 as urllib
 from social_auth.models import UserSocialAuth
-from apps.project.models import *
+from apps.project.models import Project, Repo, Media, ExtendedImage
+#from apps.post.models import Post
 from datetime import datetime
 
 MAX_IMAGE_SIZE = ('300','300')
@@ -35,6 +36,7 @@ class Developer(models.Model):
     lat = models.CharField(max_length=50, blank=True, null=True)
     long = models.CharField(max_length=50, blank=True, null=True)
     process = models.TextField(blank=True, null=True)
+#    posts = models.ManyToOneRel(Post)
     repos = models.ManyToManyField(Repo, default=None, null=True, blank=True)
     medias = models.ManyToManyField(Media, default=None, null=True, blank=True)
     projects = models.ManyToManyField(Project, default=None, null=True, blank=True)

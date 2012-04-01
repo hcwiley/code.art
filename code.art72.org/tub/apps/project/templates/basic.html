@@ -21,17 +21,24 @@
         z-index: 0;
     }
 </style>
-<script type='text/javascript' src="{{ STATIC_URL }}js/project.js">>
+<script type='text/javascript' src='{{ STATIC_URL }}js/project.js'>
 </script>
 <div id='project'>
 <h2>{{ project }}</h2>
 <br>
+<h3>description</h3>
 <p>
     {% autoescape off %}
     {{ project.blurb }}
     {% endautoescape %}
 </p>
 <br>
+<h3>here's all the things you'll need to make this thing run</h3>
+<ul>
+{% for depend in project.repos.all.0.dependencies.all %}
+    <a href='{{ depend.url }}' target='_blank'><li>{{ depend }}</li></a>
+{% endfor %}
+</ul>
 <div id='videos'>
     {% for media in project.media.all %}
     {% include 'project/media.html' with media=media %}

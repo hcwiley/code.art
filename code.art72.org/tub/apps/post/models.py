@@ -1,13 +1,11 @@
 from django.conf import settings
 from django.contrib import admin
-from apps.developer import *
 from django.db import models
 from uuid import uuid4
 from sorl import thumbnail
 import Image
-from apps.developer.models import *
-from django.db import models
-import urllib
+from apps.developer.models import Developer
+from apps.utility.models import *
 #import BeautifulSoup
 
 MAX_IMAGE_SIZE = settings.MAX_IMAGE_SIZE
@@ -15,8 +13,10 @@ MAX_IMAGE_SIZE = settings.MAX_IMAGE_SIZE
 class Post(models.Model):
     title = models.CharField(max_length=144)
     blurb = models.TextField()
-    developer = models.ForeignKey(Developer)
     image = thumbnail.ImageField(upload_to='images/posts/%Y/%m/%d', null=True, blank=True)
+    links = models.ManyToManyField(Link, null=True, blank=True, default=None)
+    developer = models.ForeignKey(Developer, default='Mr. Bar', null=True, blank=True)
+    tags = models.ManyToManyField(Tag, null=True, blank=True, default=None)
     __original_image = None
     
     @models.permalink
@@ -53,29 +53,4 @@ class Post(models.Model):
         super(Post, self).save(*args, **kwargs)
         if image_changed:
             self.do_resizes()
-
-class Link(models.Model):
-    url = models.URLField(help_text='add your own link here')
-    post = models.ForeignKey(Post)
-    title = models.CharField(max_length=100, null=False, blank=True)
-    
-    def __unicode__(self):
-        return self.title
-    
-    def save(self, *args, **kwargs):
-#        if self.title == '':
-#            soup = BeautifulSoup.BeautifulSoup(urllib.urlopen(self.url))
-#            self.title = soup.title.string
-        super(Link, self).save(*args, **kwargs)
-    
-
-class Tag(models.Model):
-    text = models.CharField(max_length=50, help_text='add your own tag here')
-    post = models.ManyToManyField(Post)
-    
-    def __unicode__(self):
-        return self.text
-    
-    @models.permalink
-    def get_absolute_url(self):
-        return ('apps.post.views.tag', {self.id:self.id})
+\

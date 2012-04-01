@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.contrib import admin
-from apps.developer import *
 from django.db import models
 from uuid import uuid4
 from sorl import thumbnail
@@ -8,7 +7,8 @@ import Image
 from django.template.defaultfilters import slugify
 import urllib
 import json as simplejson
-#from apps.post.models import Post, Tag, Link
+#from apps.developer.models import *
+from apps.utility.models import Tag, Link
 
 MAX_IMAGE_SIZE = settings.MAX_IMAGE_SIZE
 
@@ -16,6 +16,8 @@ class Repo(models.Model):
     title = models.CharField(max_length=144)
     blurb = models.TextField(default="", null=True, blank=True)
     url = models.URLField()
+    dependencies = models.ManyToManyField(Link, null=True, blank=True, default=None)
+    tags = models.ManyToManyField(Tag, null=True, blank=True, default=None)
     
     def __unicode__(self):
         return self.title
