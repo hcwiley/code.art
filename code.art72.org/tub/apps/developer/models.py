@@ -16,6 +16,7 @@ from social_auth.models import UserSocialAuth
 from apps.project.models import Project, Repo, Media, ExtendedImage
 #from apps.post.models import Post
 from datetime import datetime
+from django.template.defaultfilters import slugify
 
 MAX_IMAGE_SIZE = ('300', '300')
 
@@ -102,8 +103,14 @@ class Developer(models.Model):
             rep.url = repo['html_url']
             dev = repo['owner']
             dev = dev['login']
-            rep.save() 
-            self.repos.add(rep)
+            rep.save()
+            try:
+                proj = Project.objects.get(slug=rep.title) 
+                if proj:
+                    proj.repos.add(rep)
+                self.repos.add(rep)
+            except:
+                print 'no auto project add'
             print repo['name']
         return self.repos.all()
     
