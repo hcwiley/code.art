@@ -21,45 +21,24 @@
         z-index: 0;
     }
 </style>
-<script type='text/javascript'>
-$(document).ready(function() {
-    // canvas = document.createElement('canvas');
-    // var $ctx = $( '<canvas />', {width:$(document).width(), height:$(document).height()} )
-    // $widget.append($ctx);                                    
-    // $ctx[0].getContext('2d');
-    // $(canvas).attr('id','date-connections');
-    // $(canvas).height();
-    // $(canvas).width($(document).width());
-    // document.getElementById('container').appendChild(canvas);
-    // // var canvas = document.getElementById("date-connections");
-    // ctx = canvas.getContext('2d');
-    // ctx.stroke(190);
-    // ctx.lineWidth = 1;
-    $('.media-thumbs h4').each(function(index) {
-        var media = $(this);
-        $('.commit-header h4').each(function(index) {
-            if($(this).text().split('-')[1] == $(media).text().split('-')[1] && $(this).text().split('-')[2].substring(0,1) == $(media).text().split('-')[2].substring(0,1)) {
-                console.log($(this).text().split('-'));
-                console.log($(media).text().split('-'));
-                $(media).parent().css('margin-left','100');
-                $(this).parent().css('margin-left','-100');
-                // ctx.moveTo($(media).position().left, $(media).position().top);
-                // ctx.lineTo($(this).position().left, $(this).position().top);
-                // ctx.stroke();
-            }
-        });
-    });
-});
+<script type='text/javascript' src='{{ STATIC_URL }}js/project.js'>
 </script>
 <div id='project'>
 <h2>{{ project }}</h2>
 <br>
+<h3>description</h3>
 <p>
     {% autoescape off %}
     {{ project.blurb }}
     {% endautoescape %}
 </p>
 <br>
+<h3>here's all the things you'll need to make this thing run</h3>
+<ul>
+{% for depend in project.repos.all.0.dependencies.all %}
+    <a href='{{ depend.url }}' target='_blank'><li>{{ depend }}</li></a>
+{% endfor %}
+</ul>
 <div id='videos'>
     {% for media in project.media.all %}
     {% include 'project/media.html' with media=media %}
