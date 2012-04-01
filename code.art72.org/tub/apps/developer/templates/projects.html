@@ -12,13 +12,22 @@
     <div id='projects'>
         {% for project in developer.projects.all %}
         <div class='project'>
-            <a href='{{ project.url }}'target="_blank"><h5 id='title' class='editable'>{{ project }}</h5></a>
+            <h2 id='title' class='editable'>{{ project }}</h2><a href='{{ project.get_absolute_url }}'target="_blank">view</a>
             <br>
             <p id='blurb' class='editable'>
                 {{ project.blurb }}
             </p>
             <br>
             {% if project.use_git_blurb %}<h6 onclick='useGit(0)'>stop using github description</h6>{% else %}<h6 onclick='useGit(1)'>use github description?</h6>{% endif %}
+            <div class='dependencies'>
+                <h4>dependencies</h4>
+                <br>
+                <ul>
+                {% for depend in project.repos.all.0.dependencies.all %}
+                    <a href='{{ depend.url }}' target='_blank'><li>{{ depend }}</li></a>
+                {% endfor %}
+                </ul>
+            </div>
         </div>
         {% endfor %}
         <br>
