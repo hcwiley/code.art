@@ -148,10 +148,11 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'south',
     'registration',
+    'social_auth',
     'apps.developer',
     'apps.post',
     'apps.project',
-    'social_auth',
+    'apps.utility'
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
