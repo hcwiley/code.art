@@ -11,95 +11,91 @@
         <script type="text/javascript" src="https://use.typekit.com/cew3pji.js"></script>
         <title>{% block header_title %}code.art{% endblock %}</title>
         <script type="text/javascript">
-            try {
-                Typekit.load();
-            } catch(e) {
-            }
+			try {
+				Typekit.load();
+			} catch(e) {
+			}
         </script>
         <script type='text/javascript'>
-            $(document).ready(function() {
-                $('.read-more').each(function(index) {
-                    $(this).click(function() {
-                        $(this).hide();
-                        $(this).parent().siblings('.hidden').stop(true, true).animate({
-                            height : 250,
-                        }, 500);
-                        $(this).unbind();
-                    });
-                    $(this).hover(function() {
-                        $(this).parent().siblings('.hidden').stop(false, true).animate({
-                            height : 45,
-                        }, 500);
-                        $(this).text('click to view rest');
-                    }, function() {
-                        $(this).text('read more');
-                        $('.hidden').stop(false, false).animate({
-                            height : 0,
-                        }, 500);
-                    });
-                });
-                $('.revq').each(function(index) {
-                    $(this).click(function() {
-                        $(this).hide();
-                        $(this).parent().siblings('.hidden').stop(true, true).animate({
-                            height : 115,
-                        }, 500);
-                        $(this).unbind();
-                    });
-                    $(this).hover(function() {
-                        $(this).parent().siblings('.hidden').stop(false, true).animate({
-                            height : 115,
-                        }, 500);
-                        $(this).text('click to leave open');
-                    }, function() {
-                        $(this).text('what is revision control');
-                        $('.hidden').stop(false, false).animate({
-                            height : 0,
-                        }, 500);
-                    });
-                });
-                $('form').unbind('');
-                $('#submit').unbind('');
-                $('#submit').submit(function() {
-                    if($('#name').val() == '' || $('#name').val().search(/[ ]+/g) == 0) {
-                        $('#name').focus();
-                        $('#name').css('background-color', '#eee');
-                    } else if($('#email').val() == '') {
-                        $('#email').focus();
-                        $('#email').css('background-color', '#eee');
-                    } else if($('#email').val().split('@').length < 2) {
-                        $('#email').focus();
-                        $('#email').css('background-color', '#eee');
-                    } else if($('#email').val().split('@')[1].split('.').length < 2) {
-                        $('#email').focus();
-                        $('#email').css('background-color', '#eee');
-                    } else {
-                        $.post('', $('form').serialize(), function(data, status, xhr) {
-                            $('form').replaceWith('<p>' + data + '</p>');
-                        });
-                    }
-                });
-                $('#submit').click(function() {
-                    if($('#name').val() == '' || $('#name').val().search(/[ ]+/g) == 0) {
-                        $('#name').focus();
-                        $('#name').css('background-color', '#eee');
-                    } else if($('#email').val() == '') {
-                        $('#email').focus();
-                        $('#email').css('background-color', '#eee');
-                    } else if($('#email').val().split('@').length < 2) {
-                        $('#email').focus();
-                        $('#email').css('background-color', '#eee');
-                    } else if($('#email').val().split('@')[1].split('.').length < 2) {
-                        $('#email').focus();
-                        $('#email').css('background-color', '#eee');
-                    } else {
-                        $.post('', $('form').serialize(), function(data, status, xhr) {
-                            $('form').replaceWith('<p>' + data + '</p>');
-                        });
-                    }
-                });
-            });
-
+			$(document).ready(function() {
+				$('.read-more').click(function() {
+					$(this).hide();
+				    console.log($($(this).parent().siblings('.hidden')[0]));
+					$($(this).parent().siblings('.hidden')[0]).stop(true, true).animate({
+						height : 250,
+					}, 500);
+					$(this).unbind();
+				});
+				$('.read-more').hover(function() {
+					$($(this).parent().siblings('.hidden')[0]).stop(false, true).animate({
+						height : 45,
+					}, 500);
+					$(this).text('click to view rest');
+				}, function() {
+					$(this).text('read more');
+					$($(this).parent().siblings('.hidden')[0]).stop(false, true).animate({
+						height : 0,
+					}, 500);
+				});
+				$('.revq').click(function() {
+					$(this).hide();
+					$($(this).parent().siblings('.hidden')[0]).stop(true, true).animate({
+						height : 115,
+					}, 500);
+					$(this).unbind();
+				});
+				$('.revq').hover(function() {
+					$($(this).parent().siblings('.hidden')[0]).stop(false, true).animate({
+						height : 115,
+					}, 500);
+					$(this).text('click to leave open');
+				}, function() {
+					$(this).text('what is revision control?');
+					$($(this).parent().siblings('.hidden')[0]).stop(false, true).animate({
+						height : 0,
+					}, 500);
+				});
+				$('form').unbind('');
+				$('#submit').unbind('');
+				$('#submit').submit(function() {
+					if($('#name').val() == '' || $('#name').val().search(/[ ]+/g) == 0) {
+						$('#name').focus();
+						$('#name').css('background-color', '#eee');
+					} else if($('#email').val() == '') {
+						$('#email').focus();
+						$('#email').css('background-color', '#eee');
+					} else if($('#email').val().split('@').length < 2) {
+						$('#email').focus();
+						$('#email').css('background-color', '#eee');
+					} else if($('#email').val().split('@')[1].split('.').length < 2) {
+						$('#email').focus();
+						$('#email').css('background-color', '#eee');
+					} else {
+						$.post('', $('form').serialize(), function(data, status, xhr) {
+							$('form').replaceWith('<p>' + data + '</p>');
+						});
+					}
+				});
+				$('#submit').click(function() {
+					if($('#name').val() == '' || $('#name').val().search(/[ ]+/g) == 0) {
+						$('#name').focus();
+						$('#name').css('background-color', '#eee');
+					} else if($('#email').val() == '') {
+						$('#email').focus();
+						$('#email').css('background-color', '#eee');
+					} else if($('#email').val().split('@').length < 2) {
+						$('#email').focus();
+						$('#email').css('background-color', '#eee');
+					} else if($('#email').val().split('@')[1].split('.').length < 2) {
+						$('#email').focus();
+						$('#email').css('background-color', '#eee');
+					} else {
+						$.post('', $('form').serialize(), function(data, status, xhr) {
+							$('form').replaceWith('<p>' + data + '</p>');
+						});
+					}
+				});
+			});
         </script>
         <title>{% block title %}{% endblock %}</title>
     </head>
@@ -120,7 +116,7 @@
                 </p>
                 <br>
                 <div class='header'>
-                <h3>a manifesto of sorts</h3>
+                    <h3>a manifesto of sorts</h3>
                 </div>
                 <p>
                     We all possess a particular process, but we all have similar means of documenting. By studying the evolution of my process while creating digitally based interactive work I have noticed an incredibly predictable pattern of documentation. I was using some form revision control (svn, hg, git) to keep track of file changes, and a combination of youtube, vimeo, google+, dropbox, and flickr to document visual evolution.
