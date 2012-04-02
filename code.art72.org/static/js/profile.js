@@ -25,39 +25,35 @@ function sendEdits() {
 }
 
 function initProfile() {
-	$('.editable').unbind();
+	$('.editable').unbind(); 
+	$('.project-selector').children('.a-project').click(function() {
+		var title = $(this).attr('media');
+		$('#editting_note').addClass('editting');
+		var selected = true;
+		if($(this).attr('class').match('current')) {
+			selected = false;
+		} else {
+			$(this).addClass('added');
+		}
+		// console.log(selected);
+		$('#' + $(this).attr('form') + ' [name=media] option').each(function() {
+			if($(this).text() == title) {
+				if(selected)
+					$(this).attr('selected', selected);
+				else
+					$(this).removeAttr('selected');
+			}
+
+		});
+		// console.log($('#'+$(this).attr('form')));
+		$('#save-menu').show();
+		$('#' + $(this).attr('form')).addClass('modified');
+	});
 	$('.editable').mousedown(function(event) {
 		// console.log(event.which);
 		if(event.which == 3) {
 			$('body').attr('oncontextmenu', "return false");
-			if($(this).attr('class').match('media-thumb')) {
-				// $('.editable').unbind();
-				$(this).next('.project-selector').removeClass('hidden');
-				$('#editting_note').addClass('editting');
-				$('#editting_note > h5').text('click the project you want to add this to');
-				$(this).next('.project-selector').children('.a-project').click(function() {
-					var title = $(this).attr('media');
-					var selected = true;
-					if($(this).attr('class').match('current')) {
-						selected = false;
-					} else {
-						$(this).addClass('added');
-					}
-					// console.log(selected);
-					$('#' + $(this).attr('form') + ' [name=media] option').each(function() {
-						if($(this).text() == title) {
-							if(selected)
-								$(this).attr('selected', selected);
-							else
-								$(this).removeAttr('selected');
-						}
-
-					});
-					// console.log($('#'+$(this).attr('form')));
-					$('#save-menu').show();
-					$('#' + $(this).attr('form')).addClass('modified');
-				});
-			} else if($('.editting').length < 1) {
+			if($('.editting').length < 1) {
 				$('#editting_note').addClass('editting');
 				var orig = $(this).clone();
 				var input = $('#id_' + $(this).attr('id')).clone().attr('id', 'tmp').attr('orig', '#id_' + $(this).attr('id')).addClass('editting');
