@@ -151,10 +151,10 @@ INSTALLED_APPS = (
     'south',
     'registration',
     'social_auth',
+    'apps.utility'
     'apps.developer',
     'apps.post',
     'apps.project',
-    'apps.utility'
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
