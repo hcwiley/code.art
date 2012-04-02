@@ -116,7 +116,7 @@ class Developer(models.Model):
     
     def updateYoutube(self):
         youtube = self.user.social_auth.filter(provider='google')[0]
-        medias = urllib.urlopen('https://gdata.youtube.com/feeds/api/videos?author=%s&alt=json&prettyprint=true' % youtube.user)
+        medias = urllib.urlopen('https://gdata.youtube.com/feeds/api/videos?author=%s&alt=json' % youtube.user)
         medias = simplejson.loads(medias.read())
         names = {}
         c = 0
@@ -137,7 +137,7 @@ class Developer(models.Model):
             tmp = tmp[0]
             tmp = tmp['url']
             med.image = ExtendedImage.objects.get_or_create(external=tmp)[0]
-            tmp = media['updated']
+            tmp = media['published']
             tmp = tmp['$t']
             tmp = datetime.strptime(tmp, '%Y-%m-%dT%H:%M:%S.000Z')
             med.date = tmp
