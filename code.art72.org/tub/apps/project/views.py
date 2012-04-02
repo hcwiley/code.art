@@ -14,10 +14,11 @@ def project(request, id=None):
         project = Project.objects.all()
     else:
         project = Project.objects.get(id=id)
-    project_form = get_form(request, ProjectForm, request.user)
     print id == ''
     args.update({'project':project})
-    args.update({'project_forms':project_form})
+    if args['user']:
+        project_form = get_form(request, ProjectForm, request.user)
+        args.update({'project_forms':project_form})
     if id != "" and project.repos:
         repo = project.repos.all()[0]
         args['commits']  = repo.get_commits()
