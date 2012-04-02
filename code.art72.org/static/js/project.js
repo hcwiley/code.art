@@ -1,36 +1,39 @@
 jQuery.event.add(window, 'load', initProject);
 
-function initProject(){
-    $('.media-thumbs h4').each(function(index) {
-        var media = $(this);
-        $('.commit-header h4').each(function(index) {
-        	var commitM = $(this).text().split('-')[1];
-        	var commitD = $(this).text().split('-')[2].substring(0,1);
-        	var mediaM = $(media).text().split('-')[1];
-        	var mediaD = $(media).text().split('-')[2].substring(0,1);
-        	console.log(commitM+'/'+commitD+' :: '+mediaM+'/'+mediaD);
-            if(commitM == mediaM && commitD == mediaD) {
-                console.log($(this).text().split('-'));
-                console.log($(media).text().split('-'));
-                $(media).parent().css('background','#cdcdcd');
-                $(this).parent().css('background','#cdcdcd');
-                // ctx.moveTo($(media).position().left, $(media).position().top);
-                // ctx.lineTo($(this).position().left, $(this).position().top);
-                // ctx.stroke();
-            }
-        });
-    });
-    /*
-$('.media-thumbs h4').each(function(index) {
-        var media = $(this);
-        $('.commit-header h4').each(function(index) {
-            if($(this).text().split('-')[1] == $(media).text().split('-')[1] && $(this).text().split('-')[2].substring(0, 1) == $(media).text().split('-')[2].substring(0, 1)) {
-                console.log($(this).text().split('-'));
-                console.log($(media).text().split('-'));
-                $(media).css('background-color', '#cdcdcd');
-                $(this).parent().css('background-color', '#cdcdcd');
-            }
-        });
-    });
-*/
+function initProject() {
+	$('.media-thumbs').each(
+			function(index) {
+				var media = $(this);
+				var mediaM = $(media).attr('date').split('-')[1];
+				var mediaD = $(media).attr('date').split('-')[2]
+						.substring(0, 2);
+				var dateDiv = $('#' + mediaM + '-' + mediaD);
+				console.log(dateDiv.length == 0);
+				if (dateDiv.length == 0) {
+					dateDiv = $('<div class="dateDiv" id="' + mediaM + '-'
+							+ mediaD + '"><h4>' + mediaM + '-' + mediaD
+							+ '</h4></div>');
+					console.log(dateDiv);
+					$('#timeline').append(dateDiv);
+				}
+				$(media).appendTo($(dateDiv));
+			});
+	$('.commit').each(
+			function(index) {
+				var commitM = $(this).attr('date').split('-')[1];
+				var commitD = $(this).attr('date').split('-')[2]
+						.substring(0, 2);
+				var commitTime = $(this).attr('date').split('-')[2].substring(3);
+				$($(this).children('p')[0]).text(commitTime+': ');
+				var dateDiv = $('#' + commitM + '-' + commitD);
+				console.log(dateDiv.length == 0);
+				if (dateDiv.length == 0) {
+					dateDiv = $('<div class="dateDiv" id="' + commitM + '-'
+							+ commitD + '"><h4>' + commitM + '-' + commitD
+							+ '</h4></div>');
+					console.log(dateDiv);
+					$('#timeline').append(dateDiv);
+				}
+				$(this).appendTo($(dateDiv));
+			});
 }
