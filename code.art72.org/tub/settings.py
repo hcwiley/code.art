@@ -151,7 +151,7 @@ INSTALLED_APPS = (
     'south',
     'registration',
     'social_auth',
-    'apps.utility'
+    'apps.utility',
     'apps.developer',
     'apps.post',
     'apps.project',
