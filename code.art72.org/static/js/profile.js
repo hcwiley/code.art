@@ -15,7 +15,6 @@ function useGit(b) {
 function sendEdits() {
 	if($('.editting').length > 0) {
 		var me = $('#tmp');
-		console.log('save me ' + me);
 		$($('#tmp').attr('orig')).replaceWith(me);
 		$('#id_use_git_blurb').attr('checked', false);
 		$(me).parent('form').submit();
@@ -65,7 +64,6 @@ function initProfile() {
 							$(document).unbind('mousedown');
 						}
 					});
-					console.log
 					if(!$('#tmp').is('textarea')) {
 						$(document).keydown(function(event) {
 							if(event.which == 13) {

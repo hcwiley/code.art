@@ -87,8 +87,8 @@ function init() {
         } else {
             src = $(this).attr('image');
             var open = $(this).siblings('img');
-            $(this).siblings('img').attr('src', src)
-            $(this).show();
+            $(open).attr('src', src)
+            $(open).css('display','inline');
             $(this).parent().addClass('open');
             $(this).hide();
             $(this).siblings('h6').hide();

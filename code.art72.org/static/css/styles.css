@@ -473,8 +473,8 @@ form.form-part input.submit {
 	display: none;
 }
 .media-thumbs.open {
-	height: 400px;
-	width: 320px;
+	height: 500px;
+	width: 400px;
 }
 .media-thumbs h6, .media-thumbs img {
 	display: block;
