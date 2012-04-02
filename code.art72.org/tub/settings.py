@@ -101,17 +101,19 @@ AUTHENTICATION_BACKENDS = (
 
 TWITTER_CONSUMER_KEY         = 'nZnYw5fmQ7uFdiRlmQ'
 TWITTER_CONSUMER_SECRET      = 'gOxgQI0YmFF6boKRQ9L0qhEeCd0c6mgV4AI7nyrLrk'
-FACEBOOK_APP_ID              = '172127646238759'
-FACEBOOK_API_SECRET          = '32455151543ca5c16d02eb93f2a23add'
 GOOGLE_CONSUMER_KEY          = '889172199565.apps.googleusercontent.com'
 GOOGLE_CONSUMER_SECRET       = '7moPqSoZWZ6CQCsnJDQD-1bu'
 GOOGLE_OAUTH2_CLIENT_ID      = '889172199565.apps.googleusercontent.com'
 GOOGLE_OAUTH2_CLIENT_SECRET  = '7moPqSoZWZ6CQCsnJDQD-1bu'
 GOOGLE_OAUTH_EXTRA_SCOPE     = 'http://gdata.youtube.com'
 if IS_DEV:
+    FACEBOOK_APP_ID              = '160953864027168'
+    FACEBOOK_API_SECRET          = '929426d4e3c496b0e3f2556ea9bd49da'
     GITHUB_APP_ID            = '56dd1036c4a916bf1d41'
     GITHUB_API_SECRET        = '8995f91865f6ba834b3e4b877fb519dd44c2b255'
 else:
+    FACEBOOK_APP_ID              = '172127646238759'
+    FACEBOOK_API_SECRET          = '32455151543ca5c16d02eb93f2a23add'
     GITHUB_APP_ID                = 'b0b11d70b4f9254c6510'
     GITHUB_API_SECRET            = '7fbe126a6ff892a49a9ff642b5b21371a1ef937f'
 DROPBOX_APP_ID               = 'rhcjlezizolqu3j'
