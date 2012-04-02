@@ -11,7 +11,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
 #    (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^favicon.ico$', redirect_to, {'url': '/site_media/static/images/fav.ico'}),
-#    (r'^robots.txt$', direct_to_template, {'template':'common/robots.txt', 'mimetype':'text/plain'}),
+    (r'^robots.txt$', direct_to_template, {'template':'common/robots.txt', 'mimetype':'text/plain'}),
 #    (r'^sitemap.txt$', direct_to_template, {'template':'sitemap.txt', 'mimetype':'text/plain'}),
     (r'^admin/', include(admin.site.urls)),
 #    (r'^/$', 'views.promo'),
