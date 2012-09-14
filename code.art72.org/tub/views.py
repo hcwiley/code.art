@@ -137,6 +137,4 @@ def logged_in(request):
      return redirect("/profile/%s" % request.user.username)
 
 def register(request):
-    args = common_args(request)
     return redirect("/auth/login/github")
-    #return render_to_response('registration/registration_form.html', args)
