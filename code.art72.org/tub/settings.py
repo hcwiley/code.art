@@ -11,6 +11,7 @@ except:
     IS_DEV = False
 
 TEMPLATE_DEBUG = DEBUG
+THUMBNAIL_DEBUG = DEBUG
 
 MAX_IMAGE_SIZE = (1400, 1400)
 
@@ -28,8 +29,7 @@ ADMIN_MEDIA_PREFIX = os.path.join(STATIC_URL, 'admin/')
 sys.path.append(PROJECT_ROOT)
  
 ADMINS = (
-    ('Cole Wiley', 'cole@decode72.com'),
-#    ('Zack Dever', 'zack@decode72.com'),
+    ('Cole Wiley', 'dev@hcwiley.com'),
 )
 
 MANAGERS = ADMINS
@@ -133,7 +133,6 @@ SOCIAL_AUTH_EXTRA_DATA = False
 SOCIAL_AUTH_EXPIRATION = 'expires'
 SOCIAL_AUTH_SESSION_EXPIRATION = False
 SOCIAL_AUTH_ASSOCIATE_BY_MAIL = True
-#SOCIAL_AUTH_USER_MODEL = 'apps.developer.Developer' # Do this later
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -166,7 +165,8 @@ CACHES = {
     }
 }
 
-AUTH_PROFILE_MODULE = "user" #going to be something like this
+#AUTH_PROFILE_MODULE = "user" #going to be something like this
+AUTH_PROFILE_MODULE = "developer.Developer"
 
 SEND_BROKEN_LINK_EMAILS = False
 

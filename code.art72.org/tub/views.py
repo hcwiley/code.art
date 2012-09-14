@@ -21,7 +21,13 @@ def common_args(request):
     year: the year at the time of request  
     """ 
     user = request.user if request.user.is_authenticated() else None
-    developer = Developer.objects.get(user=user) if user != None else None
+    if user is not None:
+        developer = Developer.objects.get_or_create(user=user)
+        if developer[1]:
+            developer[0].save()
+        developer = developer[0]
+    else:
+        developer = None
     args = {
                 'base_template' : 'base-ajax.html' if request.is_ajax() else 'base.html',
                 'developer' : developer,
@@ -32,7 +38,7 @@ def common_args(request):
                 'projects': Project.objects.all(),
                 'user' : user,
            }
-    if user:
+    if user is not None and developer is not None:
         current_providers = {}
         for soc in developer.user.social_auth.all():
             current_providers.update({ soc.provider  : 'providers/%s.html' % soc.provider});
@@ -129,3 +135,8 @@ def log_out(request):
  
 def logged_in(request):
      return redirect("/profile/%s" % request.user.username)
+
+def register(request):
+    args = common_args(request)
+    return redirect("/auth/login/github")
+    #return render_to_response('registration/registration_form.html', args)

@@ -48,11 +48,14 @@ class ExtendedImage(models.Model):
             return self.uploaded
         elif self.external:
             return self.external
+
     def url(self):
         if self.external:
             return self.external
         elif self.uploaded:
             return self.uploaded
+        else:
+            return ""
 
 
 class Media(models.Model):
@@ -60,10 +63,15 @@ class Media(models.Model):
     image = models.ForeignKey(ExtendedImage, null=True, blank=True, default=None)
     video = models.URLField(max_length=400, null=True, blank=True, default=None)
     date = models.DateTimeField(null=True, blank=True)
+
     def __unicode__(self):
         return self.title
+
     class Meta:
         ordering = ['-date']
+    
+    def get_image(self):
+        return self.image.url()
 
 
 class Project(models.Model):

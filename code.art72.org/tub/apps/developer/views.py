@@ -14,7 +14,8 @@ import sys
 def developer_args(request, developer):
     args = common_args(request)
     args.update(csrf(request))
-    developer = Developer.objects.get(user=User.objects.get(username=developer))
+    #developer = Developer.objects.get_or_create(user=args['user']))[0]
+    developer = args['developer']
     args.update({
          'developer': developer,
 #         'base_template': 'developer/profile_base.html',
@@ -31,6 +32,7 @@ def developer_args(request, developer):
     return args
 
 def profile(request, developer):
+    args = []
     args = developer_args(request, developer)
     args['profile_form'] = get_form(request, DeveloperForm, args['user'])
     args['user_form'] = get_form(request, UserChangeForm, args['user'])
@@ -44,15 +46,21 @@ def edit_repos(request, developer):
     try:
         repos = args['developer'].update_repos()
     except:
+        print 'shit i didnt update repos'
         repos = None
+    print repos
     args['repos'] = repos
     return render_to_response('developer/repos.html', args)
+
+def update_media(request, developer):
+    request.user.get_profile().update_media()
+    return redirect("/profile/%s/media" % developer)
+    
 
 def edit_media(request, developer, id=None):
     args = developer_args(request, developer)
     try:
-        media = args['developer'].update_media()
-#        media = args['developer'].medias.all()
+        media = args['developer'].medias.all()
     except:
         print sys.exc_info()[0]
         media = None
@@ -62,6 +70,7 @@ def edit_media(request, developer, id=None):
             form.save()
         request.POST = ''
         return redirect('/profile/%s/media' % developer)
+    print media
     args['media_source'] = media
     project_forms = []
     for project in args['developer'].projects.all():

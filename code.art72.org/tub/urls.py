@@ -15,11 +15,13 @@ urlpatterns = patterns('',
 #    (r'^sitemap.txt$', direct_to_template, {'template':'sitemap.txt', 'mimetype':'text/plain'}),
     (r'^admin/', include(admin.site.urls)),
 #    (r'^/$', 'views.promo'),
-    (r'^$', 'views.promo'),
     (r'^promo$', 'views.promo'),
-    (r'^foo$', 'views.home'),
+    (r'^$', 'views.home'),
+    (r'^register$', 'views.register'),
     (r'^login$', 'views.login'),
     (r'^logout$', 'views.log_out'),
+    (r'^logout$', 'views.log_out'),
+
 )
 
 

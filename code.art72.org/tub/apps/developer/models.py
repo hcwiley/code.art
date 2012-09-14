@@ -104,11 +104,12 @@ class Developer(models.Model):
             dev = repo['owner']
             dev = dev['login']
             rep.save()
+            self.repos.add(rep)
+            self.save()
             try:
                 proj = Project.objects.get(slug=rep.title) 
                 if proj:
                     proj.repos.add(rep)
-                self.repos.add(rep)
             except:
                 print 'no auto project add'
             print repo['name']
@@ -160,6 +161,7 @@ class Developer(models.Model):
             except:
                 print 'no go on the auto add'
             self.medias.add(med)
+            self.save()
 #        print 'updated from youtube'
             
     def updatePicasa(self):
@@ -206,6 +208,7 @@ class Developer(models.Model):
                     med.developer = tmp
                     med.save()
                     self.medias.add(med)
+                    self.save()
             except:
                 print 'err.. there was an api error'
 #        print "updated from picasa"
@@ -225,8 +228,7 @@ class Developer(models.Model):
 #            print repos
             self.image = ExtendedImage.objects.get_or_create(external=repos['avatar_url'])[0]
             self.image.save()
-        if self.user.is_staff:
-            super(Developer, self).save(*args, **kwargs)
+        super(Developer, self).save(*args, **kwargs)
 
 ID_TYPES = (
             ('1', 'github'),
@@ -237,16 +239,14 @@ ID_TYPES = (
             ('6', 'vimeo'),
             ('7', 'youtube')
     )
-@receiver(post_save, sender=User, weak=False)
-def delete_image_on_file(sender, instance, raw, created, using, **kwargs):
-    if created:
-        Developer.objects.create(user=instance)
         
 @receiver(pre_save, sender=User, weak=False)
 def ensure_unique_email(sender, instance, raw, using, **kwargs):
     users = User.objects.filter(email__iexact=instance.email)
     if users and users[0].id != instance.id:
+        print "email error"
         raise ValidationError("The email '%s' is already associated with another account." % instance.email)
     users = User.objects.filter(username__iexact=instance.username)
     if users and users[0].id != instance.id:
+        print "username error"
         raise ValidationError("The username '%s' is already associated with another account." % instance.username)

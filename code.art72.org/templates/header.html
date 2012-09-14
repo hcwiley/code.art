@@ -2,10 +2,8 @@
     <div>
         <a href="/"><img id='logo' src="{{ STATIC_URL }}images/mark.png" /></a>
         <div id='login'>
-            {% if user %} <img id='profile_picture' src='{{ user.developer.image.url }}' width='80px' height='80px' title='{{ user }}'/>
-            <a href='{{ user.developer.get_absolute_url }}'><h3>{{ user.developer }}</h3></a>
-            <a href='{{ user.developer.get_absolute_url }}'><h5>edit profile</h5></a>&nbsp;&nbsp;|&nbsp;&nbsp;<h5><a href='/logout'>logout</a></h5>
-            {% else %} <h5><a href='/login'>login</a> or <a href='/register'>register</a></h5>
+            {% if developer %} <img id='profile_picture' src='{{ developer.image.url }}' width='80px' height='80px' title='{{ user }}'/>
+            <a href='{{ developer.get_absolute_url }}'><h3>{{ developer }}</h3></a>
             {% endif %}
         </div>
     </div>
