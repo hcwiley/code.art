@@ -23,11 +23,14 @@ class Repo(models.Model):
         return self.title
     
     def get_commits(self):
-        github = self.developer_set.all()[0]
-        github = github.user.social_auth.filter(provider='github')[0]
-        commits = urllib.urlopen('https://api.github.com/repos/%s/%s/commits' % (github.user, self.title))
-        commits = simplejson.load(commits)
-        return commits
+        if self.developer_set.count() > 0:
+            github = self.developer_set.all()[0]
+            github = github.user.social_auth.filter(provider='github')[0]
+            commits = urllib.urlopen('https://api.github.com/repos/%s/%s/commits' % (github.user, self.title))
+            commits = simplejson.load(commits)
+            return commits
+        else:
+            return None
     
     def getBlurb(self, developer):
         github = developer.user.social_auth.filter(provider='github')[0]
