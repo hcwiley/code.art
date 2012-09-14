@@ -148,7 +148,6 @@ INSTALLED_APPS = (
     'apps.contactform',
     'sorl.thumbnail',
     'south',
-    'registration',
     'social_auth',
     'apps.utility',
     'apps.developer',
