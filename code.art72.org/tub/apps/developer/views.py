@@ -53,7 +53,8 @@ def edit_repos(request, developer):
     return render_to_response('developer/repos.html', args)
 
 def update_media(request, developer):
-    request.user.get_profile().update_media()
+    args = developer_args(request, developer)
+    args['developer'].update_media()
     return redirect("/profile/%s/media" % developer)
     
 
