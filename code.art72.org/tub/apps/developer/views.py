@@ -14,8 +14,8 @@ import sys
 def developer_args(request, developer):
     args = common_args(request)
     args.update(csrf(request))
-    #developer = Developer.objects.get_or_create(user=args['user']))[0]
-    developer = args['developer']
+    developer = Developer.objects.get(user=User.objects.get(username=developer))
+    #developer = args['developer']
     args.update({
          'developer': developer,
 #         'base_template': 'developer/profile_base.html',
