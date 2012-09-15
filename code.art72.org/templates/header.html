@@ -1,6 +1,5 @@
 <header>
     <div>
-        <a href="/"><img id='logo' src="{{ STATIC_URL }}images/mark.png" /></a>
         <div id='login'>
             {% if user %} <img id='profile_picture' src='{{ user.get_profile.image.url }}' width='80px' height='80px' title='{{ user }}'/>
             <a href='{{ user.get_profile.get_absolute_url }}'><h3>{{ user.get_profile }}</h3></a>
@@ -11,6 +10,6 @@
     </div>
     <a href="/">
     <div id='header-title'>
-        <img height='100px' width='auto' src="{{ STATIC_URL }}images/title_text.png" />
+    <a href="/"><img class='logo' width='auto' height='100' src="{{ STATIC_URL }}images/logo.png" /></a>
     </div></a>
 </header>

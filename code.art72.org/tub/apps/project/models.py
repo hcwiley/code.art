@@ -114,6 +114,12 @@ class Project(models.Model):
         
     def getGithubBlurb(self, repo):
         return repo.getBlurb(self.developer_set.all()[0])
+
+    def get_image(self):
+        if self.image:
+            return self.image.url()
+        elif self.media.count() > 0:
+            return self.media.all()[0].get_image()
         
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)

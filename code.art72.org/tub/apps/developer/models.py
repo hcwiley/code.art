@@ -151,9 +151,9 @@ class Developer(models.Model):
                 at = tmp.find('@')
                 if at >= 0:
                     tmp = tmp[at+1:]
-                    print tmp
+                    #print tmp
                     tmp = tmp.split(' ')[0]
-                    print tmp
+                    #print tmp
                     proj = Project.objects.get(slug=tmp)
                     if proj:
                         print 'project: %s' % proj

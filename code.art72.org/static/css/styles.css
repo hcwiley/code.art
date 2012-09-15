@@ -31,7 +31,7 @@ header, footer {
 }
 header {
 	float: left;
-	height: 135px;
+	height: 115px;
 	width: 100%;
 	clear: both;
 	background-color: #dedede;
@@ -151,31 +151,21 @@ footer {
 	border-top: dotted 1px #c0c0c0;
 	text-align: center;
 }
-footer .logo {
-	margin-left: -70px;
+#github-link {
+    text-align: center;
+    margin: 10px 0px;
+    width: 100%;
+    height: 120px;
+    clear: both;
 }
-footer div.art72 {
-	float: left;
-	margin-top: 30px;
-	width: 115px;
-	height: 70px;
-	background-image: url(../images/art72-color.png)
-	/*	background-repeat: no-repeat;*/
+#github-link h4{
+  position: relative;
+  top: 50px;
 }
-footer .art72 img:hover {
-	opacity: 0;
-}
-footer div.decode72 {
-	float: left;
-	margin-top: 30px;
-	margin-left: 30px;
-	width: 72px;
-	height: 70px;
-	background-image: url(../images/decode72-color.png)
-	/*  background-repeat: no-repeat;*/
-}
-footer .decode72 img:hover {
-	opacity: 0;
+#github-link img{
+  position: relative;
+  top: 0px;
+  z-index: -1;
 }
 #wrapper {
 	float: left;
@@ -193,7 +183,7 @@ footer .decode72 img:hover {
 	margin-top: 10px;
 	min-height: 500px;
 	height: auto;
-	padding: 30px 10px;
+	padding: 10px 10px;
 	width: 100%;
 }
 #right-nav {
@@ -244,6 +234,62 @@ footer .decode72 img:hover {
 	cursor: pointer;
 	font-variant: small-caps;
 }
+.whatIs{
+  font-size: 20px;
+  text-align: center;
+  display: block;
+  width: 100%;
+  float: left;
+  margin: 20px 0px;
+}
+.whatIs:hover{
+  cursor: pointer;
+}
+#about, #bottom  {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+#about{
+  width: 1000px;
+  height: 400px;
+  margin: 0 auto;
+  border-bottom: 1px solid #ce2c2f;
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+}
+#about .define{
+  float: left;
+  width: 80%;
+  margin-bottom: 20px;
+}
+.header {
+    width: 85%;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 2px dotted #879a2c;
+    text-align: left;
+}
+.appeals .header h5{
+    font-weight: lighter;
+    color: #ce2d2f;
+}
+h3 {
+    color: #343434;
+}
+.appeals {
+    font-weight: lighter;
+    color: #ce2d2f;
+}
+.column {
+    float: left;
+    width: 280px;
+    text-align: justify;
+    margin: 0 50px 0px 0px;
+}
+.column:last-child {
+    margin: 0 0 0 0px;
+}
 .half-column {
 	width: 45%;
 	float: left;
@@ -254,6 +300,12 @@ footer .decode72 img:hover {
 .half-column h3 {
 	color: #ce2c2f;
 	font-size: 18px;
+}
+.half-column p {
+  width: 270px;
+}
+.half-column img{
+  float: right;
 }
 #project h3 {
 	color: #7da109;
@@ -576,7 +628,6 @@ form.form-part input.submit {
 	margin-left: -30px;
 	font-size: 18px;
 }
-∆
 .repo p{
 margin-left: 60px;
 }
@@ -613,7 +664,6 @@ display: block;
 h6 {
 display: inline;
 }
-.hidden{
+*.hidden, #about.hidden{
 display: none;
-visibility: hidden;
 }
