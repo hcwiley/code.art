@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.contrib import admin
@@ -214,7 +215,6 @@ class Developer(models.Model):
 #        print "updated from picasa"
      
     def update_media(self):
-#        print 'updating the medias'
         self.updateYoutube()
         self.updatePicasa()
         return self.medias.all()
@@ -223,7 +223,7 @@ class Developer(models.Model):
     def save(self, *args, **kwargs):
         if len(self.user.social_auth.filter(provider='github')) > 0:
             github = self.user.social_auth.filter(provider='github')[0]
-            repos = urllib.urlopen('https://api.github.com/users/%s' % github.user)
+            repos = urllib.urlopen('https://api.github.com/users/%s?client_id=%s&client_secret=%s' % (github.user, settings.GITHUB_APP_ID, settings.GITHUB_API_SECRET))
             repos = simplejson.loads(repos.read())
 #            print repos
             self.image = ExtendedImage.objects.get_or_create(external=repos['avatar_url'])[0]
@@ -241,12 +241,14 @@ ID_TYPES = (
     )
         
 @receiver(pre_save, sender=User, weak=False)
-def ensure_unique_email(sender, instance, raw, using, **kwargs):
-    users = User.objects.filter(email__iexact=instance.email)
-    if users and users[0].id != instance.id:
-        print "email error"
-        raise ValidationError("The email '%s' is already associated with another account." % instance.email)
-    users = User.objects.filter(username__iexact=instance.username)
-    if users and users[0].id != instance.id:
-        print "username error"
-        raise ValidationError("The username '%s' is already associated with another account." % instance.username)
+def ensure_unique_email(sender, instance, created=False, raw=False, using=False, update_fields=False, **kwargs):
+  print "pre user save"
+  print instance
+    #users = User.objects.filter(email=instance.email)
+    #if users and users[0].id != instance.id:
+        #print "email error"
+        #raise ValidationError("The email '%s' is already associated with another account." % instance.email)
+    #users = User.objects.filter(username__iexact=instance.username)
+    #if users and users[0].id != instance.id:
+        #print "username error"
+        #raise ValidationError("The username '%s' is already associated with another account." % instance.username)

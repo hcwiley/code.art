@@ -124,8 +124,6 @@ def oauth_authorize(request):
     return False
  
 def login(request):
-#    for p in Provider.objects.all():
-#        print p
     return redirect("/auth/login/github")
  
 def log_out(request):

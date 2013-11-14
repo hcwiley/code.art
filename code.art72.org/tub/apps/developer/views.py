@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from apps.developer.models import *
 from apps.post.models import *
 from django.core.context_processors import csrf
-from django.contrib.admin.models import User
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 from tub.views import common_args, get_form
 from apps.project.forms import *

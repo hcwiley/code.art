@@ -8,6 +8,9 @@
 </div>
 {% endfor %}
 <div class='developer-profile'>
+  <a href='/profile/{{ developer.user.username }}/media/update'>
+    update media
+  </a>
   {% for media in media_source %}
   <div class='media-element'>
     {% include 'project/media.html' with media=media editable='True' %}

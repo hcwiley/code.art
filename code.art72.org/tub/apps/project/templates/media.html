@@ -6,7 +6,6 @@
   <iframe width='300px' height='350px' src=''></iframe>
   {% else %} <h6>click to view image</h6>
   {% thumbnail media.get_image "200x200" crop="center" as im %} <img class='mini' src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}" video='{{ media.video }}'>
-  <!--<img class='mini' src='{{ media.get_image }}' width='200px' height='200px' image='{{ media.get_image}}'/>-->
   <img src=""/>
   {% endthumbnail %}
   {% endif %}

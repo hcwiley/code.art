@@ -26,7 +26,8 @@ class Repo(models.Model):
         if self.developer_set.count() > 0:
             github = self.developer_set.all()[0]
             github = github.user.social_auth.filter(provider='github')[0]
-            commits = urllib.urlopen('https://api.github.com/repos/%s/%s/commits' % (github.user, self.title))
+            print 'https://api.github.com/repos/%s/%s/commits?client_id=%s&client_secret=%s' % (github.user, self.title, settings.GITHUB_APP_ID, settings.GITHUB_API_SECRET)
+            commits = urllib.urlopen('https://api.github.com/repos/%s/%s/commits?client_id=%s&client_secret=%s' % (github.user, self.title, settings.GITHUB_APP_ID, settings.GITHUB_API_SECRET))
             commits = simplejson.load(commits)
             return commits
         else:

@@ -88,10 +88,8 @@ STATICFILES_DIRS = (
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.twitter.TwitterBackend',
     'social_auth.backends.facebook.FacebookBackend',
-    'social_auth.backends.google.GoogleOAuthBackend',
     'social_auth.backends.google.GoogleOAuth2Backend',
     'social_auth.backends.google.GoogleBackend',
-    'social_auth.backends.google.GoogleOAuth2Backend',
     'social_auth.backends.contrib.github.GithubBackend',
     'social_auth.backends.contrib.dropbox.DropboxBackend',
     'social_auth.backends.contrib.flickr.FlickrBackend',
@@ -101,10 +99,10 @@ AUTHENTICATION_BACKENDS = (
 
 TWITTER_CONSUMER_KEY         = 'nZnYw5fmQ7uFdiRlmQ'
 TWITTER_CONSUMER_SECRET      = 'gOxgQI0YmFF6boKRQ9L0qhEeCd0c6mgV4AI7nyrLrk'
-GOOGLE_CONSUMER_KEY          = '889172199565.apps.googleusercontent.com'
-GOOGLE_CONSUMER_SECRET       = '7moPqSoZWZ6CQCsnJDQD-1bu'
-GOOGLE_OAUTH2_CLIENT_ID      = '889172199565.apps.googleusercontent.com'
-GOOGLE_OAUTH2_CLIENT_SECRET  = '7moPqSoZWZ6CQCsnJDQD-1bu'
+#GOOGLE_CONSUMER_KEY          = '889172199565.apps.googleusercontent.com'
+#GOOGLE_CONSUMER_SECRET       = '7moPqSoZWZ6CQCsnJDQD-1bu'
+GOOGLE_OAUTH2_CLIENT_ID      = '889172199565-4f1ii8t2i13lhlanqq6p9fkb7njpni80.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_SECRET  = 'msDiWi414jtMfAGRfaPjvuKo'
 GOOGLE_OAUTH_EXTRA_SCOPE     = 'http://gdata.youtube.com'
 if IS_DEV:
     FACEBOOK_APP_ID              = '160953864027168'
@@ -132,6 +130,7 @@ SOCIAL_AUTH_UUID_LENGTH = 16
 SOCIAL_AUTH_EXTRA_DATA = False
 SOCIAL_AUTH_EXPIRATION = 'expires'
 SOCIAL_AUTH_SESSION_EXPIRATION = False
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 SOCIAL_AUTH_ASSOCIATE_BY_MAIL = True
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -141,7 +140,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 #    'django.contrib.admindocs',
     # everything above needed for admin
-    'django.contrib.localflavor',
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.webdesign',

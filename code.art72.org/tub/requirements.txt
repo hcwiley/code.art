@@ -1,10 +1,9 @@
-Django==1.4
-gondor==1.0b1.post14
+Django==1.5
 psycopg2==2.4.1
 PIL==1.1.7
 South==0.7.6
 sorl-thumbnail==11.12
 python-memcached==1.48
-oauth2
-python_openid
-django-social-auth
+oauth2>=1.5.167
+python_openid>=2.2
+django-social-auth==0.7.22
