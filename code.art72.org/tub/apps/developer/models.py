@@ -222,9 +222,9 @@ class Developer(models.Model):
         print albums
      
     def update_media(self):
-        #self.updateYoutube()
-        #self.updatePicasa()
-        self.updateDropbox()
+        self.updateYoutube()
+        self.updatePicasa()
+        #self.updateDropbox()
         return self.medias.all()
         
         
