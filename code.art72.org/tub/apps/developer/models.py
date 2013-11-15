@@ -213,10 +213,18 @@ class Developer(models.Model):
             except:
                 print 'err.. there was an api error'
 #        print "updated from picasa"
+
+    def updateDropbox(self):
+        dropbox = self.user.social_auth.filter(provider='dropbox')[0]
+        #albums = urllib.urlopen('https://www.dropbox.com/1/oauth2/authorize')
+        albums = urllib.urlopen('https://api.dropbox.com/1/search/.jpg?token=2g3j61j07bybzfh4')
+        albums = simplejson.loads(albums.read())
+        print albums
      
     def update_media(self):
-        self.updateYoutube()
-        self.updatePicasa()
+        #self.updateYoutube()
+        #self.updatePicasa()
+        self.updateDropbox()
         return self.medias.all()
         
         

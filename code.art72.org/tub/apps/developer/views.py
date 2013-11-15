@@ -25,8 +25,8 @@ def developer_args(request, developer):
     if request.user.is_authenticated():
         for soc in developer.user.social_auth.all():
             current_providers.update({ soc.provider  : 'providers/%s.html' % soc.provider});
-            if(soc.provider in settings.AVAILABLE_PROVIDERS):
-                new_providers.remove(soc.provider)
+            #if(soc.provider in settings.AVAILABLE_PROVIDERS):
+                #new_providers.remove(soc.provider)
         args['new_providers'] = new_providers
         args['current_providers'] = current_providers
     return args
