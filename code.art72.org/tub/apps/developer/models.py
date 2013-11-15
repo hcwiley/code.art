@@ -123,7 +123,9 @@ class Developer(models.Model):
         names = {}
         c = 0
         medias = medias['feed']
-        if not medias['entry']:
+        try:
+          medias['entry']
+        except:
           return
         medias = medias['entry']
         for media in medias:
